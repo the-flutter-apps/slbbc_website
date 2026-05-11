@@ -13,13 +13,13 @@ import { siteConfig } from "@/content/site";
 import { services } from "@/content/services";
 
 export const metadata: Metadata = {
-  title: "Boiler O&M Contractor for Pharma — Hyderabad & Vishakhapatnam",
+  title: "Boiler O&M Contractor — Hyderabad & Vishakhapatnam | Sri Lakshmi Balaji",
   description:
-    "Sri Lakshmi Balaji Boiler Contractor (SLBBC) provides 24/7 IBR-certified boiler operations, maintenance, and manpower services to pharmaceutical manufacturers across Hyderabad and Vishakhapatnam.",
+    "Sri Lakshmi Balaji Boiler Contractor has over a decade of experience in boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We provide round-the-clock operations with ESI, PF, and full statutory benefits.",
   openGraph: {
-    title: "SLBBC — Reliable Boiler Operations for Pharmaceutical Manufacturing",
+    title: "Sri Lakshmi Balaji Boiler Contractor — Aligning with your business",
     description:
-      "24/7 IBR-certified boiler operation, maintenance, and manpower services. 10+ vendor sites, 85+ employees.",
+      "10+ years of boiler maintenance and operations (1–10 Ton). 24/7 contract operations with IBR-certified manpower, ESI & PF benefits.",
   },
 };
 
@@ -83,14 +83,15 @@ export default function HomePage() {
 
       {/* Hero */}
       <Hero
-        badge="IBR Certified · Pharma Focused · 24/7 Operations"
-        title="Reliable Boiler Operations for Pharmaceutical Manufacturing"
-        subtitle={`24/7 IBR-certified boiler operation, maintenance, and manpower services across Hyderabad and Vishakhapatnam. Trusted by leading pharma manufacturers since ${siteConfig.foundingYear}.`}
+        badge="1 Ton to 10 Ton · IBR Certified · 24/7 Operations"
+        title="Aligning with your business"
+        subtitle="Having more than a decade of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, we enable our clients to excel in their continuous delivery by providing continuous support. We undertake contract boiler operations and provide round the clock operations with our own manpower."
         primaryCTA={{ label: "Get a Quote", href: "/contact" }}
         secondaryCTA={{ label: "Our Services", href: "/services" }}
         image={{
-          src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
-          alt: "Industrial boiler facility — workers in PPE monitoring operations",
+          src: "/images/hero.jpg",
+          alt: "Sri Lakshmi Balaji Boiler Contractor — industrial boiler facility",
+          fallback: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
         }}
       >
         {/* Trust strip */}
@@ -98,7 +99,7 @@ export default function HomePage() {
           {siteConfig.stats.map((stat) => (
             <div key={stat.label} className="flex items-center gap-1.5 text-white/80">
               <span className="text-lg font-bold text-white">
-                {stat.prefix ?? ""}{stat.value}{stat.suffix}
+                {stat.value}{stat.suffix}
               </span>
               <span className="text-sm">{stat.label}</span>
             </div>
@@ -106,13 +107,13 @@ export default function HomePage() {
         </div>
       </Hero>
 
-      {/* Why SLBBC */}
+      {/* Why SLB */}
       <section className="py-16 md:py-24 bg-background-muted" aria-labelledby="why-heading">
         <Container>
           <SectionHeader
-            label="Why SLBBC"
-            title="Built for pharmaceutical operations"
-            subtitle="We exist for one purpose: keeping your boilers running safely, compliantly, and without interruption."
+            label="Why Sri Lakshmi Balaji"
+            title="Built for continuous industrial operations"
+            subtitle="We exist for one purpose: keeping your boilers running safely, compliantly, and without interruption — so your production never stops."
             id="why-heading"
           />
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -210,7 +211,6 @@ export default function HomePage() {
                 key={stat.label}
                 value={stat.value}
                 suffix={stat.suffix}
-                prefix={stat.prefix}
                 label={stat.label}
                 light
               />

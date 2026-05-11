@@ -1,14 +1,14 @@
 export const siteConfig = {
   name: "Sri Lakshmi Balaji Boiler Contractor",
-  shortName: "SLBBC",
-  tagline: "Reliable Boiler Operations for Pharmaceutical Manufacturing",
+  shortName: "SLB",
+  tagline: "Aligning with your business",
   description:
-    "24/7 IBR-certified boiler operation, maintenance, and manpower services across Hyderabad and Vishakhapatnam. Trusted by leading pharma manufacturers.",
+    "Having more than a decade of experience in the area of Boiler maintenance and services ranging from 1 Ton to 10 Ton boilers, we enable our clients to excel in their continuous delivery by providing continuous support across Hyderabad and Vishakhapatnam.",
   url: "https://slbbc.in",
-  foundingYear: "[YEAR]",
+  foundingYear: "2013",
   gstin: "36XXXXXXXXXXXXXXX",
-  phone: "+91 98490 00000",
-  whatsapp: "+919849000000",
+  phone: "+91 93907 45568",
+  whatsapp: "+919390745568",
   email: "info@slbbc.in",
   officeHours: "Mon–Sat, 9:00 AM – 6:00 PM IST",
   addresses: {
@@ -28,12 +28,12 @@ export const siteConfig = {
   stats: [
     { value: 10, suffix: "+", label: "Vendor Sites" },
     { value: 85, suffix: "+", label: "Employees" },
-    { value: 0, suffix: "", label: "LTI Incidents", prefix: "" },
-    { value: 8, suffix: "+", label: "Years of Operation" },
+    { value: 10, suffix: "+", label: "Years of Experience" },
+    { value: 0, suffix: "", label: "LTI Incidents" },
   ],
   social: {
     linkedin: "#",
-    whatsapp: "https://wa.me/919849000000",
+    whatsapp: "https://wa.me/919390745568",
   },
 };
 

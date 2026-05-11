@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -9,7 +12,7 @@ interface HeroProps {
   subtitle?: string;
   primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
-  image?: { src: string; alt: string };
+  image?: { src: string; alt: string; fallback?: string };
   centered?: boolean;
   dark?: boolean;
   children?: React.ReactNode;
@@ -26,6 +29,8 @@ export function Hero({
   dark = true,
   children,
 }: HeroProps) {
+  const [imgSrc, setImgSrc] = useState(image?.src ?? "");
+
   return (
     <section
       className={cn(
@@ -116,17 +121,22 @@ export function Hero({
             {children}
           </div>
 
-          {/* Hero image */}
+          {/* Hero image — falls back to fallback URL if local image missing */}
           {image && (
             <div className="flex-1 md:max-w-[45%]">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
                 <Image
-                  src={image.src}
+                  src={imgSrc || (image.fallback ?? image.src)}
                   alt={image.alt}
                   fill
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, 45vw"
+                  onError={() => {
+                    if (image.fallback && imgSrc !== image.fallback) {
+                      setImgSrc(image.fallback);
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-primary/10" aria-hidden="true" />
               </div>

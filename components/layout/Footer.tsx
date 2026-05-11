@@ -16,8 +16,9 @@ export function Footer() {
           <div className="space-y-4">
             <Logo variant="light" />
             <p className="text-sm text-white/70 leading-relaxed max-w-[220px]">
-              Professional boiler operation and maintenance contracting for
-              pharmaceutical manufacturing across Hyderabad and Vishakhapatnam.
+              Over a decade of boiler maintenance and services (1–10 Ton).
+              Round-the-clock contract operations with ESI, PF &amp; statutory
+              benefits for our workforce.
             </p>
             <div className="text-xs text-white/50 space-y-0.5">
               <p>GSTIN: {siteConfig.gstin}</p>

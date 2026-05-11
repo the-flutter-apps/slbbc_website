@@ -9,13 +9,13 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 
 export const metadata: Metadata = {
-  title: "About Us — SLBBC",
+  title: "About Us — Sri Lakshmi Balaji Boiler Contractor",
   description:
-    "Learn about Sri Lakshmi Balaji Boiler Contractor — our founding story, mission, values, and the team behind reliable boiler operations for pharma manufacturers in Hyderabad and Vishakhapatnam.",
+    "Over a decade of boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We undertake round-the-clock boiler operations with our own manpower and provide ESI, PF, and statutory benefits.",
   openGraph: {
-    title: "About SLBBC — Built on Safety, Run on Reliability",
+    title: "About Sri Lakshmi Balaji Boiler Contractor",
     description:
-      "Our story, mission, values, and certifications. SLBBC has been serving pharmaceutical manufacturers in Hyderabad and Vishakhapatnam since [YEAR].",
+      "10+ years of boiler O&M experience. Contract boiler operations with 24/7 manpower, ESI, PF, and full statutory compliance.",
   },
 };
 
@@ -72,9 +72,9 @@ export default function AboutPage() {
       />
 
       <Hero
-        badge="About SLBBC"
+        badge="About Us"
         title="Built on safety. Run on reliability."
-        subtitle="A proprietary boiler contracting firm with deep roots in pharmaceutical operations across Telangana and Andhra Pradesh."
+        subtitle="Having more than a decade of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, Sri Lakshmi Balaji Boiler Contractor aligns with your business to keep operations running without interruption."
         dark
       />
 
@@ -85,32 +85,27 @@ export default function AboutPage() {
             <div className="space-y-5">
               <p className="section-label">Our Story</p>
               <h2 id="story-heading">
-                Rooted in industrial operations, focused on pharma
+                A decade of boiler expertise, built on trust
               </h2>
               <p className="text-text-muted text-body-lg leading-relaxed">
-                Sri Lakshmi Balaji Boiler Contractor was founded in [YEAR] by
-                [Founder Name], a seasoned industrial operations professional
-                with over two decades of hands-on experience in boiler
-                operations and maintenance. Recognising a gap in reliable,
-                compliance-focused boiler contracting for the growing
-                pharmaceutical sector in Hyderabad, SLBBC was established to
-                fill that need.
+                Having more than a decade of experience in the area of boiler
+                maintenance and services ranging from 1 Ton to 10 Ton boilers,
+                we enable our clients to excel in their continuous delivery by
+                providing continuous support.
               </p>
               <p className="text-text-muted leading-relaxed">
-                From a single vendor site in [YEAR], SLBBC has grown to serve
-                10+ pharmaceutical manufacturing facilities across Hyderabad
-                and Vishakhapatnam, deploying 85+ IBR-certified professionals.
-                Our growth has been driven entirely by the trust of our
-                clients — most of our expansions have come through referrals
-                from existing partners.
+                We undertake the contract of boiler operations and provide
+                round the clock operations, maintaining boilers with our own
+                manpower. We provide ESI, PF and other statutory benefits to
+                our employees — ensuring a stable, motivated workforce at
+                every client site.
               </p>
               <p className="text-text-muted leading-relaxed">
-                We remain a focused, proprietary firm by design. Every client
-                site receives the owner&apos;s personal attention, and we do
-                not take on more work than we can handle well. Quality over
-                quantity is not a slogan — it is how we have kept our safety
-                record clean and our clients&apos; boilers running without
-                incident.
+                Sri Lakshmi Balaji Boiler Contractor has grown to serve
+                10+ manufacturing facilities across Hyderabad and
+                Vishakhapatnam, deploying 85+ professionals. Our growth has
+                been driven entirely by client trust — most of our expansions
+                come through referrals from existing partners.
               </p>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
