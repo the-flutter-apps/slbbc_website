@@ -33,17 +33,41 @@ export function ContactForm() {
 
   async function onSubmit(data: ContactFormValues) {
     setIsSubmitting(true);
-    // Placeholder — log to console, no backend yet
-    console.log("[ContactForm] Submission:", data);
-    await new Promise((r) => setTimeout(r, 1000));
-    setIsSubmitting(false);
-    reset();
-    toast({
-      title: "Message received!",
-      description:
-        "Thank you for reaching out. We'll get back to you within 1 business day.",
-      variant: "success",
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !json.ok) {
+        toast({
+          title: "Couldn't send your message",
+          description:
+            json.error ||
+            "Something went wrong. Please try again or call us directly.",
+          variant: "error",
+        });
+        return;
+      }
+
+      reset();
+      toast({
+        title: "Message sent!",
+        description:
+          "Thank you for reaching out. We'll get back to you within 1 business day.",
+        variant: "success",
+      });
+    } catch {
+      toast({
+        title: "Network error",
+        description: "Please check your connection and try again.",
+        variant: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (

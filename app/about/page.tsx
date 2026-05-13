@@ -108,9 +108,9 @@ export default function AboutPage() {
                 come through referrals from existing partners.
               </p>
             </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[3/2]">
               <Image
-                src="https://images.unsplash.com/photo-1565117541001-12aed69cc7de?w=800&q=80"
+                src="/images/inspection_w.png"
                 alt="Industrial boiler room — technician in PPE conducting inspection"
                 fill
                 className="object-cover"

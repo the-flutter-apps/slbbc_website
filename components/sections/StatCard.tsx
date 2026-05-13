@@ -24,7 +24,6 @@ function useCountUp(target: number, duration = 2000, start = false) {
     const tick = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
@@ -67,24 +66,31 @@ export function StatCard({
     <div
       ref={ref}
       className={cn(
-        "flex flex-col items-center text-center gap-1 p-6",
+        "group relative flex flex-col items-start gap-3 p-6 md:p-8",
         className
       )}
     >
       <div
         className={cn(
-          "text-4xl md:text-5xl font-bold tabular-nums",
+          "font-display text-5xl md:text-6xl font-bold tabular-nums leading-none tracking-tight",
           light ? "text-white" : "text-primary"
         )}
         aria-label={`${prefix}${value}${suffix} ${label}`}
       >
         {prefix}
         {count}
-        {suffix}
+        <span className={light ? "text-accent-light" : "text-accent"}>{suffix}</span>
       </div>
+      <span
+        className={cn(
+          "h-px w-10 transition-all duration-500 group-hover:w-16",
+          light ? "bg-white/30" : "bg-accent/40"
+        )}
+        aria-hidden="true"
+      />
       <p
         className={cn(
-          "text-sm font-medium uppercase tracking-wide",
+          "text-xs font-semibold uppercase tracking-[0.18em]",
           light ? "text-white/70" : "text-text-muted"
         )}
       >

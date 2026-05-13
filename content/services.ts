@@ -12,8 +12,7 @@ export const services = [
       "Real-time parameter monitoring and adjustment",
       "Emergency response readiness at all times",
     ],
-    image:
-      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",
+    image: "/images/Boiler_operation.jpeg",
     imageAlt: "Boiler control room with operators monitoring gauges — PPE worn",
     icon: "Flame",
   },
@@ -30,14 +29,13 @@ export const services = [
       "Spare parts inventory management at your site",
       "Detailed maintenance logs and digital records",
     ],
-    image:
-      "https://images.unsplash.com/photo-1565117541001-12aed69cc7de?w=800&q=80",
+    image: "/images/boiler_maintenance.jpeg",
     imageAlt: "Technician inspecting industrial boiler components with PPE",
     icon: "Wrench",
   },
   {
     id: "manpower",
-    title: "IBR-Certified Manpower Supply",
+    title: "Certified Manpower Supply",
     shortDesc: "Qualified Operators, Firemen, and Helpers — deployed and managed.",
     description:
       "Sourcing, verifying, and managing IBR-certified boiler manpower is complex. SLBBC handles end-to-end manpower supply — from recruitment and credential verification to payroll and statutory compliance.",
@@ -48,8 +46,7 @@ export const services = [
       "On-time salary disbursement and statutory benefits (PF, ESI, PT)",
       "Replacement guarantee — zero shift vacancies",
     ],
-    image:
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+    image: "/images/certified_manpower.jpeg",
     imageAlt:
       "Industrial workers in full PPE gear at a manufacturing facility",
     icon: "Users",
@@ -67,8 +64,7 @@ export const services = [
       "Statutory documentation and record management",
       "Labour law compliance (PF, ESI, PT, Contract Labour Act)",
     ],
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+    image: "/images/compliance_mgmt.jpeg",
     imageAlt: "Engineer reviewing compliance documents and checklists",
     icon: "ClipboardCheck",
   },
@@ -85,8 +81,7 @@ export const services = [
       "Operator staffing model design for new facilities",
       "Compliance-readiness assessment for greenfield projects",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    image: "/images/boiler_consultation.jpeg",
     imageAlt: "Engineers reviewing industrial plant blueprints",
     icon: "Lightbulb",
   },

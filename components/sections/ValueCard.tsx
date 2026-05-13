@@ -53,25 +53,42 @@ export function ValueCard({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 p-6 rounded-xl border border-border/50 bg-white",
-        accent && "border-accent/20 bg-accent/5",
+        "group relative flex flex-col gap-4 p-6 rounded-2xl bg-white border border-border transition-all duration-500 ease-out-expo",
+        "hover:border-primary/25 hover:-translate-y-1 hover:shadow-card-hover",
+        accent && "border-accent/30 bg-gradient-to-br from-accent/5 to-transparent",
         className
       )}
     >
+      {/* Icon orb */}
       <div
         className={cn(
-          "w-10 h-10 rounded-lg flex items-center justify-center shrink-0",
-          accent ? "bg-accent/15" : "bg-primary/10"
+          "relative h-12 w-12 rounded-xl flex items-center justify-center shrink-0 ring-1 transition-colors duration-500",
+          accent
+            ? "bg-accent/15 ring-accent/30"
+            : "bg-primary/8 ring-primary/10 group-hover:bg-accent/12 group-hover:ring-accent/25"
         )}
       >
         <Icon
-          size={20}
-          className={accent ? "text-accent" : "text-primary"}
+          size={22}
+          strokeWidth={1.75}
+          className={cn(
+            "transition-colors duration-500",
+            accent ? "text-accent" : "text-primary group-hover:text-accent"
+          )}
           aria-hidden="true"
         />
       </div>
-      <h3 className="font-semibold text-text">{title}</h3>
+
+      <h3 className="font-display text-base font-semibold tracking-tight text-text">
+        {title}
+      </h3>
       <p className="text-sm text-text-muted leading-relaxed">{description}</p>
+
+      {/* Bottom accent line on hover */}
+      <span
+        aria-hidden="true"
+        className="absolute left-6 right-6 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
     </div>
   );
 }

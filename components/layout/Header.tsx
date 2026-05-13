@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "@/components/shared/Logo";
 import { Container } from "@/components/layout/Container";
@@ -17,6 +17,7 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -40,18 +41,24 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out-expo",
           scrolled
-            ? "bg-white shadow-header"
-            : "bg-white/95 backdrop-blur-sm"
+            ? "bg-white/85 backdrop-blur-xl backdrop-saturate-150 border-b border-border/60 shadow-header"
+            : "bg-transparent border-b border-transparent"
         )}
       >
         <Container>
           <div className="flex h-16 items-center justify-between md:h-20">
-            <Logo />
+            <Logo variant={scrolled ? "dark" : "light"} />
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
+            <nav
+              className={cn(
+                "hidden md:flex items-center gap-1 rounded-full px-2 py-1 transition-colors duration-500",
+                scrolled ? "bg-background-muted/60" : "bg-white/70 backdrop-blur-md border border-border/60"
+              )}
+              aria-label="Main navigation"
+            >
               {navLinks.map((link) => {
                 const isActive =
                   link.href === "/"
@@ -62,10 +69,10 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200",
+                      "relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
                       isActive
-                        ? "text-primary font-semibold"
-                        : "text-text hover:text-primary hover:bg-background-muted"
+                        ? "text-primary bg-white shadow-sm"
+                        : "text-text-muted hover:text-primary"
                     )}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -76,28 +83,42 @@ export function Header() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2">
               <a
                 href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-2 text-sm font-medium text-text-muted hover:text-primary transition-colors"
+                className={cn(
+                  "hidden lg:flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors",
+                  scrolled
+                    ? "text-text-muted hover:text-primary hover:bg-background-muted"
+                    : "text-white/85 hover:text-white hover:bg-white/10"
+                )}
               >
-                <Phone size={15} />
+                <Phone size={14} />
                 <span>{siteConfig.phone}</span>
               </a>
-              <Link href="/contact" className="btn-primary text-sm px-5 py-2.5">
+              <Link href="/contact" className="btn-primary text-sm px-5 py-2.5 group/cta">
                 Get a Quote
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+                />
               </Link>
             </div>
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden p-2 rounded-md text-text hover:bg-background-muted transition-colors"
+              className={cn(
+                "md:hidden p-2 rounded-full transition-colors",
+                scrolled
+                  ? "text-text hover:bg-background-muted"
+                  : "text-text bg-white/70 backdrop-blur-md border border-border/60"
+              )}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </Container>
@@ -113,7 +134,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-black/40 md:hidden"
+              className="fixed inset-0 z-40 bg-primary-900/50 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
             />
@@ -123,15 +144,15 @@ export function Header() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 z-50 w-[280px] bg-white shadow-2xl flex flex-col md:hidden"
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              className="fixed inset-y-0 right-0 z-50 w-[300px] bg-white shadow-2xl flex flex-col md:hidden"
               aria-label="Mobile navigation"
             >
               <div className="flex items-center justify-between px-5 h-16 border-b border-border">
                 <Logo />
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-md text-text hover:bg-background-muted transition-colors"
+                  className="p-2 rounded-full text-text hover:bg-background-muted transition-colors"
                   aria-label="Close menu"
                 >
                   <X size={20} />
@@ -148,9 +169,9 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       className={cn(
-                        "flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                        "flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors",
                         isActive
-                          ? "bg-primary/10 text-primary font-semibold"
+                          ? "bg-primary/8 text-primary font-semibold"
                           : "text-text hover:bg-background-muted"
                       )}
                       aria-current={isActive ? "page" : undefined}

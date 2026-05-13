@@ -23,3 +23,9 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+.vercel
+
+# Tooling (Claude Code)
+.agents/
+.claude/
+skills-lock.json

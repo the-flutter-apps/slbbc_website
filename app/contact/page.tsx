@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MessageCircle, Clock, MapPin, Building2 } from "lucide-react";
+import { Phone, Mail, MessageCircle, Clock, Building2 } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
@@ -174,23 +174,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div
-                className="rounded-xl border border-border bg-background-muted aspect-[4/3] flex items-center justify-center"
-                role="img"
-                aria-label="Map placeholder showing SLBBC office locations"
-              >
-                <div className="text-center p-6 space-y-2">
-                  <MapPin size={36} className="text-primary/50 mx-auto" aria-hidden="true" />
-                  <p className="text-sm font-medium text-text-muted">
-                    Map coming soon
-                  </p>
-                  <p className="text-xs text-text-muted/70">
-                    [Static map embed will appear here]
-                  </p>
-                </div>
-              </div>
-
               {/* Registration info */}
               <div className="p-5 rounded-xl border border-border bg-white text-sm space-y-2">
                 <p className="font-semibold text-text text-xs uppercase tracking-wide">
@@ -200,14 +183,6 @@ export default function ContactPage() {
                   <p>
                     <span className="font-medium text-text">GSTIN:</span>{" "}
                     {siteConfig.gstin}
-                  </p>
-                  <p>
-                    <span className="font-medium text-text">PF Registration:</span>{" "}
-                    TN/HYD/XXXXXX
-                  </p>
-                  <p>
-                    <span className="font-medium text-text">ESI Registration:</span>{" "}
-                    XX-XX-XXXXXXX-XXX
                   </p>
                 </div>
               </div>

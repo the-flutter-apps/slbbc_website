@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, Clock, Shield, Star, Wrench } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { ServiceCard } from "@/components/sections/ServiceCard";
 import { ValueCard } from "@/components/sections/ValueCard";
@@ -73,6 +72,23 @@ const whyUs = [
   },
 ];
 
+const industries = [
+  "Sterile Injectables",
+  "API Manufacturers",
+  "Formulations",
+  "CRAM Facilities",
+  "Chemical Processing",
+  "Food & Beverage",
+];
+
+const certifications = [
+  "IBR Certified Manpower",
+  "GST Registered",
+  "PF Registered",
+  "ESI Registered",
+  "Contract Labour Act",
+];
+
 export default function HomePage() {
   return (
     <>
@@ -83,111 +99,157 @@ export default function HomePage() {
 
       {/* Hero */}
       <Hero
-        badge="1 Ton to 10 Ton · IBR Certified · 24/7 Operations"
-        title="Aligning with your business"
-        subtitle="Having more than a decade of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, we enable our clients to excel in their continuous delivery by providing continuous support. We undertake contract boiler operations and provide round the clock operations with our own manpower."
+        badge="1 — 10 Ton · IBR Certified · 24/7"
+        title="Aligning with your business."
+        subtitle="Over a decade keeping pharma-grade boilers running across Hyderabad and Vishakhapatnam. Round-the-clock contract operations powered by IBR-certified manpower with full statutory cover."
         primaryCTA={{ label: "Get a Quote", href: "/contact" }}
         secondaryCTA={{ label: "Our Services", href: "/services" }}
         image={{
           src: "/images/hero.jpg",
           alt: "Sri Lakshmi Balaji Boiler Contractor — industrial boiler facility",
-          fallback: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
+          fallback: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=80",
         }}
       >
         {/* Trust strip */}
-        <div className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
+        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 pt-6 border-t border-white/10">
           {siteConfig.stats.map((stat) => (
-            <div key={stat.label} className="flex items-center gap-1.5 text-white/80">
-              <span className="text-lg font-bold text-white">
-                {stat.value}{stat.suffix}
+            <div key={stat.label} className="flex items-baseline gap-2">
+              <span className="font-display text-xl font-bold text-white tabular-nums">
+                {stat.value}
+                <span className="text-accent-light">{stat.suffix}</span>
               </span>
-              <span className="text-sm">{stat.label}</span>
+              <span className="text-xs uppercase tracking-[0.14em] text-white/55">
+                {stat.label}
+              </span>
             </div>
           ))}
         </div>
       </Hero>
 
       {/* Why SLB */}
-      <section className="py-16 md:py-24 bg-background-muted" aria-labelledby="why-heading">
+      <section className="relative isolate py-20 md:py-28 bg-background-subtle" aria-labelledby="why-heading">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-grid-dark bg-grid-lg mask-radial-fade opacity-60"
+        />
         <Container>
-          <SectionHeader
-            label="Why Sri Lakshmi Balaji"
-            title="Built for continuous industrial operations"
-            subtitle="We exist for one purpose: keeping your boilers running safely, compliantly, and without interruption — so your production never stops."
-            id="why-heading"
-          />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {whyUs.map((item) => (
-              <ValueCard
-                key={item.title}
-                icon={item.icon}
-                title={item.title}
-                description={item.description}
-              />
-            ))}
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="lg:col-span-5 lg:sticky lg:top-28">
+              <p className="section-label">Why Sri Lakshmi Balaji</p>
+              <h2 id="why-heading" className="font-display text-display-md mt-4 tracking-tight text-balance">
+                Built for continuous industrial operations.
+              </h2>
+              <p className="text-body-lg text-text-muted mt-5 text-pretty">
+                We exist for one purpose: keeping your boilers running safely,
+                compliantly, and without interruption — so your production never
+                stops.
+              </p>
+              <Link href="/about" className="btn-ghost mt-6 group/cta -ml-3">
+                Learn about us
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+                />
+              </Link>
+            </div>
+
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+              {whyUs.map((item, i) => (
+                <ValueCard
+                  key={item.title}
+                  icon={item.icon}
+                  title={item.title}
+                  description={item.description}
+                  className={i === 0 ? "sm:mt-8" : i === 2 ? "sm:mt-8" : ""}
+                />
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* Services overview */}
-      <section className="py-16 md:py-24" aria-labelledby="services-heading">
+      {/* Services overview — bento layout */}
+      <section className="py-20 md:py-28" aria-labelledby="services-heading">
         <Container>
-          <SectionHeader
-            label="Our Services"
-            title="Comprehensive boiler services under one contract"
-            subtitle="From manned 24/7 operations to IBR compliance — tailored for pharmaceutical manufacturing."
-            id="services-heading"
-          />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {services.slice(0, 4).map((service) => (
-              <ServiceCard
-                key={service.id}
-                icon={service.icon}
-                title={service.title}
-                description={service.shortDesc}
-                href={`/services#${service.id}`}
-              />
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Link href="/services" className="btn-secondary">
-              View All Services
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <p className="section-label">Our Services</p>
+              <h2
+                id="services-heading"
+                className="font-display text-display-md mt-4 tracking-tight max-w-2xl text-balance"
+              >
+                Comprehensive boiler services under one contract.
+              </h2>
+            </div>
+            <Link href="/services" className="btn-secondary self-start md:self-auto">
+              View all services
+              <ArrowUpRight size={14} />
             </Link>
+          </div>
+
+          {/* Bento grid: 1 feature + 3 standard, then 1 more wide */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-6 gap-4">
+            {services.slice(0, 5).map((service, i) => {
+              const feature = i === 0;
+              const wide = i === 4;
+              return (
+                <ServiceCard
+                  key={service.id}
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.shortDesc}
+                  href={`/services#${service.id}`}
+                  index={i + 1}
+                  feature={feature}
+                  className={
+                    feature
+                      ? "md:col-span-3 md:row-span-2"
+                      : wide
+                      ? "md:col-span-3"
+                      : "md:col-span-3 lg:col-span-3"
+                  }
+                />
+              );
+            })}
           </div>
         </Container>
       </section>
 
       {/* Industries strip */}
-      <section className="py-12 bg-background-muted border-y border-border" aria-labelledby="industries-heading">
+      <section
+        className="relative isolate py-20 md:py-24 bg-background-muted border-y border-border"
+        aria-labelledby="industries-heading"
+      >
         <Container>
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:max-w-md space-y-3">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-5 space-y-5">
               <p className="section-label">Industries Served</p>
-              <h2 id="industries-heading" className="text-2xl font-bold text-text">
-                Trusted by pharmaceutical manufacturers
+              <h2
+                id="industries-heading"
+                className="font-display text-display-md tracking-tight text-balance"
+              >
+                Trusted by pharmaceutical manufacturers.
               </h2>
-              <p className="text-text-muted text-sm leading-relaxed">
+              <p className="text-text-muted text-pretty">
                 Sterile injectables, API manufacturers, formulations plants —
                 SLBBC serves leading pharma companies across Telangana and
                 Andhra Pradesh.
               </p>
-              <Link href="/industries" className="btn-primary inline-flex mt-2">
-                Our Clients
+              <Link href="/industries" className="btn-secondary mt-2">
+                Our clients
+                <ArrowUpRight size={14} />
               </Link>
             </div>
-            <div className="flex-1 grid grid-cols-3 gap-3 w-full">
-              {[
-                "Sterile Injectables",
-                "API Manufacturers",
-                "Formulations",
-                "CRAM Facilities",
-                "Chemical Processing",
-                "Food & Beverage",
-              ].map((industry) => (
+            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {industries.map((industry, i) => (
                 <div
                   key={industry}
-                  className="flex items-center justify-center text-center px-3 py-4 rounded-xl bg-white border border-border shadow-sm text-xs font-semibold text-text-muted hover:border-primary/30 hover:text-primary transition-colors"
+                  className="group relative flex items-center justify-center text-center px-3 py-5 rounded-xl bg-white border border-border text-sm font-semibold text-text-muted hover:border-primary/30 hover:text-primary hover:shadow-card transition-all duration-300"
+                  style={{ marginTop: i % 2 === 1 ? "1rem" : 0 }}
                 >
+                  <span className="absolute left-3 top-3 font-display text-[10px] font-bold text-text-subtle tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {industry}
                 </div>
               ))}
@@ -196,45 +258,55 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 md:py-24 bg-primary" aria-label="Company statistics">
+      {/* Stats band */}
+      <section
+        className="relative isolate overflow-hidden py-20 md:py-28 bg-primary-900 text-white"
+        aria-label="Company statistics"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-grid-light bg-grid-md mask-radial-fade opacity-50"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-[420px] w-[60%] rounded-full bg-accent/15 blur-3xl"
+        />
         <Container>
           <SectionHeader
             label="Our track record"
-            title="Numbers that reflect our commitment"
+            title="Numbers that reflect our commitment."
             centered
             light
           />
-          <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-2 divide-x divide-white/10">
+          <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
             {siteConfig.stats.map((stat) => (
-              <StatCard
-                key={stat.label}
-                value={stat.value}
-                suffix={stat.suffix}
-                label={stat.label}
-                light
-              />
+              <div key={stat.label} className="bg-primary-900">
+                <StatCard
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  label={stat.label}
+                  light
+                />
+              </div>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Certifications */}
-      <section className="py-12 border-b border-border" aria-label="Certifications">
+      {/* Certifications strip */}
+      <section className="py-12 md:py-16 border-b border-border" aria-label="Certifications">
         <Container>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm font-semibold text-text-muted uppercase tracking-widest">
+            <p className="text-eyebrow uppercase text-text-muted">
               Registrations &amp; Compliance
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                "IBR Certified Manpower",
-                "GST Registered",
-                "PF Registered",
-                "ESI Registered",
-                "Contract Labour Act Compliant",
-              ].map((cert) => (
-                <span key={cert} className="badge text-xs px-4 py-1.5">
+            <div className="flex flex-wrap justify-center gap-2">
+              {certifications.map((cert) => (
+                <span
+                  key={cert}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-subtle px-4 py-1.5 text-xs font-semibold text-text-muted"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                   {cert}
                 </span>
               ))}

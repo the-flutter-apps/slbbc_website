@@ -22,8 +22,8 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "space-y-3",
-        centered && "text-center",
+        "flex flex-col gap-4",
+        centered && "items-center text-center",
         className
       )}
     >
@@ -40,7 +40,7 @@ export function SectionHeader({
       <h2
         id={id}
         className={cn(
-          "text-balance",
+          "font-display text-display-md text-balance tracking-tight",
           light ? "text-white" : "text-text"
         )}
       >
@@ -49,7 +49,7 @@ export function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            "text-body-lg max-w-2xl",
+            "text-body-lg max-w-2xl text-pretty",
             light ? "text-white/75" : "text-text-muted",
             centered && "mx-auto"
           )}
