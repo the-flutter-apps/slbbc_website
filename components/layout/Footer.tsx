@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight, LogIn } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import { Container } from "@/components/layout/Container";
 import { siteConfig, footerLinks } from "@/content/site";
@@ -185,6 +185,13 @@ export function Footer() {
             >
               Terms of Service
             </Link>
+            <a
+              href="https://payroll.slbbc.in"
+              className="inline-flex items-center gap-1.5 text-xs text-white/55 hover:text-white transition-colors"
+            >
+              <LogIn size={13} />
+              Staff Login
+            </a>
           </div>
         </div>
       </Container>
