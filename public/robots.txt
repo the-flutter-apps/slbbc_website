@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /privacy
 Disallow: /terms
+Disallow: /app/qr
 
 Sitemap: https://slbbc.in/sitemap.xml
