@@ -75,7 +75,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 hover:text-accent-light transition-colors"
+                    className="block py-1.5 sm:py-1 text-sm text-white/80 hover:text-accent-light transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -94,7 +94,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 hover:text-accent-light transition-colors"
+                    className="block py-1.5 sm:py-1 text-sm text-white/80 hover:text-accent-light transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -112,7 +112,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                  className="flex items-start gap-2.5 text-sm text-white/80 hover:text-white transition-colors"
+                  className="flex items-start gap-2.5 py-1.5 sm:py-1 text-sm text-white/80 hover:text-white transition-colors"
                 >
                   <Phone size={15} className="shrink-0 mt-0.5 text-accent-light" />
                   <span>{siteConfig.phone}</span>
@@ -123,7 +123,7 @@ export function Footer() {
                   href={siteConfig.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2.5 text-sm text-white/80 hover:text-white transition-colors"
+                  className="flex items-start gap-2.5 py-1.5 sm:py-1 text-sm text-white/80 hover:text-white transition-colors"
                 >
                   <MessageCircle size={15} className="shrink-0 mt-0.5 text-accent-light" />
                   <span>WhatsApp chat</span>
@@ -132,7 +132,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="flex items-start gap-2.5 text-sm text-white/80 hover:text-white transition-colors break-all"
+                  className="flex items-start gap-2.5 py-1.5 sm:py-1 text-sm text-white/80 hover:text-white transition-colors break-all"
                 >
                   <Mail size={15} className="shrink-0 mt-0.5 text-accent-light" />
                   <span>{siteConfig.email}</span>
@@ -175,19 +175,19 @@ export function Footer() {
           <div className="flex items-center gap-5">
             <Link
               href="/privacy"
-              className="text-xs text-white/55 hover:text-white transition-colors"
+              className="py-1.5 text-xs text-white/55 hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-xs text-white/55 hover:text-white transition-colors"
+              className="py-1.5 text-xs text-white/55 hover:text-white transition-colors"
             >
               Terms of Service
             </Link>
             <a
               href="https://payroll.slbbc.in"
-              className="inline-flex items-center gap-1.5 text-xs text-white/55 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 py-1.5 text-xs text-white/55 hover:text-white transition-colors"
             >
               <LogIn size={13} />
               Staff Login

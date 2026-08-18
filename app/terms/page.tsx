@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   const effectiveDate = "1 January 2025";
   return (
-    <section className="py-16 md:py-24" aria-labelledby="terms-heading">
+    <section className="pt-28 pb-16 md:pt-36 md:pb-24" aria-labelledby="terms-heading">
       <Container>
         <div className="max-w-2xl mx-auto space-y-8">
           <header className="space-y-2">

@@ -10,10 +10,19 @@ import { Container } from "@/components/layout/Container";
 import { navLinks, siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 
+/** Routes whose first section is the dark Hero, which the header can overlay transparently. */
+const DARK_HERO_ROUTES = ["/about", "/services", "/industries", "/careers", "/contact"];
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  // On light-background pages (/app, /privacy, /terms, 404) a transparent header renders
+  // the white logo on white and swallows the top of the page, so keep it solid from the start.
+  const hasDarkHero =
+    pathname === "/" || DARK_HERO_ROUTES.some((r) => pathname.startsWith(r));
+  const solid = scrolled || !hasDarkHero;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -42,20 +51,20 @@ export function Header() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out-expo",
-          scrolled
+          solid
             ? "bg-white/85 backdrop-blur-xl backdrop-saturate-150 border-b border-border/60 shadow-header"
             : "bg-transparent border-b border-transparent"
         )}
       >
         <Container>
           <div className="flex h-16 items-center justify-between md:h-20">
-            <Logo variant={scrolled ? "dark" : "light"} />
+            <Logo variant={solid ? "dark" : "light"} />
 
             {/* Desktop nav */}
             <nav
               className={cn(
                 "hidden md:flex items-center gap-1 rounded-full px-2 py-1 transition-colors duration-500",
-                scrolled ? "bg-background-muted/60" : "bg-white/70 backdrop-blur-md border border-border/60"
+                solid ? "bg-background-muted/60" : "bg-white/70 backdrop-blur-md border border-border/60"
               )}
               aria-label="Main navigation"
             >
@@ -88,7 +97,7 @@ export function Header() {
                 href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                 className={cn(
                   "hidden lg:flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors",
-                  scrolled
+                  solid
                     ? "text-text-muted hover:text-primary hover:bg-background-muted"
                     : "text-white/85 hover:text-white hover:bg-white/10"
                 )}
@@ -109,8 +118,8 @@ export function Header() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className={cn(
-                "md:hidden p-2 rounded-full transition-colors",
-                scrolled
+                "md:hidden p-3 -mr-1 rounded-full transition-colors",
+                solid
                   ? "text-text hover:bg-background-muted"
                   : "text-text bg-white/70 backdrop-blur-md border border-border/60"
               )}

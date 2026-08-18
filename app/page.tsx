@@ -111,7 +111,7 @@ export default function HomePage() {
         }}
       >
         {/* Trust strip */}
-        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 pt-6 border-t border-white/10">
+        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 pt-6 border-t border-white/10 sm:flex sm:flex-wrap sm:items-center sm:gap-x-8">
           {siteConfig.stats.map((stat) => (
             <div key={stat.label} className="flex items-baseline gap-2">
               <span className="font-display text-xl font-bold text-white tabular-nums">
@@ -247,7 +247,7 @@ export default function HomePage() {
                   className="group relative flex items-center justify-center text-center px-3 py-5 rounded-xl bg-white border border-border text-sm font-semibold text-text-muted hover:border-primary/30 hover:text-primary hover:shadow-card transition-all duration-300"
                   style={{ marginTop: i % 2 === 1 ? "1rem" : 0 }}
                 >
-                  <span className="absolute left-3 top-3 font-display text-[10px] font-bold text-text-subtle tabular-nums">
+                  <span className="absolute left-3 top-3 font-display text-[11px] font-bold text-text-subtle tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {industry}

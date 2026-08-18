@@ -93,7 +93,7 @@ export default function ServicesPage() {
           <section
             key={service.id}
             id={service.id}
-            className="py-16 md:py-24 scroll-mt-32"
+            className="py-16 md:py-24 scroll-mt-32 md:scroll-mt-40"
             aria-labelledby={`${service.id}-heading`}
           >
             <Container>

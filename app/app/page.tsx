@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function AppDownloadPage() {
   return (
-    <div className="bg-background-muted py-12 sm:py-16">
+    <div className="bg-background-muted pt-24 pb-12 sm:pt-32 sm:pb-16">
       <Container className="max-w-2xl">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -62,7 +62,7 @@ export default function AppDownloadPage() {
 
         <p className="mt-8 text-center text-xs text-text-subtle">
           This page is linked from the QR code printed on your SLBBC attendance card.{" "}
-          <Link href="/" className="underline underline-offset-2 hover:text-text-muted">
+          <Link href="/" className="inline-block py-1.5 underline underline-offset-2 hover:text-text-muted">
             Back to {siteConfig.shortName}
           </Link>
         </p>

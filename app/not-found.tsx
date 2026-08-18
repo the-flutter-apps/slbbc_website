@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="py-24 md:py-36" aria-labelledby="notfound-heading">
+    <section className="pt-32 pb-24 md:pt-44 md:pb-36" aria-labelledby="notfound-heading">
       <Container>
         <div className="max-w-lg mx-auto text-center space-y-6">
           <div

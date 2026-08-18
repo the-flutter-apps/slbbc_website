@@ -39,7 +39,7 @@ const specs = [
 
 export default function QrAssetsPage() {
   return (
-    <div className="bg-background-muted py-12 sm:py-16">
+    <div className="bg-background-muted pt-24 pb-12 sm:pt-32 sm:pb-16">
       <Container className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
           Internal
@@ -97,7 +97,7 @@ export default function QrAssetsPage() {
                 <a
                   href={a.file}
                   download
-                  className="font-mono text-sm font-semibold text-primary underline underline-offset-2"
+                  className="inline-block py-1.5 font-mono text-sm font-semibold text-primary underline underline-offset-2"
                 >
                   {a.name}
                 </a>
