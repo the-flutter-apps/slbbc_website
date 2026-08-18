@@ -41,6 +41,17 @@ Also set `packageName` to the app's real Android package id **before printing** 
 required — but it must be correct before switching `status` to `"play"`, since
 `playUrl` is derived from it.
 
+## The store badge
+
+`public/badges/google-play-badge.png` is the official Google artwork, downloaded
+unmodified from https://play.google.com/intl/en_us/badges/. Google's brand guidelines
+require it to be used as-is — do not recolour it, rotate it, or apply effects. The file
+carries its own clear space, so it only ever needs scaling.
+
+While `status` is `"coming-soon"` the badge is shown but is **not** a link, and the
+download button is disabled — a badge pointing at an unpublished listing would send
+employees to a Google Play error page. Both activate when `status` becomes `"play"`.
+
 ## Recommended path to launch
 
 Prefer **Google Play Open Testing** over hosting an APK. It gives a real

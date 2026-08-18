@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   AlertTriangle,
-  CheckCircle2,
   Clock,
   Download,
   Loader2,
@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   Smartphone,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { StoreBadge } from "@/components/app-download/StoreBadge";
 import { appDownload } from "@/content/app-download";
 
 type Platform = "android" | "ios" | "desktop" | "unknown";
@@ -24,20 +24,29 @@ function detectPlatform(): Platform {
   return "desktop";
 }
 
-function Panel({
-  tone = "neutral",
-  children,
-}: {
-  tone?: "neutral" | "success" | "warning";
-  children: React.ReactNode;
-}) {
-  const tones = {
-    neutral: "border-border bg-background-subtle",
-    success: "border-accent-100 bg-accent-50",
-    warning: "border-border-strong bg-background-muted",
-  };
+/** App identity block — icon, name, one-line description. */
+function AppIdentity() {
   return (
-    <div className={`rounded-xl border p-6 sm:p-8 ${tones[tone]}`}>{children}</div>
+    <div className="flex flex-col items-center text-center">
+      <div className="flex h-20 w-20 items-center justify-center rounded-[22px] border border-border bg-white shadow-sm sm:h-24 sm:w-24">
+        <Image
+          src="/images/logo.svg"
+          alt=""
+          width={64}
+          height={64}
+          className="h-14 w-14 sm:h-16 sm:w-16"
+        />
+      </div>
+      <h1 className="mt-5 font-display text-2xl font-bold text-primary sm:text-3xl">
+        {appDownload.fullName}
+      </h1>
+      <p className="mt-2 max-w-sm text-sm text-text-muted sm:text-base">
+        {appDownload.tagline}
+      </p>
+      <p className="mt-3 text-xs text-text-subtle">
+        Android {appDownload.minAndroid}+ · Free · SLBBC staff only
+      </p>
+    </div>
   );
 }
 
@@ -52,7 +61,7 @@ export function InstallPanel() {
   const isAndroid = platform === "android";
   const live = appDownload.status === "play";
 
-  // Forward Android users straight to the Play listing once the app is live.
+  // Forward Android visitors straight to the Play listing once the app is live.
   useEffect(() => {
     if (!live || !appDownload.autoRedirect || !isAndroid) return;
     setRedirecting(true);
@@ -63,89 +72,105 @@ export function InstallPanel() {
     return () => window.clearTimeout(timer);
   }, [live, isAndroid]);
 
-  // ---- Live on Google Play -------------------------------------------------
-  if (live) {
-    return (
-      <Panel tone="success">
-        {redirecting ? (
-          <div className="flex items-start gap-4">
-            <Loader2 className="mt-0.5 h-6 w-6 shrink-0 animate-spin text-accent" />
-            <div>
-              <h2 className="font-display text-xl font-semibold text-primary">
-                Taking you to Google Play…
-              </h2>
-              <p className="mt-2 text-sm text-text-muted">
-                If nothing happens in a few seconds, tap the button below.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-start gap-4">
-            <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-accent" />
-            <div>
-              <h2 className="font-display text-xl font-semibold text-primary">
-                {appDownload.fullName} is available on Google Play
-              </h2>
-              <p className="mt-2 text-sm text-text-muted">
-                {platform === "ios"
-                  ? "This app is for Android phones only. Open this page on your Android phone to install it."
-                  : "Install it on your Android phone, then sign in with the mobile number registered with SLBBC."}
-              </p>
-            </div>
-          </div>
-        )}
-        <Button asChild size="lg" className="mt-6 w-full sm:w-auto">
-          <a href={appDownload.playUrl} rel="noopener">
-            <Download className="h-4 w-4" />
-            Get it on Google Play
-          </a>
-        </Button>
-      </Panel>
-    );
-  }
+  return (
+    <div className="rounded-2xl border border-border bg-white p-6 shadow-sm sm:p-10">
+      <AppIdentity />
 
-  // ---- Hosted APK ----------------------------------------------------------
-  if (appDownload.status === "apk") {
-    return (
-      <Panel>
-        <div className="flex items-start gap-4">
-          <Smartphone className="mt-0.5 h-6 w-6 shrink-0 text-primary" />
-          <div>
-            <h2 className="font-display text-xl font-semibold text-primary">
-              Download {appDownload.fullName}
-            </h2>
-            <p className="mt-2 text-sm text-text-muted">
-              {appDownload.apkVersion ? `Version ${appDownload.apkVersion}` : "Latest build"}
-              {appDownload.apkSizeMb ? ` · ${appDownload.apkSizeMb} MB` : ""} · Requires Android{" "}
-              {appDownload.minAndroid} or newer
-            </p>
-          </div>
-        </div>
-
-        {platform === "ios" || platform === "desktop" ? (
-          <p className="mt-6 flex items-start gap-3 rounded-lg bg-background-muted p-4 text-sm text-text-muted">
-            {platform === "ios" ? (
-              <Smartphone className="mt-0.5 h-4 w-4 shrink-0" />
-            ) : (
-              <Monitor className="mt-0.5 h-4 w-4 shrink-0" />
-            )}
-            This app runs on Android only. Scan the QR code on your attendance card with an
-            Android phone.
-          </p>
-        ) : (
-          <Button asChild size="lg" className="mt-6 w-full sm:w-auto">
-            <a href={appDownload.apkUrl} download>
-              <Download className="h-4 w-4" />
-              Download APK
+      {/* ---- Store block: badge + primary action ---- */}
+      <div className="mt-8 flex flex-col items-center">
+        {live ? (
+          <>
+            <a
+              href={appDownload.playUrl}
+              rel="noopener"
+              aria-label="Get it on Google Play"
+              className="rounded-lg transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+            >
+              <StoreBadge />
             </a>
-          </Button>
-        )}
 
-        <div className="mt-8 border-t border-border pt-6">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-text">
+            <a
+              href={appDownload.playUrl}
+              rel="noopener"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-8 py-4 text-base font-semibold text-white shadow-sm transition-all hover:bg-accent-dark hover:shadow-md active:scale-[0.99] sm:w-auto"
+            >
+              <Download className="h-5 w-5" />
+              Download the app
+            </a>
+
+            <p className="mt-4 flex items-center gap-2 text-sm text-text-muted">
+              {redirecting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                  Opening Google Play…
+                </>
+              ) : platform === "ios" || platform === "desktop" ? (
+                <>
+                  {platform === "ios" ? (
+                    <Smartphone className="h-4 w-4" />
+                  ) : (
+                    <Monitor className="h-4 w-4" />
+                  )}
+                  Android phones only — scan the QR on your card with an Android phone
+                </>
+              ) : (
+                "Then sign in with the mobile number registered with SLBBC"
+              )}
+            </p>
+          </>
+        ) : appDownload.status === "apk" ? (
+          <>
+            <a
+              href={appDownload.apkUrl}
+              download
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-8 py-4 text-base font-semibold text-white shadow-sm transition-all hover:bg-accent-dark hover:shadow-md active:scale-[0.99] sm:w-auto"
+            >
+              <Download className="h-5 w-5" />
+              Download the app
+            </a>
+            <p className="mt-3 text-sm text-text-muted">
+              {appDownload.apkVersion ? `Version ${appDownload.apkVersion}` : "Latest build"}
+              {appDownload.apkSizeMb ? ` · ${appDownload.apkSizeMb} MB` : ""}
+            </p>
+            <div className="mt-8 flex flex-col items-center border-t border-border pt-8">
+              <StoreBadge />
+              <p className="mt-3 text-sm font-semibold text-text-muted">
+                Coming soon to Google Play
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Not published yet: show the badge, but never as a dead link. */}
+            <StoreBadge />
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-background-muted px-4 py-2 text-sm font-semibold text-primary">
+              <Clock className="h-4 w-4" />
+              Coming soon to Google Play
+            </p>
+            <button
+              type="button"
+              disabled
+              className="mt-6 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-md bg-border-strong px-8 py-4 text-base font-semibold text-white opacity-70 sm:w-auto"
+            >
+              <Download className="h-5 w-5" />
+              Download the app
+            </button>
+            <p className="mt-4 max-w-md text-center text-sm text-text-muted">
+              The app is not published yet. This page is its permanent home — the QR code on
+              your attendance card will always bring you here, and this button goes live the
+              day the app is released.
+            </p>
+          </>
+        )}
+      </div>
+
+      {/* ---- Sideload instructions, only relevant for a hosted APK ---- */}
+      {appDownload.status === "apk" && (
+        <div className="mt-10 border-t border-border pt-8">
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-text">
             <ShieldCheck className="h-4 w-4 text-primary" />
             Android will ask for permission — this is normal
-          </h3>
+          </h2>
           <ol className="mt-4 space-y-3 text-sm text-text-muted">
             {[
               "Tap Download. If Chrome warns about the file type, choose Download anyway.",
@@ -168,33 +193,18 @@ export function InstallPanel() {
             WhatsApp or any other website.
           </p>
         </div>
-      </Panel>
-    );
-  }
+      )}
 
-  // ---- Not published yet ---------------------------------------------------
-  return (
-    <Panel tone="warning">
-      <div className="flex items-start gap-4">
-        <Clock className="mt-0.5 h-6 w-6 shrink-0 text-primary" />
-        <div>
-          <h2 className="font-display text-xl font-semibold text-primary">
-            {appDownload.fullName} is launching soon
-          </h2>
-          <p className="mt-2 text-sm text-text-muted">
-            The app is not published yet. This page is the permanent home for the download — the
-            QR code on your attendance card will always bring you here, and the install link will
-            appear on this page the day the app goes live.
+      {/* ---- Until launch ---- */}
+      {appDownload.status === "coming-soon" && (
+        <div className="mt-8 rounded-xl border border-border bg-background-subtle p-5">
+          <p className="text-sm font-semibold text-text">Until then</p>
+          <p className="mt-1 text-sm text-text-muted">
+            Mark your attendance with your site supervisor as usual. Your supervisor will tell
+            you when the app is ready.
           </p>
         </div>
-      </div>
-      <div className="mt-6 rounded-lg border border-border bg-white p-4">
-        <p className="text-sm font-semibold text-text">Until then</p>
-        <p className="mt-1 text-sm text-text-muted">
-          Mark your attendance with your site supervisor as usual. Your supervisor will tell you
-          when the app is ready.
-        </p>
-      </div>
-    </Panel>
+      )}
+    </div>
   );
 }

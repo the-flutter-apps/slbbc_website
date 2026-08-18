@@ -17,17 +17,11 @@ export default function AppDownloadPage() {
   return (
     <div className="bg-background-muted pt-24 pb-12 sm:pt-32 sm:pb-16">
       <Container className="max-w-2xl">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-            {siteConfig.shortName} Staff App
-          </p>
-          <h1 className="mt-3 font-display text-3xl font-bold text-primary sm:text-4xl">
-            {appDownload.fullName}
-          </h1>
-          <p className="mt-3 text-text-muted">{appDownload.tagline}</p>
-        </div>
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-accent">
+          {siteConfig.shortName} Staff App
+        </p>
 
-        <div className="mt-10">
+        <div className="mt-6">
           <InstallPanel />
         </div>
 
