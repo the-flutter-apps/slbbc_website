@@ -9,21 +9,51 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const variants = [
+  {
+    src: "/qr/slbbc-app-qr.svg",
+    name: "Plain",
+    tag: "Recommended for the card",
+    detail: "Version 2 · 25 x 25 modules · error correction Q",
+  },
+  {
+    src: "/qr/slbbc-app-qr-logo.svg",
+    name: "SLB logo in centre",
+    tag: "Best for posters and notices",
+    detail: "Version 3 · 29 x 29 modules · error correction H",
+  },
+];
+
 const assets = [
   {
     file: "/qr/slbbc-app-card-back.svg",
     name: "slbbc-app-card-back.svg",
-    desc: "Ready-to-place card-back block, 40 x 56 mm, QR plus caption. Send this to the printer.",
+    desc: "Card-back block, 40 x 56 mm, plain QR plus caption. Send this to the printer.",
+  },
+  {
+    file: "/qr/slbbc-app-card-back-logo.svg",
+    name: "slbbc-app-card-back-logo.svg",
+    desc: "Same block with the SLB mark in the centre of the code.",
   },
   {
     file: "/qr/slbbc-app-qr.svg",
     name: "slbbc-app-qr.svg",
-    desc: "Bare QR only, vector, 25 mm. Use if your designer is laying out the caption themselves.",
+    desc: "Bare plain QR, vector, 25 mm.",
+  },
+  {
+    file: "/qr/slbbc-app-qr-logo.svg",
+    name: "slbbc-app-qr-logo.svg",
+    desc: "Bare QR with the logo centred, vector, 25 mm.",
   },
   {
     file: "/qr/slbbc-app-qr.png",
     name: "slbbc-app-qr.png",
-    desc: "2048 px raster. For slides and WhatsApp — not for printing.",
+    desc: "2048 px raster, plain. For slides and WhatsApp — not for printing.",
+  },
+  {
+    file: "/qr/slbbc-app-qr-logo.png",
+    name: "slbbc-app-qr-logo.png",
+    desc: "2048 px raster with the logo. For slides and WhatsApp — not for printing.",
   },
 ];
 
@@ -53,37 +83,48 @@ export default function QrAssetsPage() {
           reprinting a single card.
         </p>
 
-        <div className="mt-10 grid gap-8 sm:grid-cols-[auto,1fr] sm:items-start">
-          <div className="rounded-xl border border-border bg-white p-6">
-            <Image
-              src="/qr/slbbc-app-qr.svg"
-              alt={`QR code linking to ${appDownload.qrTarget}`}
-              width={200}
-              height={200}
-              className="h-[200px] w-[200px]"
-              unoptimized
-            />
-            <p className="mt-3 text-center font-mono text-sm font-semibold text-text">
-              {appDownload.qrTarget.replace(/^https?:\/\//, "")}
-            </p>
-          </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {variants.map((v) => (
+            <div key={v.src} className="rounded-xl border border-border bg-white p-6 text-center">
+              <Image
+                src={v.src}
+                alt={`QR code linking to ${appDownload.qrTarget}`}
+                width={200}
+                height={200}
+                className="mx-auto h-[180px] w-[180px] sm:h-[200px] sm:w-[200px]"
+                unoptimized
+              />
+              <p className="mt-4 font-display text-sm font-semibold text-primary">{v.name}</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-accent">
+                {v.tag}
+              </p>
+              <p className="mt-2 text-xs text-text-muted">{v.detail}</p>
+            </div>
+          ))}
+        </div>
 
-          <div className="rounded-xl border border-border bg-white p-6">
-            <h2 className="flex items-center gap-2 font-display text-base font-semibold text-primary">
-              <Printer className="h-4 w-4" />
-              Print specification
-            </h2>
-            <dl className="mt-4 space-y-3">
-              {specs.map(([label, value]) => (
-                <div key={label}>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-text-subtle">
-                    {label}
-                  </dt>
-                  <dd className="text-sm text-text">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+        <p className="mt-4 rounded-lg border border-border bg-white p-4 text-sm text-text-muted">
+          Both encode the same URL and both were verified to scan down to 150 dpi. The logo
+          version needs a denser code to carry the extra error correction, so it has slightly
+          less margin for wear — prefer the plain one at 25 mm on the card, and use the logo
+          version where it prints larger.
+        </p>
+
+        <div className="mt-8 rounded-xl border border-border bg-white p-6">
+          <h2 className="flex items-center gap-2 font-display text-base font-semibold text-primary">
+            <Printer className="h-4 w-4" />
+            Print specification
+          </h2>
+          <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+            {specs.map(([label, value]) => (
+              <div key={label}>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-text-subtle">
+                  {label}
+                </dt>
+                <dd className="text-sm text-text">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <div className="mt-8 rounded-xl border border-border bg-white p-6">

@@ -69,11 +69,36 @@ npm run qr
 
 Writes to `public/qr/`:
 
-| File                      | Use                                                          |
-| ------------------------- | ------------------------------------------------------------ |
-| `slbbc-app-card-back.svg` | 40 x 56 mm ready-to-place card-back block. **Give this to the printer.** |
-| `slbbc-app-qr.svg`        | Bare 25 mm vector QR, if the designer lays out the caption.   |
-| `slbbc-app-qr.png`        | 2048 px raster. Slides and WhatsApp only — never for print.   |
+| File                           | Use                                                          |
+| ------------------------------ | ------------------------------------------------------------ |
+| `slbbc-app-card-back.svg`      | 40 x 56 mm ready-to-place card-back block. **Give this to the printer.** |
+| `slbbc-app-card-back-logo.svg` | Same block with the SLB mark centred in the code.            |
+| `slbbc-app-qr.svg`             | Bare 25 mm vector QR, if the designer lays out the caption.   |
+| `slbbc-app-qr-logo.svg`        | Bare 25 mm vector QR with the logo centred.                  |
+| `slbbc-app-qr.png`             | 2048 px raster. Slides and WhatsApp only — never for print.   |
+| `slbbc-app-qr-logo.png`        | 2048 px raster with the logo. Slides and WhatsApp only.       |
+
+### Plain vs logo
+
+The logo covers data modules, so the logo variant is encoded at **error correction H**
+(30% recovery) rather than Q. Carrying that extra recovery data costs a version bump —
+29 x 29 modules instead of 25 x 25 — so each module prints smaller at the same physical
+size. The knockout covers 4.8% of the code area, well inside what H can rebuild.
+
+Measured by decoding both at simulated print resolutions, with and without camera blur:
+
+| 25 mm printed at | Plain | Logo |
+| ---------------- | ----- | ---- |
+| 1200 / 600 / 300 dpi | passes, including heavy blur | passes, including heavy blur |
+| 150 dpi              | passes, including heavy blur | passes, including heavy blur |
+| 100 dpi              | passes, including heavy blur | fails only under heavy blur |
+
+Both are safe for the card. **Prefer the plain version at 25 mm** — it keeps the most
+margin for scratches, ink spread, and cheap cameras. Use the logo version where the code
+prints larger: posters, site notices, induction handouts.
+
+Regenerate the centred mark with `scripts/assets/logo-384.png`; it is embedded into the
+SVG as a data URI so the print file stays self-contained.
 
 Preview them in the browser at `/app/qr` (noindex, and disallowed in `robots.txt`).
 
