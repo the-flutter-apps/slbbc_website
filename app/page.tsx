@@ -100,7 +100,8 @@ export default function HomePage() {
       {/* Hero */}
       <Hero
         badge="1 — 10 Ton · IBR Certified · 24/7"
-        title="Aligning with your business."
+        title={siteConfig.name}
+        tagline={`${siteConfig.tagline}.`}
         subtitle="Over two decades keeping pharma-grade boilers running across Hyderabad and Vishakhapatnam. Round-the-clock contract operations powered by IBR-certified manpower with full statutory cover."
         primaryCTA={{ label: "Get a Quote", href: "/contact" }}
         secondaryCTA={{ label: "Our Services", href: "/services" }}

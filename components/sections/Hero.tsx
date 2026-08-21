@@ -11,6 +11,8 @@ import { siteConfig } from "@/content/site";
 interface HeroProps {
   badge?: string;
   title: string;
+  /** Brand line shown directly beneath the headline, in accent. */
+  tagline?: string;
   subtitle?: string;
   primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
@@ -23,6 +25,7 @@ interface HeroProps {
 export function Hero({
   badge,
   title,
+  tagline,
   subtitle,
   primaryCTA,
   secondaryCTA,
@@ -89,12 +92,29 @@ export function Hero({
 
             <h1
               className={cn(
-                "font-display text-display-lg md:text-display-xl text-balance",
+                "font-display text-balance",
+                // A headline carrying a tagline beneath it steps down one size,
+                // so the pair still clears the fold alongside the CTAs.
+                tagline
+                  ? "text-display-md md:text-display-lg"
+                  : "text-display-lg md:text-display-xl",
                 dark ? "text-gradient-light" : "text-text"
               )}
             >
               {title}
             </h1>
+
+            {tagline && (
+              <p
+                className={cn(
+                  "-mt-2 font-display text-xl md:text-2xl font-semibold tracking-tight",
+                  dark ? "text-accent-light" : "text-accent",
+                  centered && "mx-auto"
+                )}
+              >
+                {tagline}
+              </p>
+            )}
 
             {subtitle && (
               <p

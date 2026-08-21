@@ -64,7 +64,7 @@ const certifications = [
 ];
 
 const founder = {
-  name: "Nemali Gundam Gora",
+  name: "Nemili Gundam Gora",
   initials: "NG",
   role: "Proprietor & Founder",
   /** Personal experience, longer than the firm's own age. */
