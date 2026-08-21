@@ -11,11 +11,11 @@ import { Container } from "@/components/layout/Container";
 export const metadata: Metadata = {
   title: "About Us — Sri Lakshmi Balaji Boiler Contractor",
   description:
-    "Over a decade of boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We undertake round-the-clock boiler operations with our own manpower and provide ESI, PF, and statutory benefits.",
+    "Over two decades of boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We undertake round-the-clock boiler operations with our own manpower and provide ESI, PF, and statutory benefits.",
   openGraph: {
     title: "About Sri Lakshmi Balaji Boiler Contractor",
     description:
-      "10+ years of boiler O&M experience. Contract boiler operations with 24/7 manpower, ESI, PF, and full statutory compliance.",
+      "20+ years of boiler O&M experience. Contract boiler operations with 24/7 manpower, ESI, PF, and full statutory compliance.",
   },
 };
 
@@ -63,6 +63,14 @@ const certifications = [
   { label: "Contract Labour Act", detail: "Compliant contractor registration" },
 ];
 
+const founder = {
+  name: "Nemali Gundam Gora",
+  initials: "NG",
+  role: "Proprietor & Founder",
+  /** Personal experience, longer than the firm's own age. */
+  yearsExperience: 30,
+};
+
 export default function AboutPage() {
   return (
     <>
@@ -74,7 +82,7 @@ export default function AboutPage() {
       <Hero
         badge="About Us"
         title="Built on safety. Run on reliability."
-        subtitle="Having more than a decade of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, Sri Lakshmi Balaji Boiler Contractor aligns with your business to keep operations running without interruption."
+        subtitle="Having more than two decades of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, Sri Lakshmi Balaji Boiler Contractor aligns with your business to keep operations running without interruption."
         dark
       />
 
@@ -85,10 +93,10 @@ export default function AboutPage() {
             <div className="space-y-5">
               <p className="section-label">Our Story</p>
               <h2 id="story-heading">
-                A decade of boiler expertise, built on trust
+                Two decades of boiler expertise, built on trust
               </h2>
               <p className="text-text-muted text-body-lg leading-relaxed">
-                Having more than a decade of experience in the area of boiler
+                Having more than two decades of experience in the area of boiler
                 maintenance and services ranging from 1 Ton to 10 Ton boilers,
                 we enable our clients to excel in their continuous delivery by
                 providing continuous support.
@@ -156,20 +164,20 @@ export default function AboutPage() {
             <div className="flex items-start gap-5 p-6 rounded-xl border border-border bg-white shadow-card">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                 <span className="text-2xl font-bold text-primary" aria-hidden="true">
-                  FN
+                  {founder.initials}
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-text">[Founder Name]</h3>
-                <p className="text-sm text-text-muted mb-3">
-                  Proprietor &amp; Founder
-                </p>
+                <h3 className="text-lg font-semibold text-text">{founder.name}</h3>
+                <p className="text-sm text-text-muted mb-3">{founder.role}</p>
                 <p className="text-sm text-text-muted leading-relaxed">
-                  [Founder Name] brings over [N] years of hands-on experience
-                  in industrial boiler operations and maintenance. He founded
-                  SLBBC with a vision to professionalise boiler contracting for
-                  the pharmaceutical industry — combining rigorous safety
-                  standards with operational reliability.
+                  {founder.name} brings more than {founder.yearsExperience} years
+                  of hands-on experience in industrial boiler operations —
+                  starting on the floor as a boiler operator, then earning both
+                  2nd Class and 1st Class Boiler Operator certification before
+                  moving into contracting. SLBBC was founded to professionalise
+                  boiler contracting for the pharmaceutical industry, combining
+                  rigorous safety standards with operational reliability.
                 </p>
               </div>
             </div>

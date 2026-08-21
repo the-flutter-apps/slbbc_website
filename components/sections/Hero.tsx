@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
+import { siteConfig } from "@/content/site";
 
 interface HeroProps {
   badge?: string;
@@ -176,7 +177,9 @@ export function Hero({
               {/* Floating stat card */}
               <div className="absolute -left-3 sm:-left-6 bottom-6 glass-dark text-white rounded-2xl px-5 py-4 shadow-2xl hidden sm:flex items-center gap-4">
                 <div className="h-10 w-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
-                  <span className="font-display text-lg font-bold text-accent-light">10</span>
+                  <span className="font-display text-lg font-bold text-accent-light">
+                    {siteConfig.yearsExperience}
+                  </span>
                 </div>
                 <div className="leading-tight">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">Years</p>

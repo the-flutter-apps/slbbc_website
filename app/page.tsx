@@ -14,11 +14,11 @@ import { services } from "@/content/services";
 export const metadata: Metadata = {
   title: "Boiler O&M Contractor — Hyderabad & Vishakhapatnam | Sri Lakshmi Balaji",
   description:
-    "Sri Lakshmi Balaji Boiler Contractor has over a decade of experience in boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We provide round-the-clock operations with ESI, PF, and full statutory benefits.",
+    "Sri Lakshmi Balaji Boiler Contractor has over two decades of experience in boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We provide round-the-clock operations with ESI, PF, and full statutory benefits.",
   openGraph: {
     title: "Sri Lakshmi Balaji Boiler Contractor — Aligning with your business",
     description:
-      "10+ years of boiler maintenance and operations (1–10 Ton). 24/7 contract operations with IBR-certified manpower, ESI & PF benefits.",
+      "20+ years of boiler maintenance and operations (1–10 Ton). 24/7 contract operations with IBR-certified manpower, ESI & PF benefits.",
   },
 };
 
@@ -101,7 +101,7 @@ export default function HomePage() {
       <Hero
         badge="1 — 10 Ton · IBR Certified · 24/7"
         title="Aligning with your business."
-        subtitle="Over a decade keeping pharma-grade boilers running across Hyderabad and Vishakhapatnam. Round-the-clock contract operations powered by IBR-certified manpower with full statutory cover."
+        subtitle="Over two decades keeping pharma-grade boilers running across Hyderabad and Vishakhapatnam. Round-the-clock contract operations powered by IBR-certified manpower with full statutory cover."
         primaryCTA={{ label: "Get a Quote", href: "/contact" }}
         secondaryCTA={{ label: "Our Services", href: "/services" }}
         image={{

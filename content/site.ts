@@ -1,11 +1,17 @@
+/** Years of boiler O&M experience. Change it here and nowhere else. */
+const YEARS_EXPERIENCE = 20;
+
 export const siteConfig = {
   name: "Sri Lakshmi Balaji Boiler Contractor",
   shortName: "SLB",
   tagline: "Aligning with your business",
   description:
-    "Having more than a decade of experience in the area of Boiler maintenance and services ranging from 1 Ton to 10 Ton boilers, we enable our clients to excel in their continuous delivery by providing continuous support across Hyderabad and Vishakhapatnam.",
+    "Having more than two decades of experience in the area of Boiler maintenance and services ranging from 1 Ton to 10 Ton boilers, we enable our clients to excel in their continuous delivery by providing continuous support across Hyderabad and Vishakhapatnam.",
   url: "https://slbbc.in",
+  // NEEDS CONFIRMATION: 2013 contradicts the 20+ years stated sitewide.
+  // Not rendered anywhere until corrected — see Footer.tsx.
   foundingYear: "2013",
+  yearsExperience: YEARS_EXPERIENCE,
   gstin: "36BGKPG7459J2ZU",
   phone: "+91 93907 45568",
   whatsapp: "+919390745568",
@@ -28,7 +34,7 @@ export const siteConfig = {
   stats: [
     { value: 10, suffix: "+", label: "Vendor Sites" },
     { value: 85, suffix: "+", label: "Employees" },
-    { value: 10, suffix: "+", label: "Years of Experience" },
+    { value: YEARS_EXPERIENCE, suffix: "+", label: "Years of Experience" },
     { value: 0, suffix: "", label: "LTI Incidents" },
   ],
   social: {

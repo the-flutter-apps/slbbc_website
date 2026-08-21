@@ -55,13 +55,15 @@ export function Footer() {
           <div className="space-y-5 lg:col-span-4">
             <Logo variant="light" />
             <p className="text-sm text-white/70 leading-relaxed max-w-[280px]">
-              Over a decade of boiler maintenance and services (1–10 Ton).
+              Over two decades of boiler maintenance and services (1–10 Ton).
               Round-the-clock contract operations with ESI, PF &amp; statutory
               benefits for our workforce.
             </p>
             <div className="text-xs text-white/50 space-y-1">
               <p>GSTIN: {siteConfig.gstin}</p>
-              <p>Founded {siteConfig.foundingYear}</p>
+              {/* Founding year pulled pending confirmation — the old 2013 value
+                  contradicted the 20+ years of experience stated sitewide.
+                  Restore this line once siteConfig.foundingYear is corrected. */}
             </div>
           </div>
 
