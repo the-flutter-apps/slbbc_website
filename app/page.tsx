@@ -187,30 +187,19 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Bento grid: 1 feature + 3 standard, then 1 more wide */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-6 gap-4">
-            {services.slice(0, 5).map((service, i) => {
-              const feature = i === 0;
-              const wide = i === 4;
-              return (
-                <ServiceCard
-                  key={service.id}
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.shortDesc}
-                  href={`/services#${service.id}`}
-                  index={i + 1}
-                  feature={feature}
-                  className={
-                    feature
-                      ? "md:col-span-3 md:row-span-2"
-                      : wide
-                      ? "md:col-span-3"
-                      : "md:col-span-3 lg:col-span-3"
-                  }
-                />
-              );
-            })}
+          {/* Even grid — the gradient plates are a fixed height, so the old
+              bento row-spans would have left the feature card's plate stretched. */}
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, i) => (
+              <ServiceCard
+                key={service.id}
+                icon={service.icon}
+                title={service.title}
+                description={service.shortDesc}
+                href={`/services#${service.id}`}
+                index={i + 1}
+              />
+            ))}
           </div>
         </Container>
       </section>

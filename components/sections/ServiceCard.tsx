@@ -19,13 +19,25 @@ const iconMap = {
 
 type IconName = keyof typeof iconMap;
 
+/**
+ * Each card gets its own gradient plate so a row reads as a set of distinct
+ * services rather than a repeated template. Ordered so no two cards sitting
+ * next to each other — across or down a 3-column grid — share a temperature.
+ */
+const gradients = [
+  "from-accent-light via-accent to-accent-600",
+  "from-primary-400 via-primary-600 to-primary-800",
+  "from-[#9FD6C6] via-[#5CAF9A] to-[#2E7D6B]",
+  "from-[#B3AEE8] via-[#7C74CC] to-[#4E45A0]",
+  "from-[#F2A98C] via-[#E5825E] to-[#C25C34]",
+] as const;
+
 interface ServiceCardProps {
   icon: string;
   title: string;
   description: string;
   href: string;
   index?: number;
-  feature?: boolean;
   className?: string;
 }
 
@@ -35,68 +47,59 @@ export function ServiceCard({
   description,
   href,
   index,
-  feature = false,
   className,
 }: ServiceCardProps) {
   const Icon = iconMap[icon as IconName] ?? Flame;
+  const gradient = gradients[((index ?? 1) - 1) % gradients.length];
 
   return (
     <Link
       href={href}
       className={cn(
-        "group relative isolate flex flex-col gap-5 rounded-2xl border border-border bg-white p-6 overflow-hidden",
-        "transition-all duration-500 ease-out-expo hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-1",
-        feature && "md:p-8 md:gap-6",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card",
+        "transition-all duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-card-hover",
         className
       )}
       aria-label={`Learn more about ${title}`}
     >
-      {/* Hover gradient wash */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-gradient-to-br from-primary/[0.03] via-transparent to-accent/[0.05]"
-      />
-
-      {/* Header row: icon + number */}
-      <div className="flex items-start justify-between gap-3">
-        <div
-          className={cn(
-            "relative h-12 w-12 rounded-xl flex items-center justify-center shrink-0",
-            "bg-primary/8 ring-1 ring-primary/10",
-            "transition-all duration-500 group-hover:bg-accent/12 group-hover:ring-accent/30"
-          )}
-        >
-          <Icon
-            size={22}
-            strokeWidth={1.75}
-            className="text-primary transition-colors duration-500 group-hover:text-accent"
-            aria-hidden="true"
-          />
-        </div>
+      {/* Gradient plate */}
+      <div
+        className={cn(
+          "relative flex h-36 items-center justify-center bg-gradient-to-br",
+          gradient
+        )}
+      >
+        {/* Radial bloom — without it the gradient reads flat */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(120px_90px_at_50%_-10%,rgba(255,255,255,0.85),transparent_70%)]"
+        />
+        <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white/90 shadow-sm transition-transform duration-500 ease-out-expo group-hover:scale-105">
+          <Icon size={24} strokeWidth={1.75} className="text-text" aria-hidden="true" />
+        </span>
         {typeof index === "number" && (
-          <span className="font-display text-sm font-semibold tabular-nums text-text-subtle tracking-wide">
+          <span className="absolute right-4 top-4 font-display text-xs font-bold tabular-nums text-white/70">
             {String(index).padStart(2, "0")}
           </span>
         )}
       </div>
 
-      <div className="space-y-2 flex-1">
-        <h3 className={cn("font-display tracking-tight text-text", feature ? "text-2xl" : "text-lg")}>
+      {/* Body */}
+      <div className="flex flex-1 flex-col gap-2.5 p-6">
+        <h3 className="font-display text-lg font-semibold tracking-tight text-text">
           {title}
         </h3>
-        <p className="text-sm text-text-muted leading-relaxed">{description}</p>
-      </div>
+        <p className="text-sm leading-relaxed text-text-muted">{description}</p>
 
-      <span
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors duration-300 group-hover:text-accent mt-auto pt-2"
-      >
-        Learn more
-        <ArrowUpRight
-          size={16}
-          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          aria-hidden="true"
-        />
-      </span>
+        <span className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-background-muted px-3.5 py-1.5 text-[13px] font-semibold text-text transition-colors duration-300 group-hover:bg-accent-50">
+          Explore
+          <ArrowUpRight
+            size={14}
+            className="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            aria-hidden="true"
+          />
+        </span>
+      </div>
     </Link>
   );
 }
