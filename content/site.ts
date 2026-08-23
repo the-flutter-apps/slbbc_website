@@ -15,7 +15,7 @@ export const siteConfig = {
   gstin: "36BGKPG7459J2ZU",
   phone: "+91 93907 45568",
   whatsapp: "+919390745568",
-  email: "boilercontractor@gmail.com",
+  email: "info@slbbc.in",
   officeHours: "Mon–Sat, 9:00 AM – 5:00 PM IST",
   addresses: {
     hyderabad: {

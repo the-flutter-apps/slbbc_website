@@ -60,10 +60,10 @@ export default function PrivacyPage() {
                 may request deletion of your data at any time by contacting us
                 at{" "}
                 <a
-                  href="mailto:info@slbbc.in"
+                  href={`mailto:${siteConfig.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@slbbc.in
+                  {siteConfig.email}
                 </a>
                 .
               </p>
@@ -100,10 +100,10 @@ export default function PrivacyPage() {
                 your personal information held by us. To exercise these rights,
                 please contact us at{" "}
                 <a
-                  href="mailto:info@slbbc.in"
+                  href={`mailto:${siteConfig.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@slbbc.in
+                  {siteConfig.email}
                 </a>
                 .
               </p>
@@ -126,10 +126,10 @@ export default function PrivacyPage() {
               <p>
                 For privacy-related queries, contact us at{" "}
                 <a
-                  href="mailto:info@slbbc.in"
+                  href={`mailto:${siteConfig.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@slbbc.in
+                  {siteConfig.email}
                 </a>{" "}
                 or call{" "}
                 <a
