@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
+import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | SLBBC",
@@ -132,10 +133,10 @@ export default function PrivacyPage() {
                 </a>{" "}
                 or call{" "}
                 <a
-                  href="tel:+919849000000"
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                   className="text-primary hover:underline"
                 >
-                  +91 98490 00000
+                  {siteConfig.phone}
                 </a>
                 .
               </p>
