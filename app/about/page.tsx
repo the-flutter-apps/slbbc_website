@@ -66,10 +66,18 @@ const certifications = [
 const founder = {
   name: "Nemili Gundam Gora",
   initials: "NG",
-  role: "Proprietor & Founder",
+  role: "Founder",
   /** Personal experience, longer than the firm's own age. */
   yearsExperience: 30,
 };
+
+/**
+ * The firm is a sole proprietorship. The legal name on the GST registration is
+ * the proprietor's, not the founder's — stated here because it is the name any
+ * verification of the business (GSTIN lookup, D-U-N-S, Play Console) resolves
+ * to, and a site that named someone else as proprietor contradicted it.
+ */
+const proprietor = "Ramanamma Gorra";
 
 export default function AboutPage() {
   return (
@@ -178,6 +186,10 @@ export default function AboutPage() {
                   moving into contracting. SLBBC was founded to professionalise
                   boiler contracting for the pharmaceutical industry, combining
                   rigorous safety standards with operational reliability.
+                </p>
+                <p className="text-sm text-text-muted leading-relaxed mt-3">
+                  Sri Lakshmi Balaji Boiler Contractor is a sole proprietorship
+                  registered in the name of {proprietor}.
                 </p>
               </div>
             </div>
