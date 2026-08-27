@@ -80,9 +80,34 @@ export default function AppPrivacyPage() {
               </ul>
             </section>
 
+            <section aria-labelledby="app-onboard-heading">
+              <h2 id="app-onboard-heading" className="text-xl font-semibold text-text mb-2">
+                3. If you are a supervisor adding a new worker
+              </h2>
+              <p>
+                Supervisors can register a new worker from the app. Doing so sends
+                that person&rsquo;s details to us: their name, mobile number, date of
+                birth, gender, address, Aadhaar number, joining date, trade and
+                agreed wage.
+              </p>
+              <p className="mt-3">
+                This is the one place the app sends a <strong>full</strong> Aadhaar
+                number rather than a masked one, because a new employment record
+                cannot be created without it. To save typing, a supervisor may
+                photograph the Aadhaar card and the app will read the details from
+                the image. That reading is done by an optical character recognition
+                service acting on our behalf and for no other purpose.
+              </p>
+              <p className="mt-3">
+                If you are a supervisor, please only register people who have agreed
+                to work for SLBBC and have given you their documents for that
+                purpose.
+              </p>
+            </section>
+
             <section aria-labelledby="app-shows-heading">
               <h2 id="app-shows-heading" className="text-xl font-semibold text-text mb-2">
-                3. What the app shows you from your employment record
+                4. What the app shows you from your employment record
               </h2>
               <p>
                 The app displays information SLBBC already holds about you as
@@ -92,16 +117,16 @@ export default function AppPrivacyPage() {
                 personal details such as date of birth and blood group.
               </p>
               <p className="mt-3">
-                <strong>Sensitive identifiers are masked.</strong> Where the app
+                <strong>Sensitive identifiers you are shown are masked.</strong> Where the app
                 shows an Aadhaar number, PAN, or bank account number, it receives
                 and displays only a partially hidden value. The full numbers are
-                never sent to the phone and are never stored on it.
+                never sent to the phone and are never stored on it. The one exception is registering a new worker, described in section 3.
               </p>
             </section>
 
             <section aria-labelledby="app-use-heading">
               <h2 id="app-use-heading" className="text-xl font-semibold text-text mb-2">
-                4. How this information is used
+                5. How this information is used
               </h2>
               <p>
                 Solely to run the employment relationship: to sign you in, to
@@ -113,7 +138,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-not-heading">
               <h2 id="app-not-heading" className="text-xl font-semibold text-text mb-2">
-                5. What we do not do
+                6. What we do not do
               </h2>
               <ul className="list-disc pl-5 space-y-2">
                 <li>We do not sell or rent your personal information to anyone.</li>
@@ -133,7 +158,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-share-heading">
               <h2 id="app-share-heading" className="text-xl font-semibold text-text mb-2">
-                6. Who your information is shared with
+                7. Who your information is shared with
               </h2>
               <p>
                 Your information is shared only where it is necessary to employ
@@ -152,7 +177,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-retention-heading">
               <h2 id="app-retention-heading" className="text-xl font-semibold text-text mb-2">
-                7. How long it is kept
+                8. How long it is kept
               </h2>
               <p>
                 Employment, wage and statutory records are retained for as long
@@ -166,7 +191,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-security-heading">
               <h2 id="app-security-heading" className="text-xl font-semibold text-text mb-2">
-                8. Security
+                9. Security
               </h2>
               <p>
                 All communication between the app and our servers is encrypted in
@@ -179,7 +204,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-rights-heading">
               <h2 id="app-rights-heading" className="text-xl font-semibold text-text mb-2">
-                9. Your rights, and deleting your data
+                10. Your rights, and deleting your data
               </h2>
               <p>
                 Under the Digital Personal Data Protection Act, 2023, you may ask
@@ -209,7 +234,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-children-heading">
               <h2 id="app-children-heading" className="text-xl font-semibold text-text mb-2">
-                10. Children
+                11. Children
               </h2>
               <p>
                 The app is for adults in employment. We do not knowingly collect
@@ -219,7 +244,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-changes-heading">
               <h2 id="app-changes-heading" className="text-xl font-semibold text-text mb-2">
-                11. Changes to this policy
+                12. Changes to this policy
               </h2>
               <p>
                 If we change this policy we will update the effective date above
@@ -229,7 +254,7 @@ export default function AppPrivacyPage() {
 
             <section aria-labelledby="app-contact-heading">
               <h2 id="app-contact-heading" className="text-xl font-semibold text-text mb-2">
-                12. Contact
+                13. Contact
               </h2>
               <p>
                 Sri Lakshmi Balaji Boiler Contractor
