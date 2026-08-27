@@ -3,9 +3,9 @@ import { Container } from "@/components/layout/Container";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "SLBBC Staff App — Privacy Policy | SLBBC",
+  title: "SLBBC Connect App — Privacy Policy | SLBBC",
   description:
-    "Privacy Policy for the SLBBC Staff mobile application — what the app collects, why, and how it is protected.",
+    "Privacy Policy for the SLBBC Connect mobile application — what the app collects, why, and how it is protected.",
 };
 
 export default function AppPrivacyPage() {
@@ -16,7 +16,7 @@ export default function AppPrivacyPage() {
         <div className="max-w-2xl mx-auto prose-style space-y-8">
           <header className="space-y-2">
             <p className="section-label">Legal</p>
-            <h1 id="app-privacy-heading">SLBBC Staff App — Privacy Policy</h1>
+            <h1 id="app-privacy-heading">SLBBC Connect App — Privacy Policy</h1>
             <p className="text-text-muted text-sm">Effective date: {effectiveDate}</p>
           </header>
 
@@ -26,7 +26,7 @@ export default function AppPrivacyPage() {
                 1. Who this policy is for
               </h2>
               <p>
-                This policy covers the <strong>SLBBC Staff</strong> Android
+                This policy covers the <strong>SLBBC Connect</strong> Android
                 application, published by Sri Lakshmi Balaji Boiler Contractor
                 (&ldquo;SLBBC&rdquo;, &ldquo;we&rdquo;). The app is a workplace tool for
                 people employed or engaged by SLBBC. It is not a consumer app and
