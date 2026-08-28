@@ -11,21 +11,21 @@ import { siteConfig } from "./site";
  */
 export type AppDistributionStatus = "coming-soon" | "apk" | "play";
 
-const packageName = "in.slbbc.attendance";
+const packageName = "in.slbbc.app";
 
 export const appDownload = {
   status: "coming-soon" as AppDistributionStatus,
 
   name: "SLBBC",
-  fullName: "SLBBC Attendance",
-  tagline: "Daily attendance and muster for SLBBC field staff",
+  fullName: "SLBBC Connect",
+  tagline: "Pay, attendance and documents for SLBBC staff",
   packageName,
 
   /** Google Play listing. Valid the moment the app is published under this package name. */
   playUrl: `https://play.google.com/store/apps/details?id=${packageName}`,
 
   /** Used only when status is "apk". Place the file at public/downloads/. */
-  apkUrl: "/downloads/slbbc-attendance-latest.apk",
+  apkUrl: "/downloads/slbbc-connect-latest.apk",
   apkVersion: "",
   apkSizeMb: "",
 
