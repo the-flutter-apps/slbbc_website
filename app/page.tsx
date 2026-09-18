@@ -1,317 +1,293 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Hero } from "@/components/sections/Hero";
-import { ServiceCard } from "@/components/sections/ServiceCard";
-import { ValueCard } from "@/components/sections/ValueCard";
-import { StatCard } from "@/components/sections/StatCard";
-import { CTASection } from "@/components/sections/CTASection";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { Container } from "@/components/layout/Container";
+import {
+  ArrowUpRight,
+  ArrowRight,
+  ShieldCheck,
+  Clock3,
+  MapPin,
+  Flame,
+  Wrench,
+  Users,
+  ClipboardCheck,
+  Lightbulb,
+  Check,
+} from "lucide-react";
 import { siteConfig } from "@/content/site";
 import { services } from "@/content/services";
-
 export const metadata: Metadata = {
-  title: "Boiler O&M Contractor — Hyderabad & Vishakhapatnam | Sri Lakshmi Balaji",
-  description:
-    "Sri Lakshmi Balaji Boiler Contractor has over two decades of experience in boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We provide round-the-clock operations with ESI, PF, and full statutory benefits.",
-  openGraph: {
-    title: "Sri Lakshmi Balaji Boiler Contractor — Aligning with your business",
-    description:
-      "20+ years of boiler maintenance and operations (1–10 Ton). 24/7 contract operations with IBR-certified manpower, ESI & PF benefits.",
-  },
-};
-
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: siteConfig.name,
+  title: "Boiler Operations & Maintenance | Sri Lakshmi Balaji",
   description: siteConfig.description,
-  url: siteConfig.url,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Hyderabad",
-    addressRegion: "Telangana",
-    addressCountry: "IN",
-  },
-  areaServed: ["Hyderabad", "Vishakhapatnam"],
-  knowsAbout: [
-    "Boiler Operation",
-    "Boiler Maintenance",
-    "IBR Compliance",
-    "Manpower Supply",
-  ],
 };
-
-const whyUs = [
-  {
-    icon: "Clock",
-    title: "24/7 Reliability",
-    description:
-      "Every shift is covered. Boilers don't stop, and neither do we — our IBR-certified operators are on-site around the clock.",
-  },
-  {
-    icon: "Shield",
-    title: "IBR Compliance",
-    description:
-      "All operators hold valid IBR certificates. We handle statutory inspections, licence renewals, and documentation — end to end.",
-  },
-  {
-    icon: "CheckCircle2",
-    title: "Pharma-Grade Standards",
-    description:
-      "Deep experience in GMP pharmaceutical environments. We understand the audit expectations and zero-tolerance approach to downtime.",
-  },
-  {
-    icon: "Star",
-    title: "End-to-End Service",
-    description:
-      "From manpower sourcing and payroll to compliance management — one contractor for all your boiler operation needs.",
-  },
-];
-
-const industries = [
-  "Sterile Injectables",
-  "API Manufacturers",
-  "Formulations",
-  "CRAM Facilities",
-  "Chemical Processing",
-  "Food & Beverage",
-];
-
-const certifications = [
-  "IBR Certified Manpower",
-  "GST Registered",
-  "PF Registered",
-  "ESI Registered",
-  "Contract Labour Act",
-];
-
+const icons = [Flame, Wrench, Users, ClipboardCheck, Lightbulb];
 export default function HomePage() {
   return (
-    <>
+    <div className="redesign-home">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-      />
-
-      {/* Hero */}
-      <Hero
-        badge="1 — 10 Ton · IBR Certified · 24/7"
-        title={siteConfig.name}
-        tagline={`${siteConfig.tagline}.`}
-        subtitle="Over two decades keeping pharma-grade boilers running across Hyderabad and Vishakhapatnam. Round-the-clock contract operations powered by IBR-certified manpower with full statutory cover."
-        primaryCTA={{ label: "Get a Quote", href: "/contact" }}
-        secondaryCTA={{ label: "Our Services", href: "/services" }}
-        image={{
-          src: "/images/hero.jpg",
-          alt: "Sri Lakshmi Balaji Boiler Contractor — industrial boiler facility",
-          fallback: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=80",
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: siteConfig.name,
+            url: siteConfig.url,
+            telephone: siteConfig.phone,
+            email: siteConfig.email,
+            areaServed: ["Hyderabad", "Vishakhapatnam"],
+          }),
         }}
-      >
-        {/* Trust strip */}
-        <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 pt-6 border-t border-white/10 sm:flex sm:flex-wrap sm:items-center sm:gap-x-8">
-          {siteConfig.stats.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-2">
-              <span className="font-display text-xl font-bold text-white tabular-nums">
-                {stat.value}
-                <span className="text-accent-light">{stat.suffix}</span>
-              </span>
-              <span className="text-xs uppercase tracking-[0.14em] text-white/55">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </Hero>
-
-      {/* Why SLB */}
-      <section className="relative isolate py-20 md:py-28 bg-background-subtle" aria-labelledby="why-heading">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-grid-dark bg-grid-lg mask-radial-fade opacity-60"
-        />
-        <Container>
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            <div className="lg:col-span-5 lg:sticky lg:top-28">
-              <p className="section-label">Why Sri Lakshmi Balaji</p>
-              <h2 id="why-heading" className="font-display text-display-md mt-4 tracking-tight text-balance">
-                Built for continuous industrial operations.
-              </h2>
-              <p className="text-body-lg text-text-muted mt-5 text-pretty">
-                We exist for one purpose: keeping your boilers running safely,
-                compliantly, and without interruption — so your production never
-                stops.
-              </p>
-              <Link href="/about" className="btn-ghost mt-6 group/cta -ml-3">
-                Learn about us
-                <ArrowUpRight
-                  size={14}
-                  className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                />
-              </Link>
-            </div>
-
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-              {whyUs.map((item, i) => (
-                <ValueCard
-                  key={item.title}
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  className={i === 0 ? "sm:mt-8" : i === 2 ? "sm:mt-8" : ""}
-                />
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Services overview — bento layout */}
-      <section className="py-20 md:py-28" aria-labelledby="services-heading">
-        <Container>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-              <p className="section-label">Our Services</p>
-              <h2
-                id="services-heading"
-                className="font-display text-display-md mt-4 tracking-tight max-w-2xl text-balance"
-              >
-                Comprehensive boiler services under one contract.
-              </h2>
-            </div>
-            <Link href="/services" className="btn-secondary self-start md:self-auto">
-              View all services
-              <ArrowUpRight size={14} />
+      />
+      <section className="industrial-hero" aria-labelledby="home-title">
+        <div className="hero-copy">
+          <p className="eyebrow">
+            <span className="status-dot" /> YOUR PARTNER IN CONTINUOUS
+            PRODUCTION
+          </p>
+          <h1 id="home-title">
+            Your boilers.
+            <br />
+            Our expertise.
+            <br />
+            <span>Non-stop.</span>
+          </h1>
+          <p className="hero-description">
+            Reliable boiler operations, expert maintenance, and the right
+            people. Keeping your business moving, every hour of every day.
+          </p>
+          <div className="hero-actions">
+            <Link className="industrial-button" href="/contact">
+              Let’s talk operations <ArrowUpRight size={18} />
+            </Link>
+            <Link className="text-link" href="/services">
+              Explore services <ArrowRight size={17} />
             </Link>
           </div>
-
-          {/* Even grid — the gradient plates are a fixed height, so the old
-              bento row-spans would have left the feature card's plate stretched. */}
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => (
-              <ServiceCard
-                key={service.id}
-                icon={service.icon}
-                title={service.title}
-                description={service.shortDesc}
-                href={`/services#${service.id}`}
-                index={i + 1}
-              />
-            ))}
+          <div className="hero-location">
+            <MapPin size={14} /> HYDERABAD <span>/</span> VISAKHAPATNAM
           </div>
-        </Container>
-      </section>
-
-      {/* Industries strip */}
-      <section
-        className="relative isolate py-20 md:py-24 bg-background-muted border-y border-border"
-        aria-labelledby="industries-heading"
-      >
-        <Container>
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 space-y-5">
-              <p className="section-label">Industries Served</p>
-              <h2
-                id="industries-heading"
-                className="font-display text-display-md tracking-tight text-balance"
-              >
-                Trusted by pharmaceutical manufacturers.
-              </h2>
-              <p className="text-text-muted text-pretty">
-                Sterile injectables, API manufacturers, formulations plants —
-                SLBBC serves leading pharma companies across Telangana and
-                Andhra Pradesh.
-              </p>
-              <Link href="/industries" className="btn-secondary mt-2">
-                Our clients
-                <ArrowUpRight size={14} />
-              </Link>
-            </div>
-            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {industries.map((industry, i) => (
-                <div
-                  key={industry}
-                  className="group relative flex items-center justify-center text-center px-3 py-5 rounded-xl bg-white border border-border text-sm font-semibold text-text-muted hover:border-primary/30 hover:text-primary hover:shadow-card transition-all duration-300"
-                  style={{ marginTop: i % 2 === 1 ? "1rem" : 0 }}
-                >
-                  <span className="absolute left-3 top-3 font-display text-[11px] font-bold text-text-subtle tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {industry}
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Stats band */}
-      <section
-        className="relative isolate overflow-hidden py-20 md:py-28 bg-primary-900 text-white"
-        aria-label="Company statistics"
-      >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-grid-light bg-grid-md mask-radial-fade opacity-50"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute -z-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-[420px] w-[60%] rounded-full bg-accent/15 blur-3xl"
-        />
-        <Container>
-          <SectionHeader
-            label="Our track record"
-            title="Numbers that reflect our commitment."
-            centered
-            light
+        </div>
+        <div className="hero-visual">
+          <Image
+            src="/images/Boiler_operation.jpeg"
+            alt="Boiler operator beside an industrial boiler and control panel"
+            fill
+            priority
+            sizes="(max-width: 800px) 100vw, 55vw"
           />
-          <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
-            {siteConfig.stats.map((stat) => (
-              <div key={stat.label} className="bg-primary-900">
-                <StatCard
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  label={stat.label}
-                  light
-                />
-              </div>
-            ))}
+          <div className="image-topline">
+            <span>PRECISION IN EVERY SHIFT.</span>
+            <span>01 / SLBBC</span>
           </div>
-        </Container>
-      </section>
-
-      {/* Certifications strip */}
-      <section className="py-12 md:py-16 border-b border-border" aria-label="Certifications">
-        <Container>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-eyebrow uppercase text-text-muted">
-              Registrations &amp; Compliance
-            </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {certifications.map((cert) => (
-                <span
-                  key={cert}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background-subtle px-4 py-1.5 text-xs font-semibold text-text-muted"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {cert}
-                </span>
-              ))}
+          <div className="hero-cert">
+            <ShieldCheck size={23} />
+            <div>
+              <strong>IBR-certified expertise</strong>
+              <span>Safety at the heart of every operation.</span>
             </div>
           </div>
-        </Container>
+          <div className="hero-capacity">
+            <span>BOILER CAPACITY</span>
+            <strong>
+              1–10 <small>TON</small>
+            </strong>
+          </div>
+        </div>
       </section>
-
-      {/* Final CTA */}
-      <CTASection
-        title="Ready to discuss your boiler operations?"
-        subtitle="Tell us about your facility and we'll design a boiler O&M contract that fits your requirements."
-        primaryCTA={{ label: "Get a Quote", href: "/contact" }}
-        secondaryCTA={{ label: "Learn About Us", href: "/about" }}
-      />
-    </>
+      <section className="proof-strip" aria-label="Our experience in numbers">
+        <div className="proof-intro">
+          <span className="eyebrow">BUILT ON EXPERIENCE.</span>
+          <strong>Backed by people.</strong>
+        </div>
+        <div>
+          <strong>
+            {siteConfig.yearsExperience}
+            <em>+</em>
+          </strong>
+          <span>Years of expertise</span>
+        </div>
+        <div>
+          <strong>
+            10<em>+</em>
+          </strong>
+          <span>Vendor sites</span>
+        </div>
+        <div>
+          <strong>
+            85<em>+</em>
+          </strong>
+          <span>Skilled employees</span>
+        </div>
+        <div>
+          <strong>
+            24<em>/</em>7
+          </strong>
+          <span>Operational support</span>
+        </div>
+      </section>
+      <section className="home-section" aria-labelledby="services-title">
+        <div className="section-top">
+          <div>
+            <p className="eyebrow">01 / WHAT WE DO</p>
+            <h2 id="services-title">
+              One partner.
+              <br />
+              Every boiler requirement.
+            </h2>
+          </div>
+          <div className="section-aside">
+            <p>
+              From the first shift to the next inspection, we take care of the
+              details that keep your facility running.
+            </p>
+            <Link className="text-link" href="/services">
+              View all services <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        </div>
+        <div className="service-grid">
+          {services.map((service, i) => {
+            const Icon = icons[i];
+            return (
+              <Link
+                className="industrial-service"
+                href={`/services#${service.id}`}
+                key={service.id}
+              >
+                <div className="service-top">
+                  <Icon size={29} strokeWidth={1.4} />
+                  <span>0{i + 1}</span>
+                </div>
+                <h3>{service.title}</h3>
+                <p>{service.shortDesc}</p>
+                <span className="service-bottom">
+                  Explore service <ArrowUpRight size={21} />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+      <section
+        className="commitment-section"
+        aria-labelledby="commitment-title"
+      >
+        <div className="commitment-photo">
+          <Image
+            src="/images/boiler_maintenance.jpeg"
+            alt="Industrial boiler maintenance"
+            fill
+            sizes="(max-width: 800px) 100vw, 50vw"
+          />
+          <div className="photo-note">
+            <span className="status-dot" /> EXPERTISE ON THE GROUND. EVERY DAY.
+          </div>
+        </div>
+        <div className="commitment-copy">
+          <p className="eyebrow">02 / THE SLBBC COMMITMENT</p>
+          <h2 id="commitment-title">
+            We look after your boilers.
+            <br />
+            <span>You focus on your business.</span>
+          </h2>
+          <p>
+            For over two decades, Sri Lakshmi Balaji Boiler Contractor has
+            supported continuous production across Telangana and Andhra Pradesh.
+          </p>
+          <div className="commitment-item">
+            <Clock3 />
+            <div>
+              <h3>Every shift, covered.</h3>
+              <p>
+                Round-the-clock operations with a dedicated, qualified team.
+              </p>
+            </div>
+          </div>
+          <div className="commitment-item">
+            <ShieldCheck />
+            <div>
+              <h3>Compliance, built in.</h3>
+              <p>
+                IBR-certified manpower with PF, ESI, and statutory benefits.
+              </p>
+            </div>
+          </div>
+          <Link className="text-link" href="/about">
+            Get to know SLBBC <ArrowUpRight size={18} />
+          </Link>
+        </div>
+      </section>
+      <section
+        className="home-section industries-section"
+        aria-labelledby="industry-title"
+      >
+        <div className="section-top">
+          <div>
+            <p className="eyebrow">03 / INDUSTRIES WE SERVE</p>
+            <h2 id="industry-title">
+              Behind the industries
+              <br />
+              that move us forward.
+            </h2>
+          </div>
+          <div className="section-aside">
+            <p>
+              Deep roots in pharmaceutical manufacturing. Dependable steam
+              support across essential industries.
+            </p>
+            <Link className="text-link" href="/industries">
+              Explore our experience <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        </div>
+        <div className="industry-list">
+          {[
+            "Pharmaceuticals & APIs",
+            "Sterile injectables",
+            "Formulations & CRAM",
+            "Chemical processing",
+            "Food & beverage",
+            "Textile manufacturing",
+          ].map((name, i) => (
+            <Link href="/industries" key={name}>
+              <span>0{i + 1}</span>
+              <h3>{name}</h3>
+              <ArrowUpRight size={23} />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="compliance-band" aria-label="Registrations">
+        <span>CONFIDENCE AT EVERY LEVEL</span>
+        {[
+          "IBR-certified manpower",
+          "GST registered",
+          "PF & ESI",
+          "Statutory compliance",
+        ].map((t) => (
+          <span key={t}>
+            <Check size={16} />
+            {t}
+          </span>
+        ))}
+      </section>
+      <section className="home-cta">
+        <p className="eyebrow">LET’S KEEP YOUR BUSINESS MOVING</p>
+        <div>
+          <h2>
+            Your next shift.
+            <br />
+            Our next commitment.
+          </h2>
+          <Link className="industrial-button light-button" href="/contact">
+            Discuss your requirements <ArrowUpRight size={20} />
+          </Link>
+        </div>
+        <p>
+          Tell us about your facility. We’ll help you build the right operations
+          plan.
+        </p>
+      </section>
+    </div>
   );
 }
