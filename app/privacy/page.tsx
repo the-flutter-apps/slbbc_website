@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/Container";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | SLBBC",
+  title: "Privacy Policy",
   description:
     "Privacy Policy for Sri Lakshmi Balaji Boiler Contractor — how we collect, use, and protect your personal information.",
   robots: { index: false },

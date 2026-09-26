@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
-import { siteConfig } from "@/content/site";
+import { ogImage, siteConfig } from "@/content/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,15 +19,37 @@ const display = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500"],
+});
+
+const defaultTitle = `${siteConfig.name} — Boiler O&M Contractor in Hyderabad & Vishakhapatnam`;
+
+export const viewport: Viewport = {
+  themeColor: "#061B30",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.shortName} — ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.shortName}`,
+    default: defaultTitle,
+    template: `%s | SLBBC`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
+  alternates: { canonical: "/" },
+  category: "Industrial services",
   keywords: [
     "boiler contractor Hyderabad",
+    "boiler operation and maintenance contractor",
+    "boiler O&M contract",
+    "IBR boiler operator supply",
+    "boiler contractor Visakhapatnam",
+    "boiler contractor Parawada",
+    "boiler contractor Jeedimetla",
     "boiler operator Hyderabad",
     "IBR certified boiler",
     "boiler maintenance Hyderabad",
@@ -44,19 +66,62 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.shortName} — ${siteConfig.tagline}`,
+    title: defaultTitle,
     description: siteConfig.description,
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.shortName} — ${siteConfig.tagline}`,
+    title: defaultTitle,
+    images: [ogImage.url],
     description: siteConfig.description,
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  formatDetection: { telephone: true, email: true },
+};
+
+/** Sitewide entity data — lets search engines tie every page to one business. */
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      alternateName: ["SLBBC", "SLB Boiler Contractor"],
+      url: siteConfig.url,
+      logo: `${siteConfig.url}/icon.png`,
+      email: siteConfig.email,
+      telephone: siteConfig.phone,
+      slogan: siteConfig.tagline,
+      taxID: siteConfig.gstin,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
+        contactType: "sales",
+        areaServed: "IN",
+        availableLanguage: ["en", "te", "hi"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      inLanguage: "en-IN",
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -65,8 +130,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${display.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${display.variable} ${mono.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-text antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary focus:shadow-lg"
+        >
+          Skip to content
+        </a>
         <Header />
         <main id="main-content" className="flex-1">
           {children}

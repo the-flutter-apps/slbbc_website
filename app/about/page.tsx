@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, MapPin } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, MapPin } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { ValueCard } from "@/components/sections/ValueCard";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
+import { siteConfig, ogImage } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "About Us — Sri Lakshmi Balaji Boiler Contractor",
   description:
     "Over two decades of boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We undertake round-the-clock boiler operations with our own manpower and provide ESI, PF, and statutory benefits.",
+  alternates: { canonical: "/about/" },
   openGraph: {
+    images: [ogImage],
+    url: "/about/",
     title: "About Sri Lakshmi Balaji Boiler Contractor",
     description:
       "20+ years of boiler O&M experience. Contract boiler operations with 24/7 manpower, ESI, PF, and full statutory compliance.",
@@ -57,7 +61,7 @@ const values = [
 
 const certifications = [
   { label: "IBR Certified Manpower", detail: "Indian Boiler Regulations" },
-  { label: "GST Registered", detail: "GSTIN: 36XXXXXXXXXXXXXXX" },
+  { label: "GST Registered", detail: `GSTIN: ${siteConfig.gstin}` },
   { label: "PF Registered", detail: "Employees' Provident Fund" },
   { label: "ESI Registered", detail: "Employees' State Insurance" },
   { label: "Contract Labour Act", detail: "Compliant contractor registration" },
@@ -88,7 +92,8 @@ export default function AboutPage() {
       />
 
       <Hero
-        badge="About Us"
+        breadcrumb={[{ label: "About" }]}
+        badge={`${siteConfig.yearsExperience}+ years in boiler houses`}
         title="Built on safety. Run on reliability."
         subtitle="Having more than two decades of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, Sri Lakshmi Balaji Boiler Contractor aligns with your business to keep operations running without interruption."
         dark
@@ -238,16 +243,39 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-            {/* Map placeholder */}
-            <div className="relative rounded-2xl overflow-hidden bg-background-muted border border-border aspect-[4/3] flex items-center justify-center">
-              <div className="text-center p-6 space-y-2">
-                <MapPin size={40} className="text-primary mx-auto" aria-hidden="true" />
-                <p className="text-sm font-semibold text-text">
-                  Hyderabad &amp; Vishakhapatnam
-                </p>
-                <p className="text-xs text-text-muted">
-                  [Map placeholder — real map will be embedded here]
-                </p>
+            {/* Office cards */}
+            <div className="relative overflow-hidden rounded-xl bg-primary-900 p-3 text-white">
+              <div aria-hidden="true" className="absolute inset-0 bg-grid-light bg-grid-sm opacity-50" />
+              <div className="relative grid gap-3">
+                {[siteConfig.addresses.hyderabad, siteConfig.addresses.vizag].map((office, i) => (
+                  <a
+                    key={office.label}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      `${office.line1}, ${office.line2}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start gap-4 rounded-lg border border-white/10 bg-primary-950/60 p-6 transition-colors hover:border-accent/50"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-accent">
+                      <MapPin size={20} aria-hidden="true" />
+                    </span>
+                    <span className="flex-1">
+                      <span className="spec-label block text-accent-light">
+                        {i === 0 ? "Head office" : "Site office"}
+                      </span>
+                      <span className="mt-1 block font-display text-lg font-semibold">
+                        {office.label}
+                      </span>
+                      <span className="mt-1 block text-sm text-white/70">
+                        {office.line1}, {office.line2}
+                      </span>
+                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/80 group-hover:text-accent-light">
+                        Open in Google Maps <ArrowUpRight size={13} aria-hidden="true" />
+                      </span>
+                    </span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

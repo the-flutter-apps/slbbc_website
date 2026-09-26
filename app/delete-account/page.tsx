@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/Container";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Delete your SLBBC Connect account | SLBBC",
+  title: "Delete your SLBBC Connect account",
   description:
     "How to request deletion of your SLBBC Connect account and the data associated with it.",
 };

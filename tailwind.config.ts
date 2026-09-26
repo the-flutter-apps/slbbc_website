@@ -76,6 +76,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
         "display-xl": ["clamp(2.75rem, 6vw + 1rem, 5.5rem)", { lineHeight: "0.98", letterSpacing: "-0.035em", fontWeight: "700" }],
@@ -150,6 +151,8 @@ const config: Config = {
           "radial-gradient(900px 500px at 100% 0%, rgba(255, 106, 26, 0.22), transparent 60%), radial-gradient(700px 400px at 0% 100%, rgba(46, 112, 172, 0.3), transparent 60%), linear-gradient(135deg, #061B30 0%, #0B2E4F 100%)",
         "grid-light":
           "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+        "hazard":
+          "repeating-linear-gradient(-45deg, #FF6A1A 0 12px, #061B30 12px 24px)",
         "grid-dark":
           "linear-gradient(to right, rgba(11,46,79,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(11,46,79,0.08) 1px, transparent 1px)",
         "shine":

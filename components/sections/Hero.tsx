@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
-import { siteConfig } from "@/content/site";
 
 interface HeroProps {
   badge?: string;
@@ -17,6 +16,10 @@ interface HeroProps {
   primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
   image?: { src: string; alt: string; fallback?: string };
+  /** Readouts shown on the control-panel card over the hero image. */
+  specs?: { label: string; value: string }[];
+  /** Visible trail for inner pages, e.g. [{ label: "Services" }]. */
+  breadcrumb?: { label: string; href?: string }[];
   centered?: boolean;
   dark?: boolean;
   children?: React.ReactNode;
@@ -30,62 +33,92 @@ export function Hero({
   primaryCTA,
   secondaryCTA,
   image,
+  specs,
+  breadcrumb,
   centered = false,
   dark = true,
   children,
 }: HeroProps) {
   const [imgSrc, setImgSrc] = useState(image?.src ?? "");
+  const centerText = centered && !image;
 
   return (
     <section
       className={cn(
         "relative isolate overflow-hidden",
-        "pt-28 pb-20 md:pt-36 md:pb-28",
+        image ? "pt-28 pb-20 md:pt-36 md:pb-28" : "pt-32 pb-20 md:pt-40 md:pb-24",
         dark ? "bg-hero-pattern text-white" : "bg-background-muted text-text"
       )}
       aria-label="Page hero"
     >
-      {/* Decorative layers (dark variant) */}
       {dark && (
         <>
-          {/* Grid pattern */}
+          {/* Blueprint grid */}
           <div
-            className="absolute inset-0 -z-10 bg-grid-light bg-grid-md mask-radial-fade opacity-60"
+            className="absolute inset-0 -z-10 bg-grid-light bg-grid-md mask-radial-fade opacity-70"
             aria-hidden="true"
           />
-          {/* Soft accent orb */}
+          {/* Furnace glow */}
           <div
-            className="absolute -z-10 top-[-10%] right-[-8%] h-[480px] w-[480px] rounded-full bg-accent/20 blur-3xl animate-blob"
+            className="absolute -z-10 top-[-15%] right-[-10%] h-[520px] w-[520px] rounded-full bg-accent/20 blur-3xl"
             aria-hidden="true"
           />
-          <div
-            className="absolute -z-10 bottom-[-20%] left-[-10%] h-[420px] w-[420px] rounded-full bg-primary-400/30 blur-3xl animate-blob"
-            style={{ animationDelay: "4s" }}
-            aria-hidden="true"
-          />
-          {/* Bottom edge fade into next section */}
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-black/20"
-            aria-hidden="true"
-          />
+          {/* Hazard band along the bottom edge */}
+          <div className="absolute inset-x-0 bottom-0 hazard-band opacity-90" aria-hidden="true" />
         </>
       )}
 
       <Container>
         <div
           className={cn(
-            "relative grid items-center gap-10",
+            "relative grid items-center gap-12",
             image
-              ? "lg:grid-cols-[1.05fr_1fr] lg:gap-16"
+              ? "lg:grid-cols-[1.1fr_1fr] lg:gap-16"
               : centered
               ? "max-w-3xl mx-auto text-center"
               : "max-w-3xl"
           )}
         >
           {/* Text content */}
-          <div className="flex flex-col gap-6 animate-fade-up">
+          <div className={cn("flex flex-col gap-6 animate-fade-up", centerText && "items-center")}>
+            {breadcrumb && (
+              <nav aria-label="Breadcrumb">
+                <ol
+                  className={cn(
+                    "spec-label flex flex-wrap items-center gap-1.5",
+                    dark ? "text-white/50" : "text-text-muted"
+                  )}
+                >
+                  <li>
+                    <Link href="/" className="hover:text-accent-light">
+                      Home
+                    </Link>
+                  </li>
+                  {breadcrumb.map((crumb) => (
+                    <li key={crumb.label} className="flex items-center gap-1.5">
+                      <ChevronRight size={12} aria-hidden="true" />
+                      {crumb.href ? (
+                        <Link href={crumb.href} className="hover:text-accent-light">
+                          {crumb.label}
+                        </Link>
+                      ) : (
+                        <span aria-current="page" className={dark ? "text-white/80" : "text-text"}>
+                          {crumb.label}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+
             {badge && (
-              <span className={dark ? "badge-dot self-start" : "badge-accent self-start"}>
+              <span
+                className={cn(
+                  dark ? "badge-dot" : "badge-accent",
+                  centerText ? "self-center" : "self-start"
+                )}
+              >
                 {badge}
               </span>
             )}
@@ -93,12 +126,10 @@ export function Hero({
             <h1
               className={cn(
                 "font-display text-balance",
-                // A headline carrying a tagline beneath it steps down one size,
-                // so the pair still clears the fold alongside the CTAs.
                 tagline
                   ? "text-display-md md:text-display-lg"
                   : "text-display-lg md:text-display-xl",
-                dark ? "text-gradient-light" : "text-text"
+                dark ? "text-white" : "text-text"
               )}
             >
               {title}
@@ -107,11 +138,12 @@ export function Hero({
             {tagline && (
               <p
                 className={cn(
-                  "-mt-2 font-display text-xl md:text-2xl font-semibold tracking-tight",
+                  "-mt-2 flex items-center gap-3 font-display text-xl md:text-2xl font-semibold tracking-tight",
                   dark ? "text-accent-light" : "text-accent",
                   centered && "mx-auto"
                 )}
               >
+                <span className="h-[3px] w-8 bg-accent" aria-hidden="true" />
                 {tagline}
               </p>
             )}
@@ -119,7 +151,7 @@ export function Hero({
             {subtitle && (
               <p
                 className={cn(
-                  "mt-2 max-w-xl text-body-lg text-pretty",
+                  "max-w-xl text-body-lg text-pretty",
                   dark ? "text-white/75" : "text-text-muted",
                   centered && "mx-auto"
                 )}
@@ -131,15 +163,12 @@ export function Hero({
             {(primaryCTA || secondaryCTA) && (
               <div
                 className={cn(
-                  "flex flex-wrap items-center gap-3 pt-3",
+                  "flex flex-wrap items-center gap-3 pt-2",
                   centered && "justify-center"
                 )}
               >
                 {primaryCTA && (
-                  <Link
-                    href={primaryCTA.href}
-                    className="btn-primary group/cta"
-                  >
+                  <Link href={primaryCTA.href} className="btn-primary group/cta">
                     {primaryCTA.label}
                     <ArrowUpRight
                       size={16}
@@ -152,7 +181,6 @@ export function Hero({
                     href={secondaryCTA.href}
                     className={dark ? "btn-outline-white" : "btn-secondary"}
                   >
-                    <Play size={14} className="opacity-80" />
                     {secondaryCTA.label}
                   </Link>
                 )}
@@ -162,17 +190,16 @@ export function Hero({
             {children}
           </div>
 
-          {/* Hero image with framed treatment + floating stat */}
+          {/* Framed image with a control-panel readout */}
           {image && (
-            <div className="relative animate-fade-up animate-delay-200">
-              {/* Outer frame ring */}
-              <div className="relative rounded-3xl p-2 bg-gradient-to-br from-white/15 via-white/5 to-transparent shadow-2xl">
-                <div className="relative rounded-[1.25rem] overflow-hidden aspect-[4/5]">
+            <div className="relative animate-fade-up animate-delay-200 lg:pl-4">
+              <div className="relative p-3 text-white/40 corner-ticks">
+                <div className="relative overflow-hidden rounded-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
                   <Image
                     src={imgSrc || (image.fallback ?? image.src)}
                     alt={image.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-[50%_40%]"
                     priority
                     sizes="(max-width: 1024px) 100vw, 45vw"
                     onError={() => {
@@ -181,36 +208,33 @@ export function Hero({
                       }
                     }}
                   />
-                  {/* Tint overlay */}
                   <div
-                    className="absolute inset-0 bg-gradient-to-tr from-primary-900/60 via-primary-900/10 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/10 to-transparent"
                     aria-hidden="true"
                   />
-                  {/* Corner brackets */}
-                  <span className="pointer-events-none absolute left-3 top-3 h-6 w-6 border-l-2 border-t-2 border-accent" />
-                  <span className="pointer-events-none absolute right-3 top-3 h-6 w-6 border-r-2 border-t-2 border-white/50" />
-                  <span className="pointer-events-none absolute left-3 bottom-3 h-6 w-6 border-l-2 border-b-2 border-white/50" />
-                  <span className="pointer-events-none absolute right-3 bottom-3 h-6 w-6 border-r-2 border-b-2 border-accent" />
-                </div>
-              </div>
 
-              {/* Floating stat card */}
-              <div className="absolute -left-3 sm:-left-6 bottom-6 glass-dark text-white rounded-2xl px-5 py-4 shadow-2xl hidden sm:flex items-center gap-4">
-                <div className="h-10 w-10 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center">
-                  <span className="font-display text-lg font-bold text-accent-light">
-                    {siteConfig.yearsExperience}
-                  </span>
-                </div>
-                <div className="leading-tight">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">Years</p>
-                  <p className="text-sm font-semibold text-white">of pharma-grade O&amp;M</p>
-                </div>
-              </div>
+                  {/* On-duty status tag */}
+                  <div className="absolute left-4 top-4 flex items-center gap-2 rounded-md bg-primary-950/80 px-3 py-1.5 backdrop-blur-md">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:hidden" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                    </span>
+                    <span className="spec-label text-white/90">On duty · 24/7/365</span>
+                  </div>
 
-              {/* Floating compliance pill */}
-              <div className="absolute -right-3 sm:-right-4 top-6 bg-white/95 backdrop-blur-md border border-white text-text rounded-full px-4 py-2 shadow-xl hidden sm:flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.7)]" />
-                <span className="text-xs font-semibold tracking-wide text-text">IBR Certified</span>
+                  {specs && specs.length > 0 && (
+                    <dl className="absolute inset-x-4 bottom-4 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/15 bg-white/15 backdrop-blur-md">
+                      {specs.map((spec) => (
+                        <div key={spec.label} className="bg-primary-950/75 px-4 py-3">
+                          <dt className="spec-label text-white/55">{spec.label}</dt>
+                          <dd className="mt-1 font-display text-lg font-bold tracking-tight text-white">
+                            {spec.value}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                </div>
               </div>
             </div>
           )}

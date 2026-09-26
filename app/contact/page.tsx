@@ -4,13 +4,16 @@ import { Hero } from "@/components/sections/Hero";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { siteConfig } from "@/content/site";
+import { siteConfig, ogImage } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Contact SLBBC — Boiler Contractor Hyderabad",
   description:
     "Get in touch with Sri Lakshmi Balaji Boiler Contractor. Request a quote, ask about services, or enquire about careers. Phone, WhatsApp, and email available.",
+  alternates: { canonical: "/contact/" },
   openGraph: {
+    images: [ogImage],
+    url: "/contact/",
     title: "Contact SLBBC — Get a Quote for Boiler O&M Services",
     description:
       "Reach out via phone, WhatsApp, or email. We typically respond within 1 business day.",
@@ -23,7 +26,7 @@ const localBusinessJsonLd = {
   name: siteConfig.name,
   telephone: siteConfig.phone,
   email: siteConfig.email,
-  openingHours: "Mo-Sa 09:00-18:00",
+  openingHours: "Mo-Sa 09:00-17:00",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Hyderabad",
@@ -47,7 +50,7 @@ const contactMethods = [
     label: "Phone",
     value: siteConfig.phone,
     href: `tel:${siteConfig.phone.replace(/\s/g, "")}`,
-    desc: "Call us directly — Mon–Sat, 9 AM–6 PM",
+    desc: "Call us directly — Mon–Sat, 9 AM–5 PM",
   },
   {
     icon: MessageCircle,
@@ -86,7 +89,8 @@ export default function ContactPage() {
       />
 
       <Hero
-        badge="Contact Us"
+        breadcrumb={[{ label: "Contact" }]}
+        badge="Quotes · Site visits · Support"
         title="Get in Touch"
         subtitle="Whether you're looking for a boiler O&M contractor, have a service query, or are interested in joining our team — we'd love to hear from you."
         dark

@@ -43,11 +43,18 @@ export const siteConfig = {
   },
 };
 
+/** Share card for link previews (1200×630). */
+export const ogImage = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: "Sri Lakshmi Balaji Boiler Contractor — Boiler O&M Contractor in Hyderabad & Vishakhapatnam",
+};
+
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Industries", href: "/industries" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
@@ -62,7 +69,6 @@ export const footerLinks = {
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Industries Served", href: "/industries" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
     { label: "Privacy Policy", href: "/privacy" },

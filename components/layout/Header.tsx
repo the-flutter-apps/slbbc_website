@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, ArrowUpRight } from "lucide-react";
+import { Menu, X, Phone, ArrowUpRight, Mail, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "@/components/shared/Logo";
 import { Container } from "@/components/layout/Container";
@@ -56,6 +56,36 @@ export function Header() {
             : "bg-transparent border-b border-transparent"
         )}
       >
+        {/* Utility strip — collapses once the page scrolls */}
+        <div
+          className={cn(
+            "hidden lg:block overflow-hidden bg-primary-950 text-white/70 transition-all duration-500 ease-out-expo",
+            scrolled ? "max-h-0" : "max-h-10"
+          )}
+        >
+          <Container>
+            <div className="flex h-9 items-center justify-between spec-label">
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                24/7 boiler house cover for our client sites
+              </span>
+              <span className="flex items-center gap-6">
+                <span className="flex items-center gap-1.5">
+                  <MapPin size={12} aria-hidden="true" />
+                  Hyderabad · Vishakhapatnam
+                </span>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex items-center gap-1.5 normal-case tracking-normal hover:text-white"
+                >
+                  <Mail size={12} aria-hidden="true" />
+                  {siteConfig.email}
+                </a>
+              </span>
+            </div>
+          </Container>
+        </div>
+
         <Container>
           <div className="flex h-16 items-center justify-between md:h-20">
             <Logo variant={solid ? "dark" : "light"} />
@@ -63,7 +93,7 @@ export function Header() {
             {/* Desktop nav */}
             <nav
               className={cn(
-                "hidden md:flex items-center gap-1 rounded-full px-2 py-1 transition-colors duration-500",
+                "hidden md:flex items-center gap-1 rounded-lg px-1.5 py-1 transition-colors duration-500",
                 solid ? "bg-background-muted/60" : "bg-white/70 backdrop-blur-md border border-border/60"
               )}
               aria-label="Main navigation"
@@ -78,7 +108,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
+                      "relative px-3.5 py-1.5 rounded-md text-sm font-medium transition-all duration-300",
                       isActive
                         ? "text-primary bg-white shadow-sm"
                         : "text-text-muted hover:text-primary"
@@ -96,7 +126,7 @@ export function Header() {
               <a
                 href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                 className={cn(
-                  "hidden lg:flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors",
+                  "hidden lg:flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium tabular-nums transition-colors",
                   solid
                     ? "text-text-muted hover:text-primary hover:bg-background-muted"
                     : "text-white/85 hover:text-white hover:bg-white/10"

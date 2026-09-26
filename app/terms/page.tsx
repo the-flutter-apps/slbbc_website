@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | SLBBC",
+  title: "Terms of Service",
   description:
     "Terms of Service for the SLBBC website — usage terms for slbbc.in.",
   robots: { index: false },

@@ -86,25 +86,25 @@
 
   /* ── Buttons ─────────────────────────────────────────────── */
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-glow-accent transition-all duration-300 ease-out-expo
+    @apply relative inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-glow-accent transition-all duration-300 ease-out-expo
            hover:bg-accent-dark hover:shadow-[0_16px_40px_-8px_rgba(255,106,26,0.55)] hover:-translate-y-0.5
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-white px-6 py-3 text-sm font-semibold text-primary shadow-sm transition-all duration-300 ease-out-expo
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-semibold text-primary shadow-sm transition-all duration-300 ease-out-expo
            hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-0.5
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 ease-out-expo
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 ease-out-expo
            hover:bg-primary/5
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 
   .btn-outline-white {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out-expo
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out-expo
            hover:bg-white hover:text-primary hover:border-white hover:-translate-y-0.5
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
   }
@@ -136,7 +136,7 @@
   }
 
   .badge-dot {
-    @apply relative inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/85;
+    @apply relative inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.06] backdrop-blur-md px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-white/85;
   }
 
   .badge-dot::before {
@@ -155,12 +155,37 @@
 
   /* ── Section eyebrows ────────────────────────────────────── */
   .section-label {
-    @apply inline-flex items-center gap-2 text-eyebrow uppercase text-accent;
+    @apply inline-flex items-center gap-2.5 font-mono text-[12px] font-medium uppercase tracking-[0.16em] text-accent;
   }
 
   .section-label::before {
     content: "";
-    @apply h-px w-6 bg-accent;
+    @apply h-2 w-2 bg-accent;
+  }
+
+  /* ── Industrial details ──────────────────────────────────── */
+  /* Monospace readout label, as on a plant nameplate */
+  .spec-label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em];
+  }
+
+  /* Thin orange/navy warning band, used as a section edge */
+  .hazard-band {
+    @apply h-2 w-full bg-hazard;
+  }
+
+  /* Four corner ticks, drawn with gradients so any element can carry them */
+  .corner-ticks {
+    background:
+      linear-gradient(currentColor, currentColor) top left / 14px 2px,
+      linear-gradient(currentColor, currentColor) top left / 2px 14px,
+      linear-gradient(currentColor, currentColor) top right / 14px 2px,
+      linear-gradient(currentColor, currentColor) top right / 2px 14px,
+      linear-gradient(currentColor, currentColor) bottom left / 14px 2px,
+      linear-gradient(currentColor, currentColor) bottom left / 2px 14px,
+      linear-gradient(currentColor, currentColor) bottom right / 14px 2px,
+      linear-gradient(currentColor, currentColor) bottom right / 2px 14px;
+    background-repeat: no-repeat;
   }
 
   .divider {
@@ -216,6 +241,18 @@
   .mask-radial-fade {
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-blob {
+      animation: none;
+    }
   }
 
   .mask-fade-b {

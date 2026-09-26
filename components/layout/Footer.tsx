@@ -26,7 +26,7 @@ export function Footer() {
         {/* Top CTA strip */}
         <div className="py-10 border-b border-white/10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="max-w-xl">
-            <p className="text-eyebrow uppercase text-accent-light">Talk to us</p>
+            <p className="spec-label text-accent-light">Talk to us</p>
             <h2 className="font-display text-2xl md:text-3xl text-white mt-2 tracking-tight">
               Industrial-grade boiler partners — on call 24/7.
             </h2>
@@ -34,14 +34,14 @@ export function Footer() {
           <div className="flex flex-wrap gap-3">
             <a
               href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-2 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/15 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg bg-white/[0.06] backdrop-blur-sm border border-white/15 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
               <Phone size={15} />
               {siteConfig.phone}
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-glow-accent hover:bg-accent-dark transition-all"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-glow-accent hover:bg-accent-dark transition-all"
             >
               Get a Quote
               <ArrowUpRight size={14} />

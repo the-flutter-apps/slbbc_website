@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/Container";
 import { navLinks } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | SLBBC",
+  title: "Page Not Found",
   robots: { index: false },
 };
 

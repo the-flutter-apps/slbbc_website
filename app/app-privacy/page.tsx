@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/Container";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "SLBBC Connect App — Privacy Policy | SLBBC",
+  title: "SLBBC Connect App — Privacy Policy",
   description:
     "Privacy Policy for the SLBBC Connect mobile application — what the app collects, why, and how it is protected.",
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogImage } from "@/content/site";
 import { MapPin, Briefcase, Info } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { ValueCard } from "@/components/sections/ValueCard";
@@ -8,10 +9,13 @@ import { CareerForm } from "@/components/forms/CareerForm";
 import { openPositions, benefits, walkInDetails } from "@/content/careers";
 
 export const metadata: Metadata = {
-  title: "Careers — Boiler Operator & Fireman Jobs | SLBBC",
+  title: "Careers — Boiler Operator & Fireman Jobs in Hyderabad & Vizag",
   description:
     "Join SLBBC as a Boiler Operator (1st/2nd Class), Boiler Fireman, or Helper. Stable employment, on-time salaries, PF/ESI benefits, and career growth. Hyderabad & Vishakhapatnam.",
+  alternates: { canonical: "/careers/" },
   openGraph: {
+    images: [ogImage],
+    url: "/careers/",
     title: "Careers at SLBBC — Build Your Career in Industrial Operations",
     description:
       "Open positions for IBR-certified Boiler Operators, Firemen, and Helpers. Stable employment with full statutory benefits.",
@@ -36,7 +40,8 @@ export default function CareersPage() {
       />
 
       <Hero
-        badge="We're Hiring"
+        breadcrumb={[{ label: "Careers" }]}
+        badge="We're hiring"
         title="Build Your Career in Industrial Operations"
         subtitle="Join a team that values safety, offers stable employment, and treats every team member with respect. IBR-certified professionals welcome."
         primaryCTA={{ label: "Apply Now", href: "#apply" }}

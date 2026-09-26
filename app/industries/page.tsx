@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Building2, CheckCircle2 } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { CTASection } from "@/components/sections/CTASection";
@@ -35,7 +36,12 @@ const pharmaAdvantages = [
   "Confidentiality — we never disclose client names without permission",
 ];
 
+// Hidden for now: the page 404s and is unlinked from nav, footer and sitemap.
+// Delete this line (and restore the links) to bring it back.
+const HIDDEN = true;
+
 export default function IndustriesPage() {
+  if (HIDDEN) notFound();
   return (
     <>
       <script
