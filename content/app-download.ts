@@ -14,7 +14,7 @@ export type AppDistributionStatus = "coming-soon" | "apk" | "play";
 const packageName = "in.slbbc.app";
 
 export const appDownload = {
-  status: "coming-soon" as AppDistributionStatus,
+  status: "play" as AppDistributionStatus,
 
   name: "SLBBC",
   fullName: "SLBBC Connect",
