@@ -61,7 +61,7 @@ export const benefits = [
   {
     icon: "IndianRupee",
     title: "On-Time Salaries",
-    desc: "Salary credited on the 1st of every month without fail.",
+    desc: "Salary credited to your bank account between the 7th and 9th of each month.",
   },
   {
     icon: "Shield",
