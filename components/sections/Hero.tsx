@@ -3,28 +3,33 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Container } from "@/components/layout/Container";
 
 interface HeroProps {
   badge?: string;
   title: string;
-  /** Brand line shown directly beneath the headline, in accent. */
+  /** Brand line shown directly beneath the headline. */
   tagline?: string;
   subtitle?: string;
   primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
   image?: { src: string; alt: string; fallback?: string };
-  /** Readouts shown on the control-panel card over the hero image. */
+  /** Figures shown as a ruled table beside the headline. */
   specs?: { label: string; value: string }[];
   /** Visible trail for inner pages, e.g. [{ label: "Services" }]. */
   breadcrumb?: { label: string; href?: string }[];
   centered?: boolean;
+  /** Kept for compatibility; the dossier has no dark heroes. */
   dark?: boolean;
   children?: React.ReactNode;
 }
 
+/**
+ * The cover of a section of the file: where you are, what this section is, one
+ * paragraph of context. Light, and the same on every page, so the header above
+ * it never has to change colour to stay readable.
+ */
 export function Hero({
   badge,
   title,
@@ -36,210 +41,107 @@ export function Hero({
   specs,
   breadcrumb,
   centered = false,
-  dark = true,
   children,
 }: HeroProps) {
   const [imgSrc, setImgSrc] = useState(image?.src ?? "");
-  const centerText = centered && !image;
+  const side = image || (specs && specs.length > 0);
 
   return (
-    <section
-      className={cn(
-        "relative isolate overflow-hidden",
-        image ? "pt-28 pb-20 md:pt-36 md:pb-28" : "pt-32 pb-20 md:pt-40 md:pb-24",
-        dark ? "bg-hero-pattern text-white" : "bg-background-muted text-text"
-      )}
-      aria-label="Page hero"
-    >
-      {dark && (
-        <>
-          {/* Blueprint grid */}
-          <div
-            className="absolute inset-0 -z-10 bg-grid-light bg-grid-md mask-radial-fade opacity-70"
-            aria-hidden="true"
-          />
-          {/* Furnace glow */}
-          <div
-            className="absolute -z-10 top-[-15%] right-[-10%] h-[520px] w-[520px] rounded-full bg-accent/20 blur-3xl"
-            aria-hidden="true"
-          />
-          {/* Hazard band along the bottom edge */}
-          <div className="absolute inset-x-0 bottom-0 hazard-band opacity-90" aria-hidden="true" />
-        </>
-      )}
-
-      <Container>
-        <div
-          className={cn(
-            "relative grid items-center gap-12",
-            image
-              ? "lg:grid-cols-[1.1fr_1fr] lg:gap-16"
-              : centered
-              ? "max-w-3xl mx-auto text-center"
-              : "max-w-3xl"
-          )}
-        >
-          {/* Text content */}
-          <div className={cn("flex flex-col gap-6 animate-fade-up", centerText && "items-center")}>
-            {breadcrumb && (
-              <nav aria-label="Breadcrumb">
-                <ol
-                  className={cn(
-                    "spec-label flex flex-wrap items-center gap-1.5",
-                    dark ? "text-white/50" : "text-text-muted"
-                  )}
-                >
-                  <li>
-                    <Link href="/" className="hover:text-accent-light">
-                      Home
-                    </Link>
+    <section className="border-b border-border bg-background-muted" aria-label="Page introduction">
+      <div
+        className={cn(
+          "container-main grid gap-12 py-14 md:py-20",
+          side && "lg:grid-cols-12 lg:items-center",
+          centered && !side && "text-center"
+        )}
+      >
+        <div className={cn(side ? "lg:col-span-7" : "max-w-3xl", centered && !side && "mx-auto")}>
+          {breadcrumb && (
+            <nav aria-label="Breadcrumb">
+              <ol className={cn("flex items-center gap-2 font-mono text-[12px] text-text-muted", centered && "justify-center")}>
+                <li>
+                  <Link href="/" className="hover:text-accent">
+                    SLBBC
+                  </Link>
+                </li>
+                {breadcrumb.map((crumb) => (
+                  <li key={crumb.label} className="flex items-center gap-2">
+                    <span aria-hidden="true">/</span>
+                    {crumb.href ? (
+                      <Link href={crumb.href} className="hover:text-accent">
+                        {crumb.label}
+                      </Link>
+                    ) : (
+                      <span className="text-text" aria-current="page">
+                        {crumb.label}
+                      </span>
+                    )}
                   </li>
-                  {breadcrumb.map((crumb) => (
-                    <li key={crumb.label} className="flex items-center gap-1.5">
-                      <ChevronRight size={12} aria-hidden="true" />
-                      {crumb.href ? (
-                        <Link href={crumb.href} className="hover:text-accent-light">
-                          {crumb.label}
-                        </Link>
-                      ) : (
-                        <span aria-current="page" className={dark ? "text-white/80" : "text-text"}>
-                          {crumb.label}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            )}
+                ))}
+              </ol>
+            </nav>
+          )}
 
-            {badge && (
-              <span
-                className={cn(
-                  dark ? "badge-dot" : "badge-accent",
-                  centerText ? "self-center" : "self-start"
-                )}
-              >
-                {badge}
-              </span>
-            )}
+          {badge && <p className={cn("section-label", breadcrumb && "mt-6")}>{badge}</p>}
 
-            <h1
-              className={cn(
-                "font-display text-balance",
-                tagline
-                  ? "text-display-md md:text-display-lg"
-                  : "text-display-lg md:text-display-xl",
-                dark ? "text-white" : "text-text"
+          <h1 className={cn("text-display-lg font-bold text-primary", (breadcrumb || badge) && "mt-4")}>{title}</h1>
+
+          {tagline && <p className="mt-4 font-display text-xl font-semibold text-accent">{tagline}</p>}
+
+          {subtitle && (
+            <p className={cn("mt-5 max-w-2xl text-body-lg text-text-muted text-pretty", centered && !side && "mx-auto")}>
+              {subtitle}
+            </p>
+          )}
+
+          {(primaryCTA || secondaryCTA) && (
+            <div className={cn("mt-8 flex flex-wrap gap-3", centered && !side && "justify-center")}>
+              {primaryCTA && (
+                <Link href={primaryCTA.href} className="btn-primary">
+                  {primaryCTA.label} <ArrowRight size={16} aria-hidden="true" />
+                </Link>
               )}
-            >
-              {title}
-            </h1>
-
-            {tagline && (
-              <p
-                className={cn(
-                  "-mt-2 flex items-center gap-3 font-display text-xl md:text-2xl font-semibold tracking-tight",
-                  dark ? "text-accent-light" : "text-accent",
-                  centered && "mx-auto"
-                )}
-              >
-                <span className="h-[3px] w-8 bg-accent" aria-hidden="true" />
-                {tagline}
-              </p>
-            )}
-
-            {subtitle && (
-              <p
-                className={cn(
-                  "max-w-xl text-body-lg text-pretty",
-                  dark ? "text-white/75" : "text-text-muted",
-                  centered && "mx-auto"
-                )}
-              >
-                {subtitle}
-              </p>
-            )}
-
-            {(primaryCTA || secondaryCTA) && (
-              <div
-                className={cn(
-                  "flex flex-wrap items-center gap-3 pt-2",
-                  centered && "justify-center"
-                )}
-              >
-                {primaryCTA && (
-                  <Link href={primaryCTA.href} className="btn-primary group/cta">
-                    {primaryCTA.label}
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                    />
-                  </Link>
-                )}
-                {secondaryCTA && (
-                  <Link
-                    href={secondaryCTA.href}
-                    className={dark ? "btn-outline-white" : "btn-secondary"}
-                  >
-                    {secondaryCTA.label}
-                  </Link>
-                )}
-              </div>
-            )}
-
-            {children}
-          </div>
-
-          {/* Framed image with a control-panel readout */}
-          {image && (
-            <div className="relative animate-fade-up animate-delay-200 lg:pl-4">
-              <div className="relative p-3 text-white/40 corner-ticks">
-                <div className="relative overflow-hidden rounded-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
-                  <Image
-                    src={imgSrc || (image.fallback ?? image.src)}
-                    alt={image.alt}
-                    fill
-                    className="object-cover object-[50%_40%]"
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    onError={() => {
-                      if (image.fallback && imgSrc !== image.fallback) {
-                        setImgSrc(image.fallback);
-                      }
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/10 to-transparent"
-                    aria-hidden="true"
-                  />
-
-                  {/* On-duty status tag */}
-                  <div className="absolute left-4 top-4 flex items-center gap-2 rounded-md bg-primary-950/80 px-3 py-1.5 backdrop-blur-md">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:hidden" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                    </span>
-                    <span className="spec-label text-white/90">On duty · 24/7/365</span>
-                  </div>
-
-                  {specs && specs.length > 0 && (
-                    <dl className="absolute inset-x-4 bottom-4 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/15 bg-white/15 backdrop-blur-md">
-                      {specs.map((spec) => (
-                        <div key={spec.label} className="bg-primary-950/75 px-4 py-3">
-                          <dt className="spec-label text-white/55">{spec.label}</dt>
-                          <dd className="mt-1 font-display text-lg font-bold tracking-tight text-white">
-                            {spec.value}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
-                </div>
-              </div>
+              {secondaryCTA && (
+                <Link href={secondaryCTA.href} className="btn-secondary">
+                  {secondaryCTA.label}
+                </Link>
+              )}
             </div>
           )}
+
+          {children}
         </div>
-      </Container>
+
+        {side && (
+          <div className="lg:col-span-5">
+            {image && (
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-white">
+                <Image
+                  src={imgSrc || (image.fallback ?? image.src)}
+                  alt={image.alt}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                  priority
+                  onError={() => {
+                    if (image.fallback && imgSrc !== image.fallback) setImgSrc(image.fallback);
+                  }}
+                />
+              </div>
+            )}
+            {specs && specs.length > 0 && (
+              <dl className={cn("card divide-y divide-border", image && "mt-4")}>
+                {specs.map((s) => (
+                  <div key={s.label} className="flex items-baseline justify-between gap-4 px-5 py-3.5">
+                    <dt className="spec-label">{s.label}</dt>
+                    <dd className="font-mono text-sm text-primary tabular">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

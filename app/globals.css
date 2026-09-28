@@ -2,261 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * SLBBC — the vendor dossier.
+ *
+ * The site reads like the file a pharma plant's engineering and procurement
+ * teams assemble before they let a contractor near their boiler house:
+ * registrations with a tick against each, the scope of work, who does it and
+ * how the shifts are covered. Hairline rules instead of shadows and gradients,
+ * one teal for everything that can be pressed, navy for ink.
+ *
+ * Class names below are the ones the pages and forms already use — .card,
+ * .badge, .btn-primary and the rest keep their names and take the new look, so
+ * a page that was not rewritten still belongs to the same site.
+ */
+
 @layer base {
   :root {
-    --radius: 0.75rem;
-
-    --color-primary: #0B2E4F;
-    --color-primary-foreground: #FFFFFF;
-    --color-secondary: #1F2A36;
-    --color-accent: #FF6A1A;
-    --color-background: #FFFFFF;
-    --color-background-muted: #F4F6FA;
-    --color-text: #0F172A;
-    --color-text-muted: #52606D;
-    --color-border: #E4E9F2;
-  }
-
-  * {
-    @apply border-border;
+    --radius: 0.5rem;
+    --ink: #0b2239;
+    --teal: #06799a;
+    --paper: #f5f7fa;
+    --line: #e4e9ee;
   }
 
   html {
-    @apply scroll-smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply bg-background text-text font-sans antialiased;
-    font-size: 16px;
-    line-height: 1.65;
+    @apply bg-background text-text font-sans;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
   }
 
-  h1 {
-    @apply font-display text-h1-mobile md:text-h1-desktop font-bold text-text;
-  }
-
-  h2 {
-    @apply font-display text-h2-mobile md:text-h2-desktop font-bold text-text;
-  }
-
-  h3 {
-    @apply font-display text-xl md:text-2xl font-semibold text-text tracking-tight;
-  }
-
-  h4 {
-    @apply font-display text-lg font-semibold text-text tracking-tight;
-  }
-
-  p {
-    @apply text-body text-text;
-  }
-
-  a {
-    @apply transition-colors duration-200;
-  }
-
-  img {
-    @apply max-w-full;
+  h1, h2, h3, h4 {
+    @apply font-display text-primary;
+    text-wrap: balance;
   }
 
   ::selection {
-    @apply bg-accent/30 text-text;
+    background: #bfeaf6;
+    color: #0b2239;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent;
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @layer components {
-  .container-main {
-    @apply mx-auto max-w-container px-4 sm:px-6 lg:px-8;
+  /* Archivo at 87.5% width: nameplate capitals, not a rounded startup face. */
+  .font-display {
+    font-stretch: 87.5%;
+    font-variation-settings: "wdth" 87.5;
   }
 
+  .container-main {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+  }
   .section-padding {
     @apply py-20 md:py-28;
   }
-
   .section-padding-sm {
-    @apply py-12 md:py-20;
+    @apply py-14 md:py-20;
   }
 
-  /* ── Buttons ─────────────────────────────────────────────── */
+  /* ── Buttons ─────────────────────────────────────────────────────────── */
   .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-glow-accent transition-all duration-300 ease-out-expo
-           hover:bg-accent-dark hover:shadow-[0_16px_40px_-8px_rgba(255,106,26,0.55)] hover:-translate-y-0.5
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white
+      transition-colors duration-150 hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2
+      focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-50;
   }
-
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-primary/20 bg-white px-6 py-3 text-sm font-semibold text-primary shadow-sm transition-all duration-300 ease-out-expo
-           hover:border-primary hover:bg-primary hover:text-white hover:-translate-y-0.5
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border-strong bg-white px-5 py-3
+      text-sm font-semibold text-primary transition-colors duration-150 hover:border-primary hover:bg-background-muted
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
   }
-
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 ease-out-expo
-           hover:bg-primary/5
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent underline-offset-4 hover:underline;
   }
-
   .btn-outline-white {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/5 backdrop-blur-sm px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out-expo
-           hover:bg-white hover:text-primary hover:border-white hover:-translate-y-0.5
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-white/40 px-5 py-3 text-sm
+      font-semibold text-white transition-colors duration-150 hover:border-white hover:bg-white/10;
   }
 
-  /* ── Cards & surfaces ────────────────────────────────────── */
+  /* ── Surfaces ────────────────────────────────────────────────────────── */
   .card {
-    @apply relative rounded-2xl bg-white p-6 shadow-card transition-all duration-500 ease-out-expo hover:shadow-card-hover hover:-translate-y-1;
+    @apply rounded-lg border border-border bg-white;
   }
-
   .card-bordered {
-    @apply relative rounded-2xl bg-white p-6 border border-border/70 transition-all duration-500 ease-out-expo hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-1;
+    @apply rounded-lg border border-border-strong bg-white;
   }
 
-  .glass {
-    @apply bg-white/70 backdrop-blur-xl backdrop-saturate-150 border border-white/40;
-  }
-
-  .glass-dark {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
-  }
-
-  /* ── Badges & labels ─────────────────────────────────────── */
+  /* A status stamp, as on a checked form. */
   .badge {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3 py-1 text-xs font-semibold text-primary;
+    @apply inline-flex items-center gap-1.5 rounded-sm border border-border bg-background-muted px-2 py-0.5
+      font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-text-muted;
   }
-
   .badge-accent {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent;
+    @apply border-accent-100 bg-accent-50 text-accent;
   }
-
-  .badge-dot {
-    @apply relative inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.06] backdrop-blur-md px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-white/85;
-  }
-
   .badge-dot::before {
     content: "";
-    @apply h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_12px_rgba(255,106,26,0.8)];
+    @apply inline-block h-1.5 w-1.5 rounded-full bg-success;
   }
 
-  /* ── Form inputs ─────────────────────────────────────────── */
+  /* ── Forms ───────────────────────────────────────────────────────────── */
   .input-field {
-    @apply w-full rounded-lg border border-input bg-white px-4 py-2.5 text-sm text-text placeholder-text-muted shadow-sm transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+    @apply w-full rounded-md border border-input bg-white px-3.5 py-2.5 text-sm text-text placeholder:text-text-subtle
+      transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
   }
-
   .label {
-    @apply block text-sm font-medium text-text mb-1.5;
+    @apply mb-1.5 block text-sm font-medium text-text;
   }
 
-  /* ── Section eyebrows ────────────────────────────────────── */
+  /* ── Labels ──────────────────────────────────────────────────────────── */
+  /* The section index of a file: "§ 02 — Scope of work". */
   .section-label {
-    @apply inline-flex items-center gap-2.5 font-mono text-[12px] font-medium uppercase tracking-[0.16em] text-accent;
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-accent;
   }
-
-  .section-label::before {
-    content: "";
-    @apply h-2 w-2 bg-accent;
-  }
-
-  /* ── Industrial details ──────────────────────────────────── */
-  /* Monospace readout label, as on a plant nameplate */
+  /* A field name on a form: "GSTIN", "COVERAGE". */
   .spec-label {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em];
-  }
-
-  /* Thin orange/navy warning band, used as a section edge */
-  .hazard-band {
-    @apply h-2 w-full bg-hazard;
-  }
-
-  /* Four corner ticks, drawn with gradients so any element can carry them */
-  .corner-ticks {
-    background:
-      linear-gradient(currentColor, currentColor) top left / 14px 2px,
-      linear-gradient(currentColor, currentColor) top left / 2px 14px,
-      linear-gradient(currentColor, currentColor) top right / 14px 2px,
-      linear-gradient(currentColor, currentColor) top right / 2px 14px,
-      linear-gradient(currentColor, currentColor) bottom left / 14px 2px,
-      linear-gradient(currentColor, currentColor) bottom left / 2px 14px,
-      linear-gradient(currentColor, currentColor) bottom right / 14px 2px,
-      linear-gradient(currentColor, currentColor) bottom right / 2px 14px;
-    background-repeat: no-repeat;
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-text-muted;
   }
 
   .divider {
-    @apply h-1 w-12 rounded-full bg-accent;
+    @apply h-px w-full bg-border;
+  }
+
+  /* Long-form text: privacy policy, terms, the app's data page. */
+  .prose-dossier {
+    @apply max-w-[68ch] text-[15.5px] leading-7 text-text;
+  }
+  .prose-dossier h2 {
+    @apply mt-12 mb-3 text-2xl font-bold;
+  }
+  .prose-dossier h3 {
+    @apply mt-8 mb-2 text-lg font-semibold;
+  }
+  .prose-dossier p,
+  .prose-dossier ul,
+  .prose-dossier ol {
+    @apply mb-4;
+  }
+  .prose-dossier ul {
+    @apply list-disc pl-5;
+  }
+  .prose-dossier a {
+    @apply text-accent underline underline-offset-2;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
-  /* Gradient text — premium feel for hero headlines */
-  .text-gradient-light {
-    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.78) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .text-gradient-accent {
-    background: linear-gradient(110deg, #FF8A4A 10%, #FF6A1A 50%, #FFB088 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .scrollbar-hide { scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
 
   .animate-fade-up {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
-
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
   .animate-delay-100 { animation-delay: 100ms; }
   .animate-delay-200 { animation-delay: 200ms; }
   .animate-delay-300 { animation-delay: 300ms; }
-  .animate-delay-400 { animation-delay: 400ms; }
-  .animate-delay-500 { animation-delay: 500ms; }
-
-  .mask-radial-fade {
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
-  }
-
-  .mask-fade-x {
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-marquee,
-    .animate-blob {
-      animation: none;
-    }
-  }
-
-  .mask-fade-b {
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  }
 }

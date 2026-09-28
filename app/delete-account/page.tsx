@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function DeleteAccountPage() {
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24" aria-labelledby="delete-heading">
+    <section className="pt-14 pb-16 md:pt-20 md:pb-24" aria-labelledby="delete-heading">
       <Container>
         <div className="max-w-2xl mx-auto prose-style space-y-8">
-          <header className="space-y-2">
+          <header className="space-y-2 border-b border-border pb-8">
             <p className="section-label">SLBBC Connect</p>
             <h1 id="delete-heading">Delete your account</h1>
             <p className="text-text-muted text-sm">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ogImage } from "@/content/site";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { CTASection } from "@/components/sections/CTASection";
 import { Container } from "@/components/layout/Container";
@@ -65,96 +65,85 @@ export default function ServicesPage() {
 
       <Hero
         breadcrumb={[{ label: "Services" }]}
-        badge="5 services · 1 contract"
-        title="Boiler services for plants that can't afford to stop"
-        subtitle="From manned 24/7 operations to statutory compliance — every aspect of your boiler requirements, handled."
-        dark
-        centered
+        badge="Scope of work"
+        title="Boiler services for plants that can't afford to stop."
+        subtitle="From manned 24/7 operations to statutory compliance — every aspect of your boiler house, handled under one contract."
+        specs={[
+          { label: "Services", value: `${services.length}` },
+          { label: "Offices", value: "Hyderabad · Vizag" },
+          { label: "Boiler range", value: "1 – 10 TPH" },
+          { label: "Coverage", value: "24 × 7 · 365 days" },
+        ]}
       />
 
-      {/* Service jump links */}
+      {/* Jump links, pinned under the header while the sheets scroll past. */}
       <nav
-        className="sticky top-16 md:top-20 z-30 bg-white border-b border-border shadow-sm"
+        className="sticky top-16 z-30 border-b border-border bg-white/95 backdrop-blur lg:top-[106px]"
         aria-label="Service sections"
       >
         <Container>
-          <div className="flex overflow-x-auto gap-1 py-2 scrollbar-hide">
+          <ul className="-mx-1 flex gap-1 overflow-x-auto py-2 scrollbar-hide">
             {services.map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                className="shrink-0 px-4 py-2 rounded-md text-sm font-medium text-text-muted hover:text-primary hover:bg-background-muted transition-colors whitespace-nowrap"
-              >
-                {s.title}
-              </a>
+              <li key={s.id} className="shrink-0">
+                <a
+                  href={`#${s.id}`}
+                  className="block whitespace-nowrap rounded-md px-3 py-2 font-mono text-[12px] uppercase tracking-[0.08em] text-text-muted transition-colors hover:bg-background-muted hover:text-primary"
+                >
+                  {s.title}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </nav>
 
-      {/* Service blocks */}
+      {/* One sheet per service: what it is on the left, what is included on the right. */}
       <div className="divide-y divide-border">
         {services.map((service, index) => (
           <section
             key={service.id}
             id={service.id}
-            className="py-16 md:py-24 scroll-mt-32 md:scroll-mt-40"
+            className="scroll-mt-32 py-16 md:py-24 lg:scroll-mt-44"
             aria-labelledby={`${service.id}-heading`}
           >
             <Container>
-              <div
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Text */}
-                <div
-                  className={`space-y-5 ${index % 2 === 1 ? "lg:order-2" : ""}`}
-                >
-                  <p className="section-label">{`Service 0${index + 1}`}</p>
-                  <h2 id={`${service.id}-heading`}>{service.title}</h2>
-                  <p className="text-body-lg text-text-muted leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2.5">
-                    {service.points.map((point) => (
-                      <li key={point} className="flex items-start gap-3">
-                        <CheckCircle2
-                          size={18}
-                          className="text-accent shrink-0 mt-0.5"
-                          aria-hidden="true"
-                        />
-                        <span className="text-sm text-text-muted">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/contact"
-                    className="btn-primary inline-flex mt-2"
-                  >
-                    Enquire about {service.title.toLowerCase()}
-                    <ArrowUpRight size={15} aria-hidden="true" />
+              <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+                <div className="lg:col-span-5">
+                  <p className="section-label">Service</p>
+                  <h2 id={`${service.id}-heading`} className="mt-3 text-display-md font-bold">
+                    {service.title}
+                  </h2>
+                  <p className="mt-5 text-body-lg text-text-muted text-pretty">{service.description}</p>
+                  <Link href="/contact" className="btn-primary mt-8">
+                    Enquire about {service.title.toLowerCase()} <ArrowRight size={15} aria-hidden="true" />
                   </Link>
                 </div>
 
-                {/* Image */}
-                <div
-                  className={`relative p-3 text-primary/30 corner-ticks ${
-                    index % 2 === 1 ? "lg:order-1" : ""
-                  }`}
-                >
-                  <div className="relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]">
-                  <Image
-                    src={service.image}
-                    alt={service.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                  <span className="spec-label absolute left-3 top-3 rounded-md bg-primary-950/80 px-2.5 py-1 text-white backdrop-blur-md">
-                    {`0${index + 1} / 0${services.length}`}
-                  </span>
+                <div className="lg:col-span-7">
+                  <div className="card overflow-hidden">
+                    <div className="relative aspect-[16/9] border-b border-border bg-background-muted">
+                      <Image
+                        src={service.image}
+                        alt={service.imageAlt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                    </div>
+                    <div className="border-b border-border bg-background-muted px-5 py-3">
+                      <span className="spec-label">Included</span>
+                    </div>
+                    <ul className="divide-y divide-border">
+                      {service.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3 px-5 py-3.5">
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-50 text-accent">
+                            <Check size={12} strokeWidth={3} aria-hidden="true" />
+                          </span>
+                          <span className="text-[15px] leading-6 text-text">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -165,8 +154,8 @@ export default function ServicesPage() {
 
       <CTASection
         title="Need a custom service package?"
-        subtitle="Every pharma facility is different. Talk to us about a tailored boiler O&M contract."
-        primaryCTA={{ label: "Request a Quote", href: "/contact" }}
+        subtitle="Every pharma facility is different. Talk to us about a boiler O&M contract built around your plant."
+        primaryCTA={{ label: "Request a site survey", href: "/contact" }}
         secondaryCTA={{ label: "About SLBBC", href: "/about" }}
       />
     </>

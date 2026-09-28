@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function AppPrivacyPage() {
   const effectiveDate = "23 August 2026";
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24" aria-labelledby="app-privacy-heading">
+    <section className="pt-14 pb-16 md:pt-20 md:pb-24" aria-labelledby="app-privacy-heading">
       <Container>
         <div className="max-w-2xl mx-auto prose-style space-y-8">
-          <header className="space-y-2">
+          <header className="space-y-2 border-b border-border pb-8">
             <p className="section-label">Legal</p>
             <h1 id="app-privacy-heading">SLBBC Connect App — Privacy Policy</h1>
             <p className="text-text-muted text-sm">Effective date: {effectiveDate}</p>

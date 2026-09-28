@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   const effectiveDate = "1 January 2025";
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24" aria-labelledby="privacy-heading">
+    <section className="pt-14 pb-16 md:pt-20 md:pb-24" aria-labelledby="privacy-heading">
       <Container>
         <div className="max-w-2xl mx-auto prose-style space-y-8">
-          <header className="space-y-2">
+          <header className="space-y-2 border-b border-border pb-8">
             <p className="section-label">Legal</p>
             <h1 id="privacy-heading">Privacy Policy</h1>
             <p className="text-text-muted text-sm">

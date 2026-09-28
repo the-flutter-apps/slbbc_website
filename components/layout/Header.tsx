@@ -1,244 +1,150 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Logo } from "@/components/shared/Logo";
-import { Container } from "@/components/layout/Container";
-import { navLinks, siteConfig } from "@/content/site";
+import { Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/shared/Logo";
+import { navLinks, siteConfig } from "@/content/site";
 
-/** Routes whose first section is the dark Hero, which the header can overlay transparently. */
-const DARK_HERO_ROUTES = ["/about", "/services", "/industries", "/careers", "/contact"];
+const tel = `tel:${siteConfig.phone.replace(/\s/g, "")}`;
 
+/**
+ * A letterhead, not a hero overlay. White on every page and at every scroll
+ * position, so it never has to change colour — which is what made the logo
+ * unreadable in the previous design.
+ *
+ * The thin strip above it carries what a procurement reader checks first: the
+ * GSTIN, both offices and the email. Desktop only; on a phone the number is
+ * the thing, and it is in the bar.
+ */
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // On light-background pages (/app, /privacy, /terms, 404) a transparent header renders
-  // the white logo on white and swallows the top of the page, so keep it solid from the start.
-  const hasDarkHero =
-    pathname === "/" || DARK_HERO_ROUTES.some((r) => pathname.startsWith(r));
-  const solid = scrolled || !hasDarkHero;
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
-  }, [mobileOpen]);
+  }, [open]);
+
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out-expo",
-          solid
-            ? "bg-white/85 backdrop-blur-xl backdrop-saturate-150 border-b border-border/60 shadow-header"
-            : "bg-transparent border-b border-transparent"
-        )}
-      >
-        {/* Utility strip — collapses once the page scrolls */}
-        <div
-          className={cn(
-            "hidden lg:block overflow-hidden bg-primary-950 text-white/70 transition-all duration-500 ease-out-expo",
-            scrolled ? "max-h-0" : "max-h-10"
-          )}
-        >
-          <Container>
-            <div className="flex h-9 items-center justify-between spec-label">
-              <span className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-                24/7 boiler house cover for our client sites
-              </span>
-              <span className="flex items-center gap-6">
-                <span className="flex items-center gap-1.5">
-                  <MapPin size={12} aria-hidden="true" />
-                  Hyderabad · Vishakhapatnam
-                </span>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="flex items-center gap-1.5 normal-case tracking-normal hover:text-white"
-                >
-                  <Mail size={12} aria-hidden="true" />
-                  {siteConfig.email}
-                </a>
-              </span>
-            </div>
-          </Container>
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+      <div className="hidden border-b border-border bg-background-muted lg:block">
+        <div className="container-main flex h-8 items-center justify-between font-mono text-[11px] tracking-[0.06em] text-text-muted">
+          <span>
+            GSTIN <span className="text-text">{siteConfig.gstin}</span>
+          </span>
+          <span className="flex items-center gap-5">
+            <span>Hyderabad · Vishakhapatnam</span>
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-accent">
+              {siteConfig.email}
+            </a>
+          </span>
         </div>
+      </div>
 
-        <Container>
-          <div className="flex h-16 items-center justify-between md:h-20">
-            <Logo variant={solid ? "dark" : "light"} />
+      <div className="border-b border-border">
+        <div className="container-main flex h-16 items-center justify-between gap-6 lg:h-[72px]">
+          <Logo />
 
-            {/* Desktop nav */}
-            <nav
-              className={cn(
-                "hidden md:flex items-center gap-1 rounded-lg px-1.5 py-1 transition-colors duration-500",
-                solid ? "bg-background-muted/60" : "bg-white/70 backdrop-blur-md border border-border/60"
-              )}
-              aria-label="Main navigation"
-            >
-              {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href);
-                return (
+          <nav aria-label="Main navigation" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {navLinks.map((link) => (
+                <li key={link.href}>
                   <Link
-                    key={link.href}
                     href={link.href}
+                    aria-current={isActive(link.href) ? "page" : undefined}
                     className={cn(
-                      "relative px-3.5 py-1.5 rounded-md text-sm font-medium transition-all duration-300",
-                      isActive
-                        ? "text-primary bg-white shadow-sm"
-                        : "text-text-muted hover:text-primary"
+                      "relative rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
+                      isActive(link.href) ? "text-primary" : "text-text-muted hover:text-primary"
                     )}
-                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {link.label}
+                    {isActive(link.href) && (
+                      <span className="absolute inset-x-3.5 -bottom-[17px] h-0.5 bg-accent" aria-hidden="true" />
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="hidden items-center gap-5 lg:flex">
+            <a href={tel} className="inline-flex items-center gap-2 font-mono text-[13px] text-primary hover:text-accent">
+              <Phone size={14} aria-hidden="true" />
+              {siteConfig.phone}
+            </a>
+            <Link href="/contact" className="btn-primary py-2.5">
+              Request a site survey
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-1 lg:hidden">
+            <a
+              href={tel}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-primary"
+              aria-label={`Call ${siteConfig.phone}`}
+            >
+              <Phone size={19} />
+            </a>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-primary"
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {open && (
+        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-white lg:hidden">
+          <nav aria-label="Mobile navigation" className="container-main py-4">
+            <ul className="divide-y divide-border border-b border-border">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={cn(
+                      "flex items-center justify-between py-4 font-display text-2xl font-bold",
+                      isActive(link.href) ? "text-accent" : "text-primary"
+                    )}
                   >
                     {link.label}
                   </Link>
-                );
-              })}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-2">
-              <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                className={cn(
-                  "hidden lg:flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium tabular-nums transition-colors",
-                  solid
-                    ? "text-text-muted hover:text-primary hover:bg-background-muted"
-                    : "text-white/85 hover:text-white hover:bg-white/10"
-                )}
-              >
-                <Phone size={14} />
-                <span>{siteConfig.phone}</span>
-              </a>
-              <Link href="/contact" className="btn-primary text-sm px-5 py-2.5 group/cta">
-                Get a Quote
-                <ArrowUpRight
-                  size={14}
-                  className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                />
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 space-y-3">
+              <Link href="/contact" className="btn-primary w-full">
+                Request a site survey
               </Link>
+              <a href={tel} className="btn-secondary w-full">
+                <Phone size={16} aria-hidden="true" /> {siteConfig.phone}
+              </a>
             </div>
-
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              className={cn(
-                "md:hidden p-3 -mr-1 rounded-full transition-colors",
-                solid
-                  ? "text-text hover:bg-background-muted"
-                  : "text-text bg-white/70 backdrop-blur-md border border-border/60"
-              )}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-menu"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </Container>
-      </header>
-
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            <motion.div
-              key="overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-primary-900/50 backdrop-blur-sm md:hidden"
-              onClick={() => setMobileOpen(false)}
-              aria-hidden="true"
-            />
-            <motion.nav
-              key="drawer"
-              id="mobile-menu"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed inset-y-0 right-0 z-50 w-[300px] bg-white shadow-2xl flex flex-col md:hidden"
-              aria-label="Mobile navigation"
-            >
-              <div className="flex items-center justify-between px-5 h-16 border-b border-border">
-                <Logo />
-                <button
-                  onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-full text-text hover:bg-background-muted transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
-                {navLinks.map((link) => {
-                  const isActive =
-                    link.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(link.href);
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={cn(
-                        "flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors",
-                        isActive
-                          ? "bg-primary/8 text-primary font-semibold"
-                          : "text-text hover:bg-background-muted"
-                      )}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </div>
-              <div className="px-4 py-5 border-t border-border space-y-3">
-                <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2 text-sm text-text-muted px-4 py-2"
-                >
-                  <Phone size={15} />
-                  {siteConfig.phone}
-                </a>
-                <Link
-                  href="/contact"
-                  className="btn-primary w-full text-center text-sm"
-                >
-                  Get a Quote
-                </Link>
-              </div>
-            </motion.nav>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+            <p className="mt-8 font-mono text-[11px] tracking-[0.06em] text-text-muted">
+              GSTIN {siteConfig.gstin} · {siteConfig.email}
+            </p>
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }

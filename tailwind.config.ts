@@ -25,53 +25,65 @@ const config: Config = {
         65: "0.65",
         85: "0.85",
       },
+      // The SLBBC palette — the same navy and teal as the SLBBC Connect app, the
+      // Play listing and the printed QR cards, so the company looks like one
+      // company wherever it is met. Token names are unchanged from the previous
+      // design, so every page picks the new values up without edits.
       colors: {
         primary: {
-          DEFAULT: "#0B2E4F",
+          DEFAULT: "#0B2239",
           foreground: "#FFFFFF",
-          50: "#E8F0F8",
-          100: "#C7DAEB",
-          200: "#9BBBD9",
-          300: "#6F9CC6",
-          400: "#4D86B9",
-          500: "#2E70AC",
-          600: "#1F5A93",
-          700: "#164574",
-          800: "#0B2E4F",
-          900: "#061B30",
-          950: "#030F1C",
+          50: "#EEF3F7",
+          100: "#D8E3EC",
+          200: "#B3C7D7",
+          300: "#8BA8BF",
+          400: "#5E86A3",
+          500: "#3B6888",
+          600: "#1F5577",
+          700: "#123B56",
+          800: "#0B2239",
+          900: "#081A2C",
+          950: "#04101C",
         },
         secondary: {
-          DEFAULT: "#1F2A36",
+          DEFAULT: "#132234",
           foreground: "#FFFFFF",
           light: "#3B4A55",
         },
+        // Teal. DEFAULT is the text-safe 700 (5.0:1 on white); 500 is the brand
+        // teal, 3.9:1, for rules, ticks and large marks only — never small text.
         accent: {
-          DEFAULT: "#FF6A1A",
+          DEFAULT: "#06799A",
           foreground: "#FFFFFF",
-          light: "#FF8A4A",
-          dark: "#D14E07",
-          50: "#FFF1E6",
-          100: "#FFDCC0",
-          500: "#FF6A1A",
-          600: "#E5570A",
+          light: "#078BAF",
+          dark: "#055F79",
+          50: "#DFF5FB",
+          100: "#BFEAF6",
+          500: "#078BAF",
+          600: "#06799A",
+        },
+        success: {
+          DEFAULT: "#14966A",
+          text: "#0E7552",
+          bg: "#E5F6EF",
         },
         background: {
           DEFAULT: "#FFFFFF",
-          muted: "#F4F6FA",
-          subtle: "#FAFBFD",
+          muted: "#F5F7FA",
+          subtle: "#F9FBFC",
+          sunk: "#EEF2F6",
         },
         text: {
-          DEFAULT: "#0F172A",
-          muted: "#52606D",
-          subtle: "#94A3B8",
+          DEFAULT: "#132234",
+          muted: "#647587",
+          subtle: "#8D9AA7",
         },
         border: {
-          DEFAULT: "#E4E9F2",
-          strong: "#CBD5E1",
+          DEFAULT: "#E4E9EE",
+          strong: "#CFD8E0",
         },
-        input: "#E4E9F2",
-        ring: "#0B2E4F",
+        input: "#CFD8E0",
+        ring: "#06799A",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
@@ -145,18 +157,10 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "hero-pattern":
-          "radial-gradient(1200px 600px at 80% -10%, rgba(255, 106, 26, 0.18), transparent 60%), radial-gradient(800px 500px at 0% 100%, rgba(46, 112, 172, 0.35), transparent 60%), linear-gradient(135deg, #061B30 0%, #0B2E4F 45%, #0F3A66 100%)",
-        "cta-pattern":
-          "radial-gradient(900px 500px at 100% 0%, rgba(255, 106, 26, 0.22), transparent 60%), radial-gradient(700px 400px at 0% 100%, rgba(46, 112, 172, 0.3), transparent 60%), linear-gradient(135deg, #061B30 0%, #0B2E4F 100%)",
-        "grid-light":
-          "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-        "hazard":
-          "repeating-linear-gradient(-45deg, #FF6A1A 0 12px, #061B30 12px 24px)",
-        "grid-dark":
-          "linear-gradient(to right, rgba(11,46,79,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(11,46,79,0.08) 1px, transparent 1px)",
-        "shine":
-          "linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.18) 50%, transparent 75%)",
+        // The ruled lines of a boiler log sheet. The only texture on the site,
+        // used behind the vendor file and nowhere loud.
+        ruled:
+          "repeating-linear-gradient(to bottom, transparent 0 39px, rgba(11,34,57,0.06) 39px 40px)",
       },
       backgroundSize: {
         "grid-sm": "32px 32px",

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, MapPin } from "lucide-react";
+import { ArrowUpRight, Check, MapPin } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
-import { ValueCard } from "@/components/sections/ValueCard";
+import { iconFor } from "@/components/shared/icons";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
@@ -95,228 +94,218 @@ export default function AboutPage() {
         breadcrumb={[{ label: "About" }]}
         badge={`${siteConfig.yearsExperience}+ years in boiler houses`}
         title="Built on safety. Run on reliability."
-        subtitle="Having more than two decades of experience in boiler maintenance and services ranging from 1 Ton to 10 Ton, Sri Lakshmi Balaji Boiler Contractor aligns with your business to keep operations running without interruption."
-        dark
+        subtitle="More than two decades of boiler maintenance and services, from 1 Ton to 10 Ton boilers — aligned with your business so operations run without interruption."
+        specs={[
+          { label: "Constitution", value: "Sole proprietorship" },
+          { label: "GSTIN", value: siteConfig.gstin },
+          { label: "Experience", value: `${siteConfig.yearsExperience}+ years` },
+          { label: "Offices", value: "Hyderabad · Vizag" },
+        ]}
       />
 
-      {/* Our Story */}
-      <section className="py-16 md:py-24" aria-labelledby="story-heading">
+      {/* Our story */}
+      <section className="section-padding" aria-labelledby="story-heading">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-5">
-              <p className="section-label">Our Story</p>
-              <h2 id="story-heading">
-                Two decades of boiler expertise, built on trust
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <p className="section-label">Our story</p>
+              <h2 id="story-heading" className="mt-3 text-display-md font-bold">
+                Two decades of boiler expertise, built on trust.
               </h2>
-              <p className="text-text-muted text-body-lg leading-relaxed">
-                Having more than two decades of experience in the area of boiler
-                maintenance and services ranging from 1 Ton to 10 Ton boilers,
-                we enable our clients to excel in their continuous delivery by
-                providing continuous support.
-              </p>
-              <p className="text-text-muted leading-relaxed">
-                We undertake the contract of boiler operations and provide
-                round the clock operations, maintaining boilers with our own
-                manpower. We provide ESI, PF and other statutory benefits to
-                our employees — ensuring a stable, motivated workforce at
-                every client site.
-              </p>
-              <p className="text-text-muted leading-relaxed">
-                Sri Lakshmi Balaji Boiler Contractor has grown to serve
-                10+ manufacturing facilities across Hyderabad and
-                Vishakhapatnam, deploying 85+ professionals. Our growth has
-                been driven entirely by client trust — most of our expansions
-                come through referrals from existing partners.
-              </p>
+              <div className="mt-6 space-y-4 text-[16.5px] leading-7 text-text-muted">
+                <p>
+                  Having more than two decades of experience in boiler maintenance and services ranging from 1 Ton
+                  to 10 Ton boilers, we enable our clients to excel in their continuous delivery by providing
+                  continuous support.
+                </p>
+                <p>
+                  We undertake the contract of boiler operations and provide round the clock operations, maintaining
+                  boilers with our own manpower. We provide ESI, PF and other statutory benefits to our employees —
+                  a stable, motivated workforce at every client site.
+                </p>
+                <p>
+                  Sri Lakshmi Balaji Boiler Contractor has grown to serve 10+ manufacturing facilities across
+                  Hyderabad and Vishakhapatnam, deploying 85+ professionals. Our growth has been driven by client
+                  trust — most of our expansions come through referrals from existing partners.
+                </p>
+              </div>
             </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[3/2]">
-              <Image
-                src="/images/inspection_w.png"
-                alt="Industrial boiler room — technician in PPE conducting inspection"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
+            <figure className="lg:col-span-6">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg border border-border bg-background-muted">
+                <Image
+                  src="/images/inspection_w.png"
+                  alt="Industrial boiler room — technician in PPE conducting inspection"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </figure>
           </div>
         </Container>
       </section>
 
-      {/* Mission & Values */}
-      <section className="py-16 md:py-24 bg-background-muted" aria-labelledby="values-heading">
+      {/* Values */}
+      <section className="section-padding border-y border-border bg-background-muted" aria-labelledby="values-heading">
         <Container>
           <SectionHeader
-            label="Mission & Values"
-            title="What guides every decision we make"
+            label="Mission & values"
+            title="What guides every decision we make."
             subtitle="Four principles that define how we operate — on every shift, at every site."
             id="values-heading"
           />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {values.map((v) => (
-              <ValueCard
-                key={v.title}
-                icon={v.icon}
-                title={v.title}
-                description={v.description}
-              />
-            ))}
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((v) => {
+              const Icon = iconFor(v.icon);
+              return (
+                <div key={v.title} className="bg-white p-7">
+                  <Icon size={22} className="text-accent" aria-hidden="true" />
+                  <h3 className="mt-4 text-lg font-bold">{v.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">{v.description}</p>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
 
       {/* Leadership */}
-      <section className="py-16 md:py-24" aria-labelledby="leadership-heading">
+      <section className="section-padding" aria-labelledby="leadership-heading">
         <Container>
-          <SectionHeader
-            label="Leadership"
-            title="Led by experience"
-            centered={false}
-            id="leadership-heading"
-          />
-          <div className="mt-8 max-w-lg">
-            <div className="flex items-start gap-5 p-6 rounded-xl border border-border bg-white shadow-card">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                <span className="text-2xl font-bold text-primary" aria-hidden="true">
-                  {founder.initials}
-                </span>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-text">{founder.name}</h3>
-                <p className="text-sm text-text-muted mb-3">{founder.role}</p>
-                <p className="text-sm text-text-muted leading-relaxed">
-                  {founder.name} brings more than {founder.yearsExperience} years
-                  of hands-on experience in industrial boiler operations —
-                  starting on the floor as a boiler operator, then earning both
-                  2nd Class and 1st Class Boiler Operator certification before
-                  moving into contracting. SLBBC was founded to professionalise
-                  boiler contracting for the pharmaceutical industry, combining
-                  rigorous safety standards with operational reliability.
-                </p>
-                <p className="text-sm text-text-muted leading-relaxed mt-3">
-                  Sri Lakshmi Balaji Boiler Contractor is a sole proprietorship
-                  registered in the name of {proprietor}.
-                </p>
-              </div>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <SectionHeader label="Leadership" title="Led by experience." id="leadership-heading" />
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Our Footprint */}
-      <section className="py-16 md:py-24 bg-background-muted" aria-labelledby="footprint-heading">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-5">
-              <p className="section-label">Our Footprint</p>
-              <h2 id="footprint-heading">Operating across two major pharma hubs</h2>
-              <p className="text-text-muted leading-relaxed">
-                SLBBC operates across Hyderabad (Telangana) and Vishakhapatnam
-                (Andhra Pradesh) — two of India&apos;s most significant
-                pharmaceutical manufacturing clusters.
-              </p>
-              <div className="space-y-3">
-                {[
-                  {
-                    city: "Hyderabad, Telangana",
-                    detail:
-                      "Head office and primary operations hub. Serving 7+ pharma manufacturing facilities across Genome Valley, IDA Jeedimetla, and Patancheru.",
-                  },
-                  {
-                    city: "Vishakhapatnam, Andhra Pradesh",
-                    detail:
-                      "Site office supporting 3+ manufacturing clients in the JNPC and surrounding industrial corridors.",
-                  },
-                ].map((loc) => (
-                  <div key={loc.city} className="flex items-start gap-3">
-                    <MapPin
-                      size={18}
-                      className="text-accent shrink-0 mt-0.5"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <p className="font-semibold text-text text-sm">{loc.city}</p>
-                      <p className="text-xs text-text-muted leading-relaxed mt-0.5">
-                        {loc.detail}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* Office cards */}
-            <div className="relative overflow-hidden rounded-xl bg-primary-900 p-3 text-white">
-              <div aria-hidden="true" className="absolute inset-0 bg-grid-light bg-grid-sm opacity-50" />
-              <div className="relative grid gap-3">
-                {[siteConfig.addresses.hyderabad, siteConfig.addresses.vizag].map((office, i) => (
-                  <a
-                    key={office.label}
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                      `${office.line1}, ${office.line2}`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-start gap-4 rounded-lg border border-white/10 bg-primary-950/60 p-6 transition-colors hover:border-accent/50"
+            <div className="lg:col-span-8">
+              <div className="card overflow-hidden">
+                <div className="flex items-center gap-5 border-b border-border p-6">
+                  <span
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary font-display text-xl font-bold text-white"
+                    aria-hidden="true"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-accent">
-                      <MapPin size={20} aria-hidden="true" />
-                    </span>
-                    <span className="flex-1">
-                      <span className="spec-label block text-accent-light">
-                        {i === 0 ? "Head office" : "Site office"}
-                      </span>
-                      <span className="mt-1 block font-display text-lg font-semibold">
-                        {office.label}
-                      </span>
-                      <span className="mt-1 block text-sm text-white/70">
-                        {office.line1}, {office.line2}
-                      </span>
-                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/80 group-hover:text-accent-light">
-                        Open in Google Maps <ArrowUpRight size={13} aria-hidden="true" />
-                      </span>
-                    </span>
-                  </a>
-                ))}
+                    {founder.initials}
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-bold">{founder.name}</h3>
+                    <p className="spec-label mt-1">{founder.role}</p>
+                  </div>
+                </div>
+                <div className="space-y-3 p-6 text-[15px] leading-7 text-text-muted">
+                  <p>
+                    {founder.name} brings more than {founder.yearsExperience} years of hands-on experience in
+                    industrial boiler operations — starting on the floor as a boiler operator, then earning both 2nd
+                    Class and 1st Class Boiler Operator certification before moving into contracting. SLBBC was
+                    founded to professionalise boiler contracting for the pharmaceutical industry, combining rigorous
+                    safety standards with operational reliability.
+                  </p>
+                </div>
+                <dl className="grid border-t border-border sm:grid-cols-2 sm:divide-x sm:divide-border">
+                  <div className="px-6 py-4">
+                    <dt className="spec-label">Certification</dt>
+                    <dd className="mt-1 font-mono text-[13px] text-primary">1st Class Boiler Operator</dd>
+                  </div>
+                  <div className="border-t border-border px-6 py-4 sm:border-t-0">
+                    <dt className="spec-label">Proprietor of record</dt>
+                    <dd className="mt-1 font-mono text-[13px] text-primary">{proprietor}</dd>
+                  </div>
+                </dl>
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Certifications */}
-      <section className="py-16 md:py-24" aria-labelledby="cert-heading">
+      {/* Footprint */}
+      <section className="section-padding border-y border-border bg-background-muted" aria-labelledby="footprint-heading">
         <Container>
           <SectionHeader
-            label="Certifications & Compliance"
-            title="Fully registered and compliant"
-            subtitle="SLBBC maintains all statutory registrations required for a responsible boiler contracting operation in India."
-            id="cert-heading"
+            label="Our footprint"
+            title="Operating across two major pharma hubs."
+            subtitle="Hyderabad (Telangana) and Vishakhapatnam (Andhra Pradesh) — two of India's most significant pharmaceutical manufacturing clusters."
+            id="footprint-heading"
           />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {certifications.map((cert) => (
-              <div
-                key={cert.label}
-                className="flex items-start gap-4 p-5 rounded-xl border border-border bg-white shadow-sm"
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {[
+              {
+                office: siteConfig.addresses.hyderabad,
+                kind: "Head office",
+                detail:
+                  "Primary operations hub. Serving 7+ pharma manufacturing facilities across Genome Valley, IDA Jeedimetla, and Patancheru.",
+              },
+              {
+                office: siteConfig.addresses.vizag,
+                kind: "Site office",
+                detail: "Supporting 3+ manufacturing clients in the JNPC and surrounding industrial corridors.",
+              },
+            ].map(({ office, kind, detail }) => (
+              <a
+                key={office.label}
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  `${office.line1}, ${office.line2}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card group flex flex-col p-6 transition-colors hover:border-accent"
               >
-                <CheckCircle2
-                  size={20}
-                  className="text-primary shrink-0 mt-0.5"
-                  aria-hidden="true"
-                />
-                <div>
-                  <p className="font-semibold text-text text-sm">{cert.label}</p>
-                  <p className="text-xs text-text-muted mt-0.5">{cert.detail}</p>
-                </div>
-              </div>
+                <span className="flex items-center gap-2">
+                  <MapPin size={16} className="text-accent" aria-hidden="true" />
+                  <span className="spec-label">{kind}</span>
+                </span>
+                <span className="mt-3 font-display text-2xl font-bold text-primary">{office.label}</span>
+                <span className="mt-1 text-sm text-text-muted">
+                  {office.line1}, {office.line2}
+                </span>
+                <span className="mt-4 text-sm leading-6 text-text">{detail}</span>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+                  Open in Google Maps{" "}
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </span>
+              </a>
             ))}
           </div>
         </Container>
       </section>
 
+      {/* Registrations */}
+      <section className="section-padding" aria-labelledby="cert-heading">
+        <Container>
+          <SectionHeader
+            label="Registrations & compliance"
+            title="Fully registered and compliant."
+            subtitle="Every statutory registration a responsible boiler contracting operation in India needs."
+            id="cert-heading"
+          />
+          <div className="mt-12 overflow-hidden rounded-lg border border-border">
+            <ul className="divide-y divide-border">
+              {certifications.map((cert) => (
+                <li key={cert.label} className="grid grid-cols-[1fr_auto] items-center gap-4 px-5 py-4 sm:grid-cols-12">
+                  <p className="font-semibold text-primary sm:col-span-4">{cert.label}</p>
+                  <p className="hidden font-mono text-[13px] text-text-muted sm:col-span-6 sm:block">{cert.detail}</p>
+                  <span className="flex items-center justify-end gap-2 sm:col-span-2">
+                    <span className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-success-text sm:inline">
+                      In place
+                    </span>
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-success-bg text-success-text">
+                      <Check size={13} strokeWidth={3} aria-hidden="true" />
+                    </span>
+                  </span>
+                  <p className="col-span-2 -mt-2 font-mono text-[12px] text-text-muted sm:hidden">{cert.detail}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
       <CTASection
-        title="Work with a contractor you can trust"
+        title="Work with a contractor you can hold to account."
         subtitle="Let's discuss how SLBBC can take ownership of your boiler operations."
-        primaryCTA={{ label: "Get in Touch", href: "/contact" }}
-        secondaryCTA={{ label: "Our Services", href: "/services" }}
+        primaryCTA={{ label: "Request a site survey", href: "/contact" }}
+        secondaryCTA={{ label: "Our services", href: "/services" }}
       />
     </>
   );

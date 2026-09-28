@@ -3,52 +3,35 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
+  /** "dark" ink for light grounds (the header); "light" for the navy footer. */
   variant?: "dark" | "light";
   className?: string;
 }
 
+/**
+ * The mark and the trade name, set like a letterhead. One version per ground,
+ * never switching as the page scrolls — the old header flipped the name to
+ * navy over a navy bar mid-scroll and it vanished.
+ */
 export function Logo({ variant = "dark", className }: LogoProps) {
-  const isDark = variant === "dark";
+  const light = variant === "light";
   return (
     <Link
       href="/"
-      className={cn(
-        "group/logo inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm",
-        className
-      )}
+      className={cn("inline-flex items-center gap-3 rounded-sm", className)}
       aria-label="Sri Lakshmi Balaji Boiler Contractor — Home"
     >
-      <span
-        className={cn(
-          "relative inline-flex items-center justify-center h-10 w-10 rounded-xl bg-white transition-all duration-500",
-          isDark
-            ? "ring-1 ring-primary-100 group-hover/logo:ring-accent/40"
-            : "ring-1 ring-white/40 shadow-sm group-hover/logo:ring-accent/60"
-        )}
-      >
-        <Image
-          src="/images/logo.svg"
-          alt=""
-          width={28}
-          height={28}
-          className="shrink-0"
-          aria-hidden="true"
-        />
+      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-border">
+        <Image src="/images/logo.svg" alt="" width={30} height={30} aria-hidden="true" />
       </span>
-
-      <span className="flex flex-col leading-tight">
-        <span
-          className={cn(
-            "font-display font-bold text-[15px] tracking-tight leading-none",
-            isDark ? "text-primary" : "text-white"
-          )}
-        >
+      <span className="flex flex-col leading-none">
+        <span className={cn("font-display text-[17px] font-bold tracking-tight", light ? "text-white" : "text-primary")}>
           Sri Lakshmi Balaji
         </span>
         <span
           className={cn(
-            "text-[11px] font-medium tracking-[0.06em] leading-tight mt-1",
-            isDark ? "text-text-muted" : "text-white/70"
+            "mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.16em]",
+            light ? "text-accent-100/80" : "text-text-muted"
           )}
         >
           Boiler Contractor

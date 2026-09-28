@@ -69,7 +69,7 @@ const specs = [
 
 export default function QrAssetsPage() {
   return (
-    <div className="bg-background-muted pt-24 pb-12 sm:pt-32 sm:pb-16">
+    <div className="bg-background-muted pt-10 pb-12 sm:pt-14 sm:pb-16">
       <Container className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
           Internal

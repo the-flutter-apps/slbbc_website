@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { ogImage } from "@/content/site";
-import { MapPin, Briefcase, Info } from "lucide-react";
+import { ArrowRight, Briefcase, CalendarDays, MapPin } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
-import { ValueCard } from "@/components/sections/ValueCard";
+import { iconFor } from "@/components/shared/icons";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { CareerForm } from "@/components/forms/CareerForm";
@@ -42,98 +42,95 @@ export default function CareersPage() {
       <Hero
         breadcrumb={[{ label: "Careers" }]}
         badge="We're hiring"
-        title="Build Your Career in Industrial Operations"
+        title="Build your career in industrial operations."
         subtitle="Join a team that values safety, offers stable employment, and treats every team member with respect. IBR-certified professionals welcome."
-        primaryCTA={{ label: "Apply Now", href: "#apply" }}
-        secondaryCTA={{ label: "Open Positions", href: "#positions" }}
-        dark
-        centered
+        primaryCTA={{ label: "Apply now", href: "#apply" }}
+        secondaryCTA={{ label: "Open positions", href: "#positions" }}
+        specs={[
+          { label: "Open roles", value: `${openPositions.length}` },
+          { label: "Locations", value: "Hyderabad · Vizag" },
+          { label: "Benefits", value: "PF · ESI" },
+          { label: "Walk-ins", value: walkInDetails.days },
+        ]}
       />
 
       {/* Why work with SLBBC */}
-      <section className="py-16 md:py-24 bg-background-muted" aria-labelledby="why-work-heading">
+      <section className="section-padding" aria-labelledby="why-work-heading">
         <Container>
           <SectionHeader
-            label="Why Work With Us"
-            title="More than just a job"
+            label="Why work with us"
+            title="More than just a job."
             subtitle="We invest in our people because our clients depend on them."
             id="why-work-heading"
           />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {benefits.map((b) => (
-              <ValueCard
-                key={b.title}
-                icon={b.icon}
-                title={b.title}
-                description={b.desc}
-              />
-            ))}
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((b) => {
+              const Icon = iconFor(b.icon);
+              return (
+                <div key={b.title} className="bg-white p-7">
+                  <Icon size={22} className="text-accent" aria-hidden="true" />
+                  <h3 className="mt-4 text-lg font-bold">{b.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">{b.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
 
-      {/* Open Positions */}
+      {/* Open positions */}
       <section
         id="positions"
-        className="py-16 md:py-24 scroll-mt-24"
+        className="section-padding scroll-mt-24 border-y border-border bg-background-muted"
         aria-labelledby="positions-heading"
       >
         <Container>
           <SectionHeader
-            label="Open Positions"
-            title="Current openings"
+            label="Open positions"
+            title="Current openings."
             subtitle="All positions are full-time deployments at pharma manufacturing sites in Hyderabad or Vishakhapatnam."
             id="positions-heading"
           />
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
             {openPositions.map((pos) => (
-              <article
-                key={pos.id}
-                className="card border border-border/50 space-y-4"
-                aria-labelledby={`pos-${pos.id}`}
-              >
-                <div className="flex items-start justify-between gap-3">
+              <article key={pos.id} className="card flex flex-col" aria-labelledby={`pos-${pos.id}`}>
+                <div className="flex items-start justify-between gap-3 border-b border-border p-6">
                   <div>
-                    <h3
-                      id={`pos-${pos.id}`}
-                      className="text-base font-semibold text-text"
-                    >
+                    <h3 id={`pos-${pos.id}`} className="text-xl font-bold">
                       {pos.title}
                     </h3>
-                    <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                      <span className="flex items-center gap-1 text-xs text-text-muted">
+                    <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[12px] text-text-muted">
+                      <span className="inline-flex items-center gap-1.5">
                         <MapPin size={12} aria-hidden="true" />
                         {pos.location}
                       </span>
-                      <span className="flex items-center gap-1 text-xs text-text-muted">
+                      <span className="inline-flex items-center gap-1.5">
                         <Briefcase size={12} aria-hidden="true" />
                         {pos.type}
                       </span>
-                    </div>
+                    </p>
                   </div>
-                  <span className="badge shrink-0">Open</span>
+                  <span className="badge badge-accent badge-dot shrink-0">Open</span>
                 </div>
-                <p className="text-sm text-text-muted">{pos.description}</p>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-text mb-2">
-                    Requirements
-                  </p>
-                  <ul className="space-y-1.5">
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-[15px] leading-6 text-text-muted">{pos.description}</p>
+                  <p className="spec-label mt-5">Requirements</p>
+                  <ul className="mt-2 space-y-1.5">
                     {pos.requirements.map((req) => (
-                      <li key={req} className="flex items-start gap-2 text-sm text-text-muted">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" aria-hidden="true" />
+                      <li key={req} className="flex items-start gap-2.5 text-sm leading-6 text-text">
+                        <span className="mt-2.5 h-1 w-3 shrink-0 bg-accent" aria-hidden="true" />
                         {req}
                       </li>
                     ))}
                   </ul>
+                  <a
+                    href="#apply"
+                    className="btn-ghost mt-6 self-start"
+                    aria-label={`Apply for ${pos.title}`}
+                  >
+                    Apply for this role <ArrowRight size={14} aria-hidden="true" />
+                  </a>
                 </div>
-                <a
-                  href="#apply"
-                  className="btn-secondary inline-flex text-sm px-5 py-2"
-                  aria-label={`Apply for ${pos.title}`}
-                >
-                  Apply for This Role
-                </a>
               </article>
             ))}
           </div>
@@ -141,39 +138,34 @@ export default function CareersPage() {
       </section>
 
       {/* Walk-in details */}
-      <section className="py-10 bg-primary/5 border-y border-primary/10" aria-label="Walk-in interview details">
+      <section className="border-b border-border bg-primary" aria-label="Walk-in interview details">
         <Container>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <Info size={22} className="text-primary shrink-0" aria-hidden="true" />
+          <div className="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:gap-6">
+            <CalendarDays size={26} className="shrink-0 text-accent-100" aria-hidden="true" />
             <div>
-              <p className="font-semibold text-text">Walk-in Interviews</p>
-              <p className="text-sm text-text-muted mt-0.5">
-                {walkInDetails.days} · {walkInDetails.time} ·{" "}
-                {walkInDetails.location}
+              <p className="font-display text-xl font-bold text-white">Walk-in interviews</p>
+              <p className="mt-1 font-mono text-[13px] text-white/80">
+                {walkInDetails.days} · {walkInDetails.time} · {walkInDetails.location}
               </p>
-              <p className="text-xs text-text-muted mt-1">
-                {walkInDetails.note}
-              </p>
+              <p className="mt-1 text-sm text-white/60">{walkInDetails.note}</p>
             </div>
           </div>
         </Container>
       </section>
 
       {/* Application form */}
-      <section
-        id="apply"
-        className="py-16 md:py-24 scroll-mt-24"
-        aria-labelledby="apply-heading"
-      >
+      <section id="apply" className="section-padding scroll-mt-24" aria-labelledby="apply-heading">
         <Container>
-          <div className="max-w-2xl mx-auto">
-            <SectionHeader
-              label="Apply Now"
-              title="Submit your application"
-              subtitle="Fill in the form below and our HR team will contact you within 3 working days."
-              id="apply-heading"
-            />
-            <div className="mt-8 p-6 md:p-8 rounded-2xl border border-border bg-white shadow-card">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <SectionHeader
+                label="Apply now"
+                title="Submit your application."
+                subtitle="Fill in the form and our HR team will contact you within 3 working days."
+                id="apply-heading"
+              />
+            </div>
+            <div className="card p-6 md:p-8 lg:col-span-8">
               <CareerForm />
             </div>
           </div>

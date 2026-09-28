@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -12,14 +12,18 @@ const inter = Inter({
   display: "swap",
 });
 
-const display = Space_Grotesk({
+// Headlines: Archivo, drawn semi-condensed — the stamped capitals of a boiler
+// nameplate rather than a startup's rounded grotesk. The width axis is loaded so
+// .font-display can set it; see globals.css.
+const display = Archivo({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700"],
+  axes: ["wdth"],
 });
 
-const mono = JetBrains_Mono({
+// Figures and registration numbers: the monospaced columns of a log sheet.
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
@@ -29,7 +33,7 @@ const mono = JetBrains_Mono({
 const defaultTitle = `${siteConfig.name} — Boiler O&M Contractor in Hyderabad & Vishakhapatnam`;
 
 export const viewport: Viewport = {
-  themeColor: "#061B30",
+  themeColor: "#0B2239",
 };
 
 export const metadata: Metadata = {
