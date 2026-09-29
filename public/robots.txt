@@ -1,8 +1,7 @@
+# Every page may be crawled. Pages that should stay out of search results
+# (privacy, terms, the app's pages) say so with a noindex tag instead —
+# blocking them here would stop Google from ever reading that tag.
 User-agent: *
 Allow: /
-
-Disallow: /privacy
-Disallow: /terms
-Disallow: /app/qr
 
 Sitemap: https://slbbc.in/sitemap.xml

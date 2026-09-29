@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "Delete your SLBBC Connect account",
   description:
     "How to request deletion of your SLBBC Connect account and the data associated with it.",
+  alternates: { canonical: "/delete-account/" },
+  robots: { index: false, follow: true },
 };
 
 export default function DeleteAccountPage() {

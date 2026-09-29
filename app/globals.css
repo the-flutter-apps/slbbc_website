@@ -111,7 +111,8 @@
       font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-text-muted;
   }
   .badge-accent {
-    @apply border-accent-100 bg-accent-50 text-accent;
+    /* accent-dark: the small badge text read 4.4:1 in the plain accent. */
+    @apply border-accent-100 bg-accent-50 text-accent-dark;
   }
   .badge-dot::before {
     content: "";

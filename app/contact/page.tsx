@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { siteConfig, ogImage } from "@/content/site";
+import { breadcrumbs } from "@/content/schema";
 
 export const metadata: Metadata = {
   title: "Contact SLBBC — Boiler Contractor Hyderabad",
@@ -20,29 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: siteConfig.name,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  openingHours: "Mo-Sa 09:00-17:00",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Hyderabad",
-    addressRegion: "Telangana",
-    addressCountry: "IN",
-  },
-};
-
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://slbbc.in" },
-    { "@type": "ListItem", position: 2, name: "Contact", item: "https://slbbc.in/contact" },
-  ],
-};
+const breadcrumbJsonLd = breadcrumbs("Contact", "/contact/");
 
 const contactMethods = [
   {
@@ -79,10 +58,6 @@ const contactMethods = [
 export default function ContactPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -123,7 +98,6 @@ export default function ContactPage() {
                             target={method.external ? "_blank" : undefined}
                             rel={method.external ? "noopener noreferrer" : undefined}
                             className="block transition-colors hover:bg-background-muted"
-                            aria-label={`${method.label}: ${method.value}`}
                           >
                             {row}
                           </a>

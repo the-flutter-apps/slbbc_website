@@ -1,40 +1,17 @@
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/content/site";
 
+/**
+ * The pages worth finding in search, at the exact addresses the site serves —
+ * trailing slash included, the home page too.
+ *
+ * No lastModified: it used to be the build time on every page, every deploy,
+ * which tells Google nothing and teaches it to ignore the field. Google also
+ * ignores changefreq and priority, so they are left out rather than guessed.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
-  const now = new Date();
-
-  return [
-    {
-      url: base,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    {
-      url: `${base}/about/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/services/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${base}/careers/`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/contact/`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-  ];
+  return ["/", "/about/", "/services/", "/careers/", "/contact/"].map((path) => ({
+    url: `${base}${path}`,
+  }));
 }

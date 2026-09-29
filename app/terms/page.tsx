@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Terms of Service for the SLBBC website — usage terms for slbbc.in.",
   robots: { index: false },
+  alternates: { canonical: "/terms/" },
 };
 
 export default function TermsPage() {

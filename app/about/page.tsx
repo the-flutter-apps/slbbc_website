@@ -7,11 +7,12 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { siteConfig, ogImage } from "@/content/site";
+import { breadcrumbs } from "@/content/schema";
 
 export const metadata: Metadata = {
   title: "About Us — Sri Lakshmi Balaji Boiler Contractor",
   description:
-    "Over two decades of boiler maintenance and services (1–10 Ton) across Hyderabad and Vishakhapatnam. We undertake round-the-clock boiler operations with our own manpower and provide ESI, PF, and statutory benefits.",
+    "20+ years running and maintaining 1–10 Ton boilers in Hyderabad and Vishakhapatnam, with our own manpower on every shift and full ESI, PF and statutory cover.",
   alternates: { canonical: "/about/" },
   openGraph: {
     images: [ogImage],
@@ -22,14 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://slbbc.in" },
-    { "@type": "ListItem", position: 2, name: "About", item: "https://slbbc.in/about" },
-  ],
-};
+const breadcrumbJsonLd = breadcrumbs("About", "/about/");
 
 const values = [
   {

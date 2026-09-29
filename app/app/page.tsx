@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: `Download the ${appDownload.fullName} Android app for SLBBC field staff.`,
   // Internal utility page for employees — kept out of search results.
   robots: { index: false, follow: false },
+  alternates: { canonical: "/app/" },
 };
 
 export default function AppDownloadPage() {

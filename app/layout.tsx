@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { ogImage, siteConfig } from "@/content/site";
+import { businessGraph } from "@/content/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,7 +45,6 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  alternates: { canonical: "/" },
   category: "Industrial services",
   keywords: [
     "boiler contractor Hyderabad",
@@ -93,41 +93,6 @@ export const metadata: Metadata = {
   formatDetection: { telephone: true, email: true },
 };
 
-/** Sitewide entity data — lets search engines tie every page to one business. */
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteConfig.url}/#organization`,
-      name: siteConfig.name,
-      alternateName: ["SLBBC", "SLB Boiler Contractor"],
-      url: siteConfig.url,
-      logo: `${siteConfig.url}/icon.png`,
-      email: siteConfig.email,
-      telephone: siteConfig.phone,
-      slogan: siteConfig.tagline,
-      taxID: siteConfig.gstin,
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: siteConfig.phone,
-        email: siteConfig.email,
-        contactType: "sales",
-        areaServed: "IN",
-        availableLanguage: ["en", "te", "hi"],
-      },
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
-      url: siteConfig.url,
-      name: siteConfig.name,
-      inLanguage: "en-IN",
-      publisher: { "@id": `${siteConfig.url}/#organization` },
-    },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -138,7 +103,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-background text-text antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessGraph) }}
         />
         <a
           href="#main-content"

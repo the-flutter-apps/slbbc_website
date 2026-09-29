@@ -19,7 +19,6 @@ export function Logo({ variant = "dark", className }: LogoProps) {
     <Link
       href="/"
       className={cn("inline-flex items-center gap-3 rounded-sm", className)}
-      aria-label="Sri Lakshmi Balaji Boiler Contractor — Home"
     >
       <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-border">
         <Image src="/images/logo.svg" alt="" width={30} height={30} aria-hidden="true" />
@@ -37,6 +36,9 @@ export function Logo({ variant = "dark", className }: LogoProps) {
           Boiler Contractor
         </span>
       </span>
+      {/* The visible name is the link's name, so a screen reader and a voice
+          command ("click Sri Lakshmi Balaji") agree; this says where it goes. */}
+      <span className="sr-only">, home</span>
     </Link>
   );
 }

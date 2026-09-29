@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Boiler Operation & Maintenance Contractor in Hyderabad & Vizag | Sri Lakshmi Balaji (SLBBC)",
   },
   description:
-    "24/7 boiler operation, maintenance, IBR-certified operator supply and compliance for 1–10 TPH boilers. 20+ years serving pharma and process plants in Hyderabad and Vishakhapatnam. Get a quote.",
+    "24/7 boiler operation, maintenance and IBR-certified operators for 1–10 TPH boilers. 20+ years serving pharma and process plants in Hyderabad and Vizag.",
   alternates: { canonical: "/" },
   openGraph: {
     images: [ogImage],
@@ -34,47 +34,6 @@ export const metadata: Metadata = {
       "20+ years of boiler operations and maintenance (1–10 Ton). 24/7 contract operations with IBR-certified manpower, ESI & PF benefits.",
     url: "/",
   },
-};
-
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${siteConfig.url}/#business`,
-  name: siteConfig.name,
-  description: siteConfig.description,
-  url: siteConfig.url,
-  image: `${siteConfig.url}/og.png`,
-  logo: `${siteConfig.url}/icon.png`,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  parentOrganization: { "@id": `${siteConfig.url}/#organization` },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    opens: "09:00",
-    closes: "17:00",
-  },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: siteConfig.addresses.hyderabad.line1,
-    addressLocality: "Hyderabad",
-    addressRegion: "Telangana",
-    postalCode: "500055",
-    addressCountry: "IN",
-  },
-  areaServed: [
-    { "@type": "City", name: "Hyderabad" },
-    { "@type": "City", name: "Visakhapatnam" },
-    { "@type": "State", name: "Telangana" },
-    { "@type": "State", name: "Andhra Pradesh" },
-  ],
-  knowsAbout: [
-    "Boiler operation",
-    "Boiler maintenance",
-    "Indian Boiler Regulations (IBR) compliance",
-    "IBR-certified boiler operator supply",
-    "Pharmaceutical utility operations",
-  ],
 };
 
 const faqJsonLd = {
@@ -166,7 +125,6 @@ const tel = `tel:${siteConfig.phone.replace(/\s/g, "")}`;
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       {/* ── Cover ────────────────────────────────────────────────────────── */}

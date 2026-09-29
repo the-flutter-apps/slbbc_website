@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ogImage } from "@/content/site";
+import { breadcrumbs, schemaIds } from "@/content/schema";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
@@ -11,7 +12,7 @@ import { services } from "@/content/services";
 export const metadata: Metadata = {
   title: "Boiler Operation, Maintenance & IBR Compliance Services",
   description:
-    "SLBBC provides 24/7 boiler operations, preventive maintenance, IBR-certified manpower supply, compliance management, and consultation for pharmaceutical manufacturers in Hyderabad and Vishakhapatnam.",
+    "24/7 boiler operation, preventive maintenance, IBR-certified manpower, compliance and consultation for pharma plants in Hyderabad and Vishakhapatnam.",
   alternates: { canonical: "/services/" },
   openGraph: {
     images: [ogImage],
@@ -25,13 +26,12 @@ export const metadata: Metadata = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Sri Lakshmi Balaji Boiler Contractor",
-    url: "https://slbbc.in",
-  },
+  provider: { "@id": schemaIds.organization },
   serviceType: "Boiler Operation and Maintenance",
-  areaServed: ["Hyderabad", "Vishakhapatnam"],
+  areaServed: [
+    { "@type": "City", name: "Hyderabad" },
+    { "@type": "City", name: "Visakhapatnam" },
+  ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Boiler Services",
@@ -42,14 +42,7 @@ const serviceJsonLd = {
   },
 };
 
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://slbbc.in" },
-    { "@type": "ListItem", position: 2, name: "Services", item: "https://slbbc.in/services" },
-  ],
-};
+const breadcrumbJsonLd = breadcrumbs("Services", "/services/");
 
 export default function ServicesPage() {
   return (

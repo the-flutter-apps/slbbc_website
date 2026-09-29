@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ogImage } from "@/content/site";
+import { breadcrumbs } from "@/content/schema";
 import { ArrowRight, Briefcase, CalendarDays, MapPin } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { iconFor } from "@/components/shared/icons";
@@ -11,7 +12,7 @@ import { openPositions, benefits, walkInDetails } from "@/content/careers";
 export const metadata: Metadata = {
   title: "Careers — Boiler Operator & Fireman Jobs in Hyderabad & Vizag",
   description:
-    "Join SLBBC as a Boiler Operator (1st/2nd Class), Boiler Fireman, or Helper. Stable employment, on-time salaries, PF/ESI benefits, and career growth. Hyderabad & Vishakhapatnam.",
+    "Boiler Operator (1st/2nd Class), Fireman and Helper jobs in Hyderabad and Vishakhapatnam. Steady work, salary on time, PF and ESI.",
   alternates: { canonical: "/careers/" },
   openGraph: {
     images: [ogImage],
@@ -22,14 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://slbbc.in" },
-    { "@type": "ListItem", position: 2, name: "Careers", item: "https://slbbc.in/careers" },
-  ],
-};
+const breadcrumbJsonLd = breadcrumbs("Careers", "/careers/");
 
 export default function CareersPage() {
   return (
@@ -126,7 +120,7 @@ export default function CareersPage() {
                   <a
                     href="#apply"
                     className="btn-ghost mt-6 self-start"
-                    aria-label={`Apply for ${pos.title}`}
+                    aria-label={`Apply for this role: ${pos.title}`}
                   >
                     Apply for this role <ArrowRight size={14} aria-hidden="true" />
                   </a>

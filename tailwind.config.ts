@@ -75,7 +75,7 @@ const config: Config = {
         },
         text: {
           DEFAULT: "#132234",
-          muted: "#647587",
+          muted: "#516274", // 5.8:1 on the page; #647587 was 4.4:1, below AA
           subtle: "#8D9AA7",
         },
         border: {

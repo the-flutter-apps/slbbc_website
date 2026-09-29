@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "SLBBC Connect App — Privacy Policy",
   description:
     "Privacy Policy for the SLBBC Connect mobile application — what the app collects, why, and how it is protected.",
+  alternates: { canonical: "/app-privacy/" },
+  robots: { index: false, follow: true },
 };
 
 export default function AppPrivacyPage() {
