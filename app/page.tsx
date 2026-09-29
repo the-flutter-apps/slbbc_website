@@ -67,7 +67,7 @@ const whyUs = [
     icon: Clock,
     title: "Every shift covered",
     description:
-      "Boilers don't stop, and neither do we. Our operators run your boiler house round the clock, with replacements arranged so no shift goes vacant.",
+      "Boilers don't stop, and neither do we. Our operators run your boilers round the clock, with replacements arranged so no shift goes vacant.",
   },
   {
     icon: ShieldCheck,
@@ -92,7 +92,7 @@ const whyUs = [
 const handover = [
   {
     title: "Site survey",
-    description: "We visit your boiler house, review capacity, fuel, shift pattern and current compliance status.",
+    description: "We visit your plant and review your boilers' capacity, fuel, shift pattern and current compliance status.",
   },
   {
     title: "Proposal & staffing plan",
@@ -133,10 +133,10 @@ export default function HomePage() {
           <div className="lg:col-span-7 lg:pt-4">
             <p className="section-label">Boiler O&amp;M contractor · Hyderabad &amp; Vishakhapatnam</p>
             <h1 id="hero-heading" className="mt-5 text-display-xl font-bold text-primary">
-              Boiler houses for pharma plants, run round the clock.
+              Boiler operation for pharma plants, round the clock.
             </h1>
             <p className="mt-6 max-w-xl text-body-lg text-text-muted text-pretty">
-              We run, maintain and staff industrial boiler houses for pharma and process plants — IBR-certified
+              We run, maintain and staff industrial boilers for pharma and process plants — IBR-certified
               operators on every shift, with PF, ESI and statutory compliance handled for you.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -215,7 +215,7 @@ export default function HomePage() {
             <SectionHeader
               id="scope-heading"
               label="Scope of work"
-              title="Everything your boiler house needs, under one contract."
+              title="Everything your boilers need, under one contract."
             />
             <Link href="/services" className="btn-ghost shrink-0">
               Full scope of every service <ArrowRight size={15} aria-hidden="true" />
@@ -320,7 +320,7 @@ export default function HomePage() {
           <SectionHeader
             id="why-heading"
             label="Why SLBBC"
-            title="Your boiler house, run like it's our own."
+            title="Your boilers, run like they're our own."
             subtitle="Plant heads hand us the boiler so they can stop thinking about it. Safe, compliant, uninterrupted steam — so production never waits."
           />
           <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
@@ -343,7 +343,7 @@ export default function HomePage() {
             light
             label="Handover"
             title="From first call to first shift."
-            subtitle="A straightforward handover, so your plant keeps producing while we take over the boiler house."
+            subtitle="A straightforward handover, so your plant keeps producing while we take over the boiler operations."
           />
           {/* Numbered because it is a sequence: each step needs the one before it. */}
           <ol className="mt-12 grid gap-8 md:grid-cols-4">

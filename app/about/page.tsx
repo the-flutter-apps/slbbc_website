@@ -86,7 +86,7 @@ export default function AboutPage() {
 
       <Hero
         breadcrumb={[{ label: "About" }]}
-        badge={`${siteConfig.yearsExperience}+ years in boiler houses`}
+        badge={`${siteConfig.yearsExperience}+ years running boilers`}
         title="Built on safety. Run on reliability."
         subtitle="More than two decades of boiler maintenance and services, from 1 Ton to 10 Ton boilers — aligned with your business so operations run without interruption."
         specs={[

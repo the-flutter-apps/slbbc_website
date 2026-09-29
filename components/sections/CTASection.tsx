@@ -11,11 +11,11 @@ interface CTASectionProps {
 
 /**
  * The close of every page: one request, one number. A site survey is the
- * honest first step — nobody can quote a boiler house they have not seen.
+ * honest first step — nobody can quote for boilers they have not seen.
  */
 export function CTASection({
   title = "Start with a site survey.",
-  subtitle = "We visit your boiler house, review capacity, fuel and shift pattern, and come back with a staffing plan and a scope you can hold us to.",
+  subtitle = "We visit your plant, review your boilers' capacity, fuel and shift pattern, and come back with a staffing plan and a scope you can hold us to.",
   primaryCTA = { label: "Request a site survey", href: "/contact" },
   secondaryCTA,
 }: CTASectionProps) {

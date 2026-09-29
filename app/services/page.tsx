@@ -60,7 +60,7 @@ export default function ServicesPage() {
         breadcrumb={[{ label: "Services" }]}
         badge="Scope of work"
         title="Boiler services for plants that can't afford to stop."
-        subtitle="From manned 24/7 operations to statutory compliance — every aspect of your boiler house, handled under one contract."
+        subtitle="From manned 24/7 operations to statutory compliance — every part of your boiler operations, handled under one contract."
         specs={[
           { label: "Services", value: `${services.length}` },
           { label: "Offices", value: "Hyderabad · Vizag" },
