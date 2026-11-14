@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { MotionProvider } from "@/components/motion/Motion";
-import { ogImage, siteConfig } from "@/content/site";
+import { baseOpenGraph, siteConfig } from "@/content/site";
 import { businessGraph } from "@/content/schema";
 
 // Type is the platform's own UI face (see tailwind.config.ts), so there is no
@@ -44,20 +44,18 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
+  // No url here: pages without their own openGraph (privacy, terms, the app
+  // pages) would otherwise tell Facebook and WhatsApp they are the home page.
   openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
+    ...baseOpenGraph,
     title: defaultTitle,
     description: siteConfig.description,
-    images: [ogImage],
   },
+  // Only the card type: X reads the title, description and image from each
+  // page's og: tags, which are page-specific; values set here were the home
+  // page's on every page.
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    images: [ogImage.url],
-    description: siteConfig.description,
   },
   robots: {
     index: true,

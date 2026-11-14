@@ -17,7 +17,9 @@ export function Logo({ variant = "dark", className }: LogoProps) {
   return (
     <Link href="/" className={cn("group inline-flex items-center gap-2.5 rounded-xl", className)}>
       <span className="inline-flex h-10 w-10 shrink-0 overflow-hidden rounded-full shadow-lg shadow-brand-300/60 transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-[15deg]">
-        <Image src="/images/logo.svg" alt="" width={40} height={40} aria-hidden="true" />
+        {/* The PNG, not /images/logo.svg: the SVG is a 311 KB trace of the
+            mark, which next/image cannot shrink; this is served at 40/80px. */}
+        <Image src="/icon.png" alt="" width={40} height={40} aria-hidden="true" />
       </span>
       <span className="flex flex-col leading-none">
         <span

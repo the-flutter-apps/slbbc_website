@@ -6,7 +6,7 @@ import { iconFor } from "@/components/shared/icons";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
-import { siteConfig, ogImage } from "@/content/site";
+import { siteConfig, ogImage, baseOpenGraph } from "@/content/site";
 import { breadcrumbs } from "@/content/schema";
 
 export const metadata: Metadata = {
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "20+ years running and maintaining 1–10 Ton boilers in Hyderabad and Vishakhapatnam, with our own manpower on every shift and full ESI, PF and statutory cover.",
   alternates: { canonical: "/about/" },
   openGraph: {
+    ...baseOpenGraph,
     images: [ogImage],
     url: "/about/",
     title: "About Sri Lakshmi Balaji Boiler Contractor",

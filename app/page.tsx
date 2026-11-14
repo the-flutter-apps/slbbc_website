@@ -24,19 +24,20 @@ import { Reveal } from "@/components/motion/Motion";
 import { StatCard } from "@/components/sections/StatCard";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { siteConfig, ogImage } from "@/content/site";
+import { siteConfig, ogImage, baseOpenGraph } from "@/content/site";
 import { services } from "@/content/services";
 import { homeFaqs } from "@/content/faqs";
 
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Boiler Operation & Maintenance Contractor in Hyderabad & Vizag | Sri Lakshmi Balaji (SLBBC)",
+      "Boiler Operation & Maintenance in Hyderabad & Vizag | SLBBC",
   },
   description:
     "24/7 boiler operation, maintenance and IBR-certified operators for 1–10 TPH boilers. 20+ years serving pharma and process plants in Hyderabad and Vizag.",
   alternates: { canonical: "/" },
   openGraph: {
+    ...baseOpenGraph,
     images: [ogImage],
     title: "Sri Lakshmi Balaji Boiler Contractor — Aligning with your business",
     description:

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ogImage } from "@/content/site";
+import { ogImage, baseOpenGraph } from "@/content/site";
 import { breadcrumbs } from "@/content/schema";
 import { ArrowRight, Briefcase, CalendarDays, MapPin } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
@@ -10,11 +10,12 @@ import { CareerForm } from "@/components/forms/CareerForm";
 import { openPositions, benefits, walkInDetails } from "@/content/careers";
 
 export const metadata: Metadata = {
-  title: "Careers — Boiler Operator & Fireman Jobs in Hyderabad & Vizag",
+  title: "Boiler Operator & Fireman Jobs in Hyderabad & Vizag",
   description:
     "Boiler Operator (1st/2nd Class), Fireman and Helper jobs in Hyderabad and Vishakhapatnam. Steady work, salary on time, PF and ESI.",
   alternates: { canonical: "/careers/" },
   openGraph: {
+    ...baseOpenGraph,
     images: [ogImage],
     url: "/careers/",
     title: "Careers at SLBBC — Build Your Career in Industrial Operations",

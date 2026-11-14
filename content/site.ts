@@ -40,6 +40,7 @@ export const siteConfig = {
   social: {
     linkedin: "#",
     whatsapp: "https://wa.me/919390745568",
+    facebook: "https://www.facebook.com/boilercontractor/",
   },
 };
 
@@ -49,6 +50,18 @@ export const ogImage = {
   width: 1200,
   height: 630,
   alt: "Sri Lakshmi Balaji Boiler Contractor — Boiler O&M Contractor in Hyderabad & Vishakhapatnam",
+};
+
+/**
+ * Spread into every page's `openGraph`. Next.js replaces the layout's
+ * openGraph wholesale when a page sets its own, so without this a page that
+ * sets a title loses the site name, type and locale.
+ */
+export const baseOpenGraph = {
+  type: "website" as const,
+  locale: "en_IN",
+  siteName: siteConfig.name,
+  images: [ogImage],
 };
 
 export const navLinks = [

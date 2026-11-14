@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ogImage } from "@/content/site";
+import { ogImage, baseOpenGraph } from "@/content/site";
 import { breadcrumbs, schemaIds } from "@/content/schema";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,11 +10,12 @@ import { Container } from "@/components/layout/Container";
 import { services } from "@/content/services";
 
 export const metadata: Metadata = {
-  title: "Boiler Operation, Maintenance & IBR Compliance Services",
+  title: "Boiler Operation, Maintenance & IBR Services",
   description:
     "24/7 boiler operation, preventive maintenance, IBR-certified manpower, compliance and consultation for pharma plants in Hyderabad and Vishakhapatnam.",
   alternates: { canonical: "/services/" },
   openGraph: {
+    ...baseOpenGraph,
     images: [ogImage],
     url: "/services/",
     title: "Comprehensive Boiler Services | SLBBC",

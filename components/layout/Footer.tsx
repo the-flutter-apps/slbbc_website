@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogIn, Mail, MapPin, MessageCircle, Phone, Smartphone } from "lucide-react";
+import { Facebook, LogIn, Mail, MapPin, MessageCircle, Phone, Smartphone } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import { footerLinks, siteConfig } from "@/content/site";
 
@@ -16,6 +16,7 @@ export function Footer() {
     { icon: Phone, href: tel, label: `Call ${siteConfig.phone}` },
     { icon: MessageCircle, href: siteConfig.social.whatsapp, label: "WhatsApp us", external: true },
     { icon: Mail, href: `mailto:${siteConfig.email}`, label: `Email ${siteConfig.email}` },
+    { icon: Facebook, href: siteConfig.social.facebook, label: "SLBBC on Facebook", external: true },
   ];
 
   return (

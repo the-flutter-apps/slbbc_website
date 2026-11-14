@@ -30,7 +30,7 @@ function AppIdentity() {
     <div className="flex flex-col items-center text-center">
       <div className="flex h-20 w-20 items-center justify-center rounded-[22px] border border-border bg-white shadow-sm sm:h-24 sm:w-24">
         <Image
-          src="/images/logo.svg"
+          src="/icon.png"
           alt=""
           width={64}
           height={64}

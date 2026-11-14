@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MessageCircle, Clock, MapPin } from "lucide-react";
+import { Phone, Mail, MessageCircle, Clock, MapPin, Facebook } from "lucide-react";
 import { Hero } from "@/components/sections/Hero";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { siteConfig, ogImage } from "@/content/site";
+import { siteConfig, ogImage, baseOpenGraph } from "@/content/site";
 import { breadcrumbs } from "@/content/schema";
 
 export const metadata: Metadata = {
-  title: "Contact SLBBC — Boiler Contractor Hyderabad",
+  title: "Contact Us — Boiler Contractor in Hyderabad & Vizag",
   description:
     "Get in touch with Sri Lakshmi Balaji Boiler Contractor. Request a quote, ask about services, or enquire about careers. Phone, WhatsApp, and email available.",
   alternates: { canonical: "/contact/" },
   openGraph: {
+    ...baseOpenGraph,
     images: [ogImage],
     url: "/contact/",
     title: "Contact SLBBC — Get a Quote for Boiler O&M Services",
@@ -45,6 +46,14 @@ const contactMethods = [
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
     desc: "We respond within 1 business day",
+  },
+  {
+    icon: Facebook,
+    label: "Facebook",
+    value: "facebook.com/boilercontractor",
+    href: siteConfig.social.facebook,
+    desc: "Follow SLBBC on Facebook",
+    external: true,
   },
   {
     icon: Clock,

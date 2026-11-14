@@ -7,12 +7,14 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Container } from "@/components/layout/Container";
 import { vendorCards, caseHighlights, otherIndustries } from "@/content/industries";
+import { baseOpenGraph } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Industries Served — Pharmaceutical Manufacturers | SLBBC",
   description:
     "SLBBC serves sterile injectable, API, and formulations manufacturers across Hyderabad and Vishakhapatnam. Trusted boiler O&M partner to 15+ pharma facilities.",
   openGraph: {
+    ...baseOpenGraph,
     title: "Industries Served | SLBBC — Trusted by Pharma Manufacturers",
     description:
       "Trusted boiler O&M partner to 15+ pharmaceutical manufacturing facilities in Hyderabad and Vishakhapatnam.",

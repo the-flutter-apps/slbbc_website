@@ -75,6 +75,9 @@ export const businessGraph = {
       slogan: siteConfig.tagline,
       description: siteConfig.description,
       taxID: siteConfig.gstin,
+      // The company's own profiles elsewhere, so search engines can tie them
+      // to this site as one entity. Profile pages only — not chat links.
+      sameAs: [siteConfig.social.facebook],
       knowsAbout,
       areaServed: [
         { "@type": "City", name: "Hyderabad" },
@@ -94,6 +97,8 @@ export const businessGraph = {
       "@id": schemaIds.website,
       url: `${base}/`,
       name: siteConfig.name,
+      // Google picks the site name it shows in results from these.
+      alternateName: ["SLBBC", "SLB Boiler Contractor"],
       inLanguage: "en-IN",
       publisher: { "@id": schemaIds.organization },
     },
