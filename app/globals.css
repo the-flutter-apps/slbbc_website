@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 /*
- * SLBBC — the vendor dossier.
+ * SLBBC — light, open, in the brand blue (#0082B0).
  *
- * The site reads like the file a pharma plant's engineering and procurement
- * teams assemble before they let a contractor near their boilers:
- * registrations with a tick against each, the scope of work, who does it and
- * how the shifts are covered. Hairline rules instead of shadows and gradients,
- * one teal for everything that can be pressed, navy for ink.
+ * White and pale-brand grounds, slate ink, brand-600 → brand-800 gradients on
+ * whatever can be pressed, generous radii (rounded-2xl buttons, rounded-3xl
+ * cards) and soft tinted shadows. Sections rise into place as they scroll in;
+ * cards lift under the pointer.
  *
  * Class names below are the ones the pages and forms already use — .card,
  * .badge, .btn-primary and the rest keep their names and take the new look, so
@@ -18,36 +17,33 @@
 
 @layer base {
   :root {
-    --radius: 0.5rem;
-    --ink: #0b2239;
-    --teal: #06799a;
-    --paper: #f5f7fa;
-    --line: #e4e9ee;
+    --radius: 0.75rem;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* The header is fixed; anchors land below it. */
+    scroll-padding-top: 6rem;
   }
 
   body {
     @apply bg-background text-text font-sans;
-    font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4 {
-    @apply font-display text-primary;
+    @apply text-primary;
     text-wrap: balance;
   }
 
   ::selection {
-    background: #bfeaf6;
-    color: #0b2239;
+    background: #dbeef4;
+    color: #025879;
   }
 
   :focus-visible {
-    outline: 2px solid var(--teal);
+    outline: 2px solid #0082b0;
     outline-offset: 2px;
   }
 
@@ -62,89 +58,117 @@
 }
 
 @layer components {
-  /* Archivo at 87.5% width: nameplate capitals, not a rounded startup face. */
-  .font-display {
-    font-stretch: 87.5%;
-    font-variation-settings: "wdth" 87.5;
-  }
-
   .container-main {
-    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   .section-padding {
-    @apply py-20 md:py-28;
+    @apply py-20 md:py-24;
   }
   .section-padding-sm {
     @apply py-14 md:py-20;
   }
 
+  /* A word or line set in the blue gradient. */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 bg-clip-text text-transparent;
+  }
+
   /* ── Buttons ─────────────────────────────────────────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white
-      transition-colors duration-150 hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2
-      focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 px-6 py-3.5
+      text-sm font-semibold text-white shadow-xl shadow-brand-300/50 transition-all duration-300
+      hover:from-brand-700 hover:to-brand-900 hover:shadow-brand-400/50
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2
+      disabled:opacity-50;
+  }
+  .btn-primary svg {
+    @apply transition-transform duration-300;
+  }
+  .btn-primary:hover svg:last-child {
+    @apply translate-x-1;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-border-strong bg-white px-5 py-3
-      text-sm font-semibold text-primary transition-colors duration-150 hover:border-primary hover:bg-background-muted
-      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-brand-200 bg-white px-6 py-3.5 text-sm
+      font-semibold text-brand-700 transition-all duration-300 hover:border-brand-300 hover:bg-brand-50
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2;
   }
   .btn-ghost {
-    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-accent underline-offset-4 hover:underline;
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-900;
+  }
+  .btn-ghost svg {
+    @apply transition-transform duration-300;
+  }
+  .btn-ghost:hover svg {
+    @apply translate-x-1;
   }
   .btn-outline-white {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-white/40 px-5 py-3 text-sm
-      font-semibold text-white transition-colors duration-150 hover:border-white hover:bg-white/10;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-white/40 px-6 py-3.5 text-sm
+      font-semibold text-white transition-all duration-300 hover:border-white hover:bg-white/10;
+  }
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 text-base font-semibold
+      text-brand-700 shadow-xl transition-all duration-300 hover:bg-brand-50 hover:shadow-2xl;
+  }
+  .btn-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-2 text-sm font-medium
+      text-brand-700 transition-colors hover:bg-brand-50;
   }
 
   /* ── Surfaces ────────────────────────────────────────────────────────── */
   .card {
-    @apply rounded-lg border border-border bg-white;
+    @apply rounded-3xl border border-slate-100 bg-white shadow-lg shadow-slate-200/50;
   }
   .card-bordered {
-    @apply rounded-lg border border-border-strong bg-white;
+    @apply rounded-3xl border border-brand-100 bg-white shadow-lg shadow-slate-200/50;
+  }
+  /* The pale-blue tile of the "why" cards. No CSS transition on transform:
+     framer-motion moves these cards, and a transition would drag behind it. */
+  .card-tint {
+    @apply rounded-3xl bg-gradient-to-br from-brand-50 to-brand-100 hover:from-brand-100 hover:to-brand-200;
+  }
+  /* A white square of the blue gradient, holding an icon. */
+  .icon-tile {
+    @apply inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 p-3
+      text-white shadow-lg shadow-brand-300/50;
   }
 
-  /* A status stamp, as on a checked form. */
   .badge {
-    @apply inline-flex items-center gap-1.5 rounded-sm border border-border bg-background-muted px-2 py-0.5
-      font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-text-muted;
+    @apply inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600;
   }
   .badge-accent {
-    /* accent-dark: the small badge text read 4.4:1 in the plain accent. */
-    @apply border-accent-100 bg-accent-50 text-accent-dark;
+    @apply bg-brand-100 text-brand-700;
   }
   .badge-dot::before {
     content: "";
-    @apply inline-block h-1.5 w-1.5 rounded-full bg-success;
+    @apply inline-block h-1.5 w-1.5 rounded-full bg-green-500;
   }
 
   /* ── Forms ───────────────────────────────────────────────────────────── */
   .input-field {
-    @apply w-full rounded-md border border-input bg-white px-3.5 py-2.5 text-sm text-text placeholder:text-text-subtle
-      transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-text placeholder:text-slate-400
+      transition-colors focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15;
   }
   .label {
-    @apply mb-1.5 block text-sm font-medium text-text;
+    @apply mb-1.5 block text-sm font-medium text-slate-700;
   }
 
   /* ── Labels ──────────────────────────────────────────────────────────── */
-  /* The section index of a file: "§ 02 — Scope of work". */
+  /* The pill above a heading: "✦ Boiler O&M contractor". */
   .section-label {
-    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-accent;
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-100 px-4 py-2 text-sm font-medium text-brand-700;
   }
-  /* A field name on a form: "GSTIN", "COVERAGE". */
+  /* A field name: "GSTIN", "Coverage". */
   .spec-label {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-text-muted;
+    @apply text-xs font-medium text-slate-500;
   }
 
   .divider {
-    @apply h-px w-full bg-border;
+    @apply h-px w-full bg-slate-200;
   }
 
   /* Long-form text: privacy policy, terms, the app's data page. */
   .prose-dossier {
-    @apply max-w-[68ch] text-[15.5px] leading-7 text-text;
+    @apply max-w-[68ch] text-[15.5px] leading-7 text-slate-700;
   }
   .prose-dossier h2 {
     @apply mt-12 mb-3 text-2xl font-bold;
@@ -161,7 +185,7 @@
     @apply list-disc pl-5;
   }
   .prose-dossier a {
-    @apply text-accent underline underline-offset-2;
+    @apply text-brand-700 underline underline-offset-2;
   }
 }
 
@@ -172,15 +196,9 @@
   .scrollbar-hide { scrollbar-width: none; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-  .animate-fade-up {
-    opacity: 0;
-    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
   .animate-delay-100 { animation-delay: 100ms; }
   .animate-delay-200 { animation-delay: 200ms; }
   .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-600 { animation-delay: 600ms; }
 }

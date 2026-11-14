@@ -1,30 +1,30 @@
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/motion/Motion";
 
 interface SectionHeaderProps {
   label?: string;
-  title: string;
+  title: React.ReactNode;
   subtitle?: string;
   centered?: boolean;
   className?: string;
-  /** On the navy ground. */
+  /** On a dark ground. */
   light?: boolean;
   id?: string;
 }
 
-/** A section of the file: its index label, its title, one line of context. */
+/** A section's optional pill label, its title and one line of context; rises into view. */
 export function SectionHeader({ label, title, subtitle, centered, className, light, id }: SectionHeaderProps) {
   return (
-    <div className={cn("max-w-2xl", centered && "mx-auto text-center", className)}>
-      {label && <p className={cn("section-label", light && "text-accent-100")}>{label}</p>}
-      <h2
-        id={id}
-        className={cn("mt-3 text-display-md font-bold", light ? "text-white" : "text-primary")}
-      >
+    <Reveal className={cn("max-w-2xl", centered && "mx-auto text-center", className)}>
+      {label && (
+        <p className={cn("section-label mb-4", light && "bg-white/10 text-brand-100")}>{label}</p>
+      )}
+      <h2 id={id} className={cn("text-3xl font-bold sm:text-4xl", light ? "text-white" : "text-slate-900")}>
         {title}
       </h2>
       {subtitle && (
-        <p className={cn("mt-4 text-body-lg text-pretty", light ? "text-white/70" : "text-text-muted")}>{subtitle}</p>
+        <p className={cn("mt-4 text-lg text-pretty", light ? "text-white/70" : "text-slate-600")}>{subtitle}</p>
       )}
-    </div>
+    </Reveal>
   );
 }

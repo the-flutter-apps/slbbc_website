@@ -71,16 +71,16 @@ export default function ServicesPage() {
 
       {/* Jump links, pinned under the header while the sheets scroll past. */}
       <nav
-        className="sticky top-16 z-30 border-b border-border bg-white/95 backdrop-blur lg:top-[106px]"
+        className="sticky top-16 z-30 border-b border-slate-100 bg-white/90 backdrop-blur-xl lg:top-20"
         aria-label="Service sections"
       >
         <Container>
-          <ul className="-mx-1 flex gap-1 overflow-x-auto py-2 scrollbar-hide">
+          <ul className="-mx-1 flex gap-2 overflow-x-auto py-3 scrollbar-hide">
             {services.map((s) => (
               <li key={s.id} className="shrink-0">
                 <a
                   href={`#${s.id}`}
-                  className="block whitespace-nowrap rounded-md px-3 py-2 font-mono text-[12px] uppercase tracking-[0.08em] text-text-muted transition-colors hover:bg-background-muted hover:text-primary"
+                  className="block whitespace-nowrap rounded-full border border-brand-100 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
                 >
                   {s.title}
                 </a>
@@ -148,7 +148,7 @@ export default function ServicesPage() {
       <CTASection
         title="Need a custom service package?"
         subtitle="Every pharma facility is different. Talk to us about a boiler O&M contract built around your plant."
-        primaryCTA={{ label: "Request a site survey", href: "/contact" }}
+        primaryCTA={{ label: "Contact us", href: "/contact" }}
         secondaryCTA={{ label: "About SLBBC", href: "/about" }}
       />
     </>

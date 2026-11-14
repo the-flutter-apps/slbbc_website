@@ -1,94 +1,111 @@
 import Link from "next/link";
-import { LogIn, Mail, MessageCircle, Phone, Smartphone } from "lucide-react";
+import { LogIn, Mail, MapPin, MessageCircle, Phone, Smartphone } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import { footerLinks, siteConfig } from "@/content/site";
 
 const tel = `tel:${siteConfig.phone.replace(/\s/g, "")}`;
 
 /**
- * The back page of the file: who we are, where we are, how to reach us. Every
- * contact route is here, because a plant head reading this far has decided to
- * call and should not have to scroll back up to find how.
+ * Who we are, where we are, how to reach us. Every contact route is here,
+ * because a plant head reading this far has decided to call and should not
+ * have to scroll back up to find how.
  */
 export function Footer() {
   const { hyderabad, vizag } = siteConfig.addresses;
+  const quick = [
+    { icon: Phone, href: tel, label: `Call ${siteConfig.phone}` },
+    { icon: MessageCircle, href: siteConfig.social.whatsapp, label: "WhatsApp us", external: true },
+    { icon: Mail, href: `mailto:${siteConfig.email}`, label: `Email ${siteConfig.email}` },
+  ];
+
   return (
-    <footer className="bg-primary text-white/75">
-      <div className="container-main grid gap-12 py-16 md:grid-cols-12 md:py-20">
-        <div className="md:col-span-4">
-          <Logo variant="light" />
-          <p className="mt-5 max-w-sm text-sm leading-6 text-white/70">
-            Boiler operation, maintenance and IBR-certified manpower for pharmaceutical and process plants in
-            Hyderabad and Vishakhapatnam.
-          </p>
-          <p className="mt-5 font-mono text-[12px] tracking-[0.06em] text-accent-100/80">
-            GSTIN {siteConfig.gstin}
-          </p>
-        </div>
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <div className="container-main py-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <Logo variant="light" />
+            <p className="mt-5 text-sm leading-relaxed text-slate-400">
+              Boiler operation, maintenance and IBR-certified manpower for pharmaceutical and process plants in
+              Hyderabad and Vishakhapatnam.
+            </p>
+            <p className="mt-4 text-xs text-slate-500">
+              GSTIN <span className="tabular text-slate-300">{siteConfig.gstin}</span>
+            </p>
+            <div className="mt-5 flex gap-3">
+              {quick.map(({ icon: Icon, href, label, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="rounded-lg bg-white/5 p-2 text-slate-300 transition-all duration-300 hover:-translate-y-[3px] hover:bg-brand-500/20 hover:text-white"
+                >
+                  <Icon size={16} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
 
-        <FooterColumn title="Services" className="md:col-span-2">
-          {footerLinks.services.map((l) => (
-            <FooterLink key={l.href} href={l.href}>
-              {l.label}
-            </FooterLink>
-          ))}
-        </FooterColumn>
+          <FooterColumn title="Services">
+            {footerLinks.services.map((l) => (
+              <FooterLink key={l.href} href={l.href}>
+                {l.label}
+              </FooterLink>
+            ))}
+          </FooterColumn>
 
-        <FooterColumn title="Company" className="md:col-span-2">
-          {footerLinks.company.map((l) => (
-            <FooterLink key={l.href} href={l.href}>
-              {l.label}
-            </FooterLink>
-          ))}
-        </FooterColumn>
+          <FooterColumn title="Company">
+            {footerLinks.company.map((l) => (
+              <FooterLink key={l.href} href={l.href}>
+                {l.label}
+              </FooterLink>
+            ))}
+          </FooterColumn>
 
-        <FooterColumn title="Reach us" className="md:col-span-4">
-          <a href={tel} className="flex items-center gap-2.5 py-1 hover:text-white">
-            <Phone size={15} className="text-accent-100" aria-hidden="true" />
-            <span className="font-mono text-[13px]">{siteConfig.phone}</span>
-          </a>
-          <a
-            href={siteConfig.social.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2.5 py-1 hover:text-white"
-          >
-            <MessageCircle size={15} className="text-accent-100" aria-hidden="true" />
-            WhatsApp
-          </a>
-          <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2.5 py-1 hover:text-white">
-            <Mail size={15} className="text-accent-100" aria-hidden="true" />
-            {siteConfig.email}
-          </a>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <FooterColumn title="Contact us">
+            <a href={tel} className="flex items-center gap-3 text-sm text-slate-400 transition-colors hover:text-brand-400">
+              <Phone size={16} className="shrink-0 text-brand-400" aria-hidden="true" />
+              {siteConfig.phone}
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-3 text-sm text-slate-400 transition-colors hover:text-brand-400"
+            >
+              <Mail size={16} className="shrink-0 text-brand-400" aria-hidden="true" />
+              {siteConfig.email}
+            </a>
             {[hyderabad, vizag].map((a) => (
-              <address key={a.label} className="not-italic text-sm leading-6">
-                <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-white/50">{a.label}</span>
-                {a.line1}
-                <br />
-                {a.line2}
+              <address key={a.label} className="flex gap-3 text-sm not-italic leading-relaxed text-slate-400">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-brand-400" aria-hidden="true" />
+                <span>
+                  <span className="block font-medium text-slate-300">{a.label}</span>
+                  {a.line1}, {a.line2}
+                </span>
               </address>
             ))}
-          </div>
-          <p className="mt-3 text-xs text-white/50">{siteConfig.officeHours}</p>
-        </FooterColumn>
-      </div>
+            <p className="text-xs text-slate-500">{siteConfig.officeHours}</p>
+          </FooterColumn>
+        </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-main flex flex-col gap-3 py-6 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {siteConfig.name}</p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link href="/privacy" className="py-1.5 hover:text-white">
-              Privacy
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link href="/privacy" className="transition-colors hover:text-brand-400">
+              Privacy Policy
             </Link>
-            <Link href="/terms" className="py-1.5 hover:text-white">
-              Terms
+            <Link href="/terms" className="transition-colors hover:text-brand-400">
+              Terms of Service
             </Link>
-            <Link href="/app" className="inline-flex items-center gap-1.5 py-1.5 hover:text-white">
-              <Smartphone size={13} aria-hidden="true" /> Staff app
+            <Link href="/app" className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-400">
+              <Smartphone size={14} aria-hidden="true" /> Staff app
             </Link>
-            <a href="https://payroll.slbbc.in" className="inline-flex items-center gap-1.5 py-1.5 hover:text-white">
-              <LogIn size={13} aria-hidden="true" /> Staff login
+            <a
+              href="https://payroll.slbbc.in"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-400"
+            >
+              <LogIn size={14} aria-hidden="true" /> Staff login
             </a>
           </div>
         </div>
@@ -97,18 +114,18 @@ export function Footer() {
   );
 }
 
-function FooterColumn({ title, className, children }: { title: string; className?: string; children: React.ReactNode }) {
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className={className}>
-      <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-white/50">{title}</h2>
-      <div className="mt-4 flex flex-col gap-1 text-sm">{children}</div>
+    <div>
+      <h2 className="mb-4 font-semibold text-white">{title}</h2>
+      <div className="space-y-3">{children}</div>
     </div>
   );
 }
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="py-1 hover:text-white">
+    <Link href={href} className="block text-sm text-slate-400 transition-colors hover:text-brand-400">
       {children}
     </Link>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HeroProps {
@@ -15,20 +15,20 @@ interface HeroProps {
   primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
   image?: { src: string; alt: string; fallback?: string };
-  /** Figures shown as a ruled table beside the headline. */
+  /** Figures shown in a card beside the headline. */
   specs?: { label: string; value: string }[];
   /** Visible trail for inner pages, e.g. [{ label: "Services" }]. */
   breadcrumb?: { label: string; href?: string }[];
   centered?: boolean;
-  /** Kept for compatibility; the dossier has no dark heroes. */
+  /** Kept for compatibility; every hero is light now. */
   dark?: boolean;
   children?: React.ReactNode;
 }
 
 /**
- * The cover of a section of the file: where you are, what this section is, one
- * paragraph of context. Light, and the same on every page, so the header above
- * it never has to change colour to stay readable.
+ * The opening of an inner page: where you are, what this page is, one
+ * paragraph of context — on the same pale-sky ground and drifting blobs as the
+ * home page. Text slides in from the left, the side panel from the right.
  */
 export function Hero({
   badge,
@@ -47,32 +47,47 @@ export function Hero({
   const side = image || (specs && specs.length > 0);
 
   return (
-    <section className="border-b border-border bg-background-muted" aria-label="Page introduction">
+    <section className="relative overflow-hidden" aria-label="Page introduction">
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-50" aria-hidden="true" />
+      <div
+        className="absolute left-10 top-10 h-64 w-64 animate-blob rounded-full bg-brand-200/30 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-0 right-10 h-96 w-96 animate-blob-slow rounded-full bg-brand-200/30 blur-3xl"
+        aria-hidden="true"
+      />
+
       <div
         className={cn(
-          "container-main grid gap-12 py-14 md:py-20",
-          side && "lg:grid-cols-12 lg:items-center",
+          "container-main relative grid gap-12 py-16 md:py-20",
+          side && "lg:grid-cols-2 lg:items-center lg:gap-20",
           centered && !side && "text-center"
         )}
       >
-        <div className={cn(side ? "lg:col-span-7" : "max-w-3xl", centered && !side && "mx-auto")}>
+        <div className={cn("animate-slide-in-left", !side && "max-w-3xl", centered && !side && "mx-auto")}>
           {breadcrumb && (
             <nav aria-label="Breadcrumb">
-              <ol className={cn("flex items-center gap-2 font-mono text-[12px] text-text-muted", centered && "justify-center")}>
+              <ol
+                className={cn(
+                  "flex items-center gap-1.5 text-sm text-slate-500",
+                  centered && !side && "justify-center"
+                )}
+              >
                 <li>
-                  <Link href="/" className="hover:text-accent">
-                    SLBBC
+                  <Link href="/" className="transition-colors hover:text-brand-700">
+                    Home
                   </Link>
                 </li>
                 {breadcrumb.map((crumb) => (
-                  <li key={crumb.label} className="flex items-center gap-2">
-                    <span aria-hidden="true">/</span>
+                  <li key={crumb.label} className="flex items-center gap-1.5">
+                    <ChevronRight size={14} aria-hidden="true" />
                     {crumb.href ? (
-                      <Link href={crumb.href} className="hover:text-accent">
+                      <Link href={crumb.href} className="transition-colors hover:text-brand-700">
                         {crumb.label}
                       </Link>
                     ) : (
-                      <span className="text-text" aria-current="page">
+                      <span className="font-medium text-slate-700" aria-current="page">
                         {crumb.label}
                       </span>
                     )}
@@ -82,23 +97,45 @@ export function Hero({
             </nav>
           )}
 
-          {badge && <p className={cn("section-label", breadcrumb && "mt-6")}>{badge}</p>}
+          {badge && (
+            <p className={cn("section-label animate-fade-up animate-delay-200", breadcrumb && "mt-6")}>
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              {badge}
+            </p>
+          )}
 
-          <h1 className={cn("text-display-lg font-bold text-primary", (breadcrumb || badge) && "mt-4")}>{title}</h1>
+          <h1
+            className={cn(
+              "text-4xl font-bold leading-tight text-slate-900 sm:text-5xl",
+              (breadcrumb || badge) && "mt-6"
+            )}
+          >
+            {title}
+          </h1>
 
-          {tagline && <p className="mt-4 font-display text-xl font-semibold text-accent">{tagline}</p>}
+          {tagline && <p className="text-gradient mt-3 text-xl font-semibold">{tagline}</p>}
 
           {subtitle && (
-            <p className={cn("mt-5 max-w-2xl text-body-lg text-text-muted text-pretty", centered && !side && "mx-auto")}>
+            <p
+              className={cn(
+                "mt-6 max-w-xl text-lg leading-relaxed text-slate-600 text-pretty",
+                centered && !side && "mx-auto max-w-2xl"
+              )}
+            >
               {subtitle}
             </p>
           )}
 
           {(primaryCTA || secondaryCTA) && (
-            <div className={cn("mt-8 flex flex-wrap gap-3", centered && !side && "justify-center")}>
+            <div
+              className={cn(
+                "mt-8 flex animate-fade-up flex-wrap gap-3 animate-delay-400",
+                centered && !side && "justify-center"
+              )}
+            >
               {primaryCTA && (
                 <Link href={primaryCTA.href} className="btn-primary">
-                  {primaryCTA.label} <ArrowRight size={16} aria-hidden="true" />
+                  {primaryCTA.label} <ArrowRight size={18} aria-hidden="true" />
                 </Link>
               )}
               {secondaryCTA && (
@@ -113,9 +150,9 @@ export function Hero({
         </div>
 
         {side && (
-          <div className="lg:col-span-5">
+          <div className="animate-slide-in-right animate-delay-200">
             {image && (
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-white">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl shadow-brand-300/40">
                 <Image
                   src={imgSrc || (image.fallback ?? image.src)}
                   alt={image.alt}
@@ -127,14 +164,15 @@ export function Hero({
                     if (image.fallback && imgSrc !== image.fallback) setImgSrc(image.fallback);
                   }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/20 via-transparent to-transparent" />
               </div>
             )}
             {specs && specs.length > 0 && (
-              <dl className={cn("card divide-y divide-border", image && "mt-4")}>
+              <dl className={cn("card divide-y divide-slate-100 p-2", image && "mt-4")}>
                 {specs.map((s) => (
-                  <div key={s.label} className="flex items-baseline justify-between gap-4 px-5 py-3.5">
-                    <dt className="spec-label">{s.label}</dt>
-                    <dd className="font-mono text-sm text-primary tabular">{s.value}</dd>
+                  <div key={s.label} className="flex items-baseline justify-between gap-4 px-4 py-3">
+                    <dt className="text-sm text-slate-500">{s.label}</dt>
+                    <dd className="text-sm font-semibold text-slate-900 tabular">{s.value}</dd>
                   </div>
                 ))}
               </dl>

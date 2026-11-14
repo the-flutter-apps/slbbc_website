@@ -1,40 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { MotionProvider } from "@/components/motion/Motion";
 import { ogImage, siteConfig } from "@/content/site";
 import { businessGraph } from "@/content/schema";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-// Headlines: Archivo, drawn semi-condensed — the stamped capitals of a boiler
-// nameplate rather than a startup's rounded grotesk. The width axis is loaded so
-// .font-display can set it; see globals.css.
-const display = Archivo({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  axes: ["wdth"],
-});
-
-// Figures and registration numbers: the monospaced columns of a log sheet.
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "500"],
-});
+// Type is the platform's own UI face (see tailwind.config.ts), so there is no
+// web font to load here.
 
 const defaultTitle = `${siteConfig.name} — Boiler O&M Contractor in Hyderabad & Vishakhapatnam`;
 
 export const viewport: Viewport = {
-  themeColor: "#0B2239",
+  themeColor: "#FFFFFF",
 };
 
 export const metadata: Metadata = {
@@ -99,23 +78,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${display.variable} ${mono.variable}`}>
-      <body className="min-h-screen flex flex-col bg-background text-text antialiased">
+    <html lang="en-IN">
+      <head>
+        {/* Blocks that rise into view start hidden; without JavaScript they
+            would stay hidden, so show them outright. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
+      <body className="flex min-h-screen flex-col bg-gradient-to-br from-white via-brand-50/30 to-brand-50/40 text-text antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessGraph) }}
         />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-700 focus:shadow-lg"
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main id="main-content" className="flex-1 pt-16 lg:pt-20">
+            {children}
+          </main>
+          <Footer />
+        </MotionProvider>
         <Toaster />
       </body>
     </html>

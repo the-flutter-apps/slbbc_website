@@ -32,7 +32,7 @@ export const siteConfig = {
     },
   },
   stats: [
-    { value: 10, suffix: "+", label: "Vendor Sites" },
+    { value: 15, suffix: "+", label: "Vendor Sites" },
     { value: 85, suffix: "+", label: "Employees" },
     { value: YEARS_EXPERIENCE, suffix: "+", label: "Years of Experience" },
     { value: 0, suffix: "", label: "LTI Incidents" },

@@ -11,11 +11,11 @@ import { vendorCards, caseHighlights, otherIndustries } from "@/content/industri
 export const metadata: Metadata = {
   title: "Industries Served — Pharmaceutical Manufacturers | SLBBC",
   description:
-    "SLBBC serves sterile injectable, API, and formulations manufacturers across Hyderabad and Vishakhapatnam. Trusted boiler O&M partner to 10+ pharma facilities.",
+    "SLBBC serves sterile injectable, API, and formulations manufacturers across Hyderabad and Vishakhapatnam. Trusted boiler O&M partner to 15+ pharma facilities.",
   openGraph: {
     title: "Industries Served | SLBBC — Trusted by Pharma Manufacturers",
     description:
-      "Trusted boiler O&M partner to 10+ pharmaceutical manufacturing facilities in Hyderabad and Vishakhapatnam.",
+      "Trusted boiler O&M partner to 15+ pharmaceutical manufacturing facilities in Hyderabad and Vishakhapatnam.",
   },
 };
 
@@ -52,7 +52,7 @@ export default function IndustriesPage() {
       <Hero
         badge="Industries Served"
         title="Trusted by Leading Pharmaceutical Manufacturers"
-        subtitle="10+ vendor sites, 85+ deployed professionals, and zero LTI incidents — all in some of India's most regulated manufacturing environments."
+        subtitle="15+ vendor sites, 85+ deployed professionals, and zero LTI incidents — all in some of India's most regulated manufacturing environments."
         dark
         centered
       />

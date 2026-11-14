@@ -3,36 +3,32 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
-  /** "dark" ink for light grounds (the header); "light" for the navy footer. */
+  /** "dark" ink for light grounds (the header); "light" for the slate footer. */
   variant?: "dark" | "light";
   className?: string;
 }
 
 /**
- * The mark and the trade name, set like a letterhead. One version per ground,
- * never switching as the page scrolls — the old header flipped the name to
- * navy over a navy bar mid-scroll and it vanished.
+ * The round SLB mark and the trade name beside it. The mark tips 15° under
+ * the pointer.
  */
 export function Logo({ variant = "dark", className }: LogoProps) {
   const light = variant === "light";
   return (
-    <Link
-      href="/"
-      className={cn("inline-flex items-center gap-3 rounded-sm", className)}
-    >
-      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-border">
-        <Image src="/images/logo.svg" alt="" width={30} height={30} aria-hidden="true" />
+    <Link href="/" className={cn("group inline-flex items-center gap-2.5 rounded-xl", className)}>
+      <span className="inline-flex h-10 w-10 shrink-0 overflow-hidden rounded-full shadow-lg shadow-brand-300/60 transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-[15deg]">
+        <Image src="/images/logo.svg" alt="" width={40} height={40} aria-hidden="true" />
       </span>
       <span className="flex flex-col leading-none">
-        <span className={cn("font-display text-[17px] font-bold tracking-tight", light ? "text-white" : "text-primary")}>
-          Sri Lakshmi Balaji
-        </span>
         <span
           className={cn(
-            "mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.16em]",
-            light ? "text-accent-100/80" : "text-text-muted"
+            "text-lg font-bold sm:text-xl",
+            light ? "text-white" : "bg-gradient-to-r from-brand-700 to-brand-900 bg-clip-text text-transparent"
           )}
         >
+          Sri Lakshmi Balaji
+        </span>
+        <span className={cn("mt-1 text-xs font-medium", light ? "text-slate-400" : "text-slate-500")}>
           Boiler Contractor
         </span>
       </span>

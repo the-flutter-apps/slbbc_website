@@ -25,75 +25,103 @@ const config: Config = {
         65: "0.65",
         85: "0.85",
       },
-      // The SLBBC palette — the same navy and teal as the SLBBC Connect app, the
-      // Play listing and the printed QR cards, so the company looks like one
-      // company wherever it is met. Token names are unchanged from the previous
-      // design, so every page picks the new values up without edits.
+      // Slate ink and the SLBBC brand blue: white and pale-brand grounds,
+      // brand-600 → brand-800 gradients on whatever can be pressed. Token names
+      // are unchanged from earlier designs, so a page that was not rewritten
+      // still picks the new values up.
       colors: {
+        // The brand blue, #0082B0 — the ground of the SLB mark and of the
+        // company's printed quotations. 600 is the brand itself (4.4:1 on white:
+        // large text, icons, fills); small text takes 700 (5.9:1) or darker.
+        // Lighter steps are the brand mixed with white, darker with deep ink.
+        brand: {
+          50: "#F0F8FA",
+          100: "#DBEEF4",
+          200: "#B2DAE7",
+          300: "#7ABED6",
+          400: "#3DA0C3",
+          500: "#178DB7",
+          600: "#0082B0",
+          700: "#016C93",
+          800: "#025879",
+          900: "#02445F",
+          950: "#033248",
+        },
         primary: {
-          DEFAULT: "#0B2239",
+          DEFAULT: "#0F172A",
           foreground: "#FFFFFF",
-          50: "#EEF3F7",
-          100: "#D8E3EC",
-          200: "#B3C7D7",
-          300: "#8BA8BF",
-          400: "#5E86A3",
-          500: "#3B6888",
-          600: "#1F5577",
-          700: "#123B56",
-          800: "#0B2239",
-          900: "#081A2C",
-          950: "#04101C",
+          50: "#F8FAFC",
+          100: "#F1F5F9",
+          200: "#E2E8F0",
+          300: "#CBD5E1",
+          400: "#94A3B8",
+          500: "#64748B",
+          600: "#475569",
+          700: "#334155",
+          800: "#1E293B",
+          900: "#0F172A",
+          950: "#020617",
         },
         secondary: {
-          DEFAULT: "#132234",
+          DEFAULT: "#1E293B",
           foreground: "#FFFFFF",
-          light: "#3B4A55",
+          light: "#475569",
         },
-        // Teal. DEFAULT is the text-safe 700 (5.0:1 on white); 500 is the brand
-        // teal, 3.9:1, for rules, ticks and large marks only — never small text.
+        // The brand, as the older pages name it. DEFAULT is brand-700 because
+        // pages use text-accent on small text; 500/600 are the brand itself, for
+        // ticks, rules and large marks.
         accent: {
-          DEFAULT: "#06799A",
+          DEFAULT: "#016C93",
           foreground: "#FFFFFF",
-          light: "#078BAF",
-          dark: "#055F79",
-          50: "#DFF5FB",
-          100: "#BFEAF6",
-          500: "#078BAF",
-          600: "#06799A",
+          light: "#0082B0",
+          dark: "#025879",
+          50: "#F0F8FA",
+          100: "#DBEEF4",
+          500: "#0082B0",
+          600: "#0082B0",
         },
         success: {
-          DEFAULT: "#14966A",
-          text: "#0E7552",
-          bg: "#E5F6EF",
+          DEFAULT: "#16A34A",
+          text: "#15803D",
+          bg: "#DCFCE7",
         },
         background: {
           DEFAULT: "#FFFFFF",
-          muted: "#F5F7FA",
-          subtle: "#F9FBFC",
-          sunk: "#EEF2F6",
+          muted: "#F8FAFC",
+          subtle: "#F8FAFC",
+          sunk: "#F1F5F9",
         },
         text: {
-          DEFAULT: "#132234",
-          muted: "#516274", // 5.8:1 on the page; #647587 was 4.4:1, below AA
-          subtle: "#8D9AA7",
+          DEFAULT: "#334155",
+          muted: "#475569",
+          subtle: "#94A3B8",
         },
         border: {
-          DEFAULT: "#E4E9EE",
-          strong: "#CFD8E0",
+          DEFAULT: "#E2E8F0",
+          strong: "#CBD5E1",
         },
-        input: "#CFD8E0",
-        ring: "#06799A",
+        input: "#CBD5E1",
+        ring: "#0082B0",
       },
+      // The platform's own UI face — SF Pro on Apple devices, Segoe UI on
+      // Windows, Roboto on Android. No web font to download.
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],
+        display: ["ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", '"Liberation Mono"', "monospace"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 6vw + 1rem, 5.5rem)", { lineHeight: "0.98", letterSpacing: "-0.035em", fontWeight: "700" }],
-        "display-lg": ["clamp(2.25rem, 4.5vw + 0.5rem, 4rem)", { lineHeight: "1.02", letterSpacing: "-0.03em", fontWeight: "700" }],
-        "display-md": ["clamp(1.875rem, 3vw + 0.5rem, 2.75rem)", { lineHeight: "1.08", letterSpacing: "-0.025em", fontWeight: "700" }],
+        "display-xl": ["clamp(2.25rem, 3.4vw + 1.2rem, 3.75rem)", { lineHeight: "1.08", fontWeight: "700" }],
+        "display-lg": ["clamp(2.25rem, 2vw + 1.5rem, 3rem)", { lineHeight: "1.12", fontWeight: "700" }],
+        "display-md": ["clamp(1.875rem, 1vw + 1.5rem, 2.25rem)", { lineHeight: "1.2", fontWeight: "700" }],
         "h1-desktop": ["56px", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "700" }],
         "h1-mobile": ["36px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
         "h2-desktop": ["40px", { lineHeight: "1.15", letterSpacing: "-0.025em", fontWeight: "700" }],
@@ -113,19 +141,60 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        "2xl": "1.25rem",
-        "3xl": "1.75rem",
       },
+      // Entrances run in CSS so the hero paints at first frame, not after
+      // hydration; the loops are the slow drifts behind and around the hero.
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards",
-        "fade-in": "fade-in 0.6s ease-out forwards",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "fade-in": "fade-in 0.5s ease-out both",
+        "slide-in-left": "slide-in-left 0.8s ease-in-out both",
+        "slide-in-right": "slide-in-right 0.8s ease-in-out both",
+        "slide-down": "slide-down 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "drift": "drift 6s ease-in-out infinite",
+        "breathe": "breathe 8s ease-in-out infinite",
+        "bob": "bob 5s ease-in-out infinite",
+        "bob-up": "bob-up 4s ease-in-out 0.5s infinite",
+        "blob": "blob 8s ease-in-out infinite",
+        "blob-slow": "blob-reverse 10s ease-in-out infinite",
+        "spin-slow": "spin 20s linear infinite",
         "marquee": "marquee 40s linear infinite",
         "shine": "shine 2s linear infinite",
-        "blob": "blob 14s ease-in-out infinite",
       },
       keyframes: {
+        "slide-in-left": {
+          from: { opacity: "0", transform: "translateX(-50px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-in-right": {
+          from: { opacity: "0", transform: "translateX(50px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-down": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-15px) rotate(2deg)" },
+        },
+        breathe: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.02)" },
+        },
+        bob: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(10px)" },
+        },
+        "bob-up": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "blob-reverse": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(20px) rotate(-5deg)" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -135,7 +204,7 @@ const config: Config = {
           to: { height: "0" },
         },
         "fade-up": {
-          from: { opacity: "0", transform: "translateY(28px)" },
+          from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
@@ -151,16 +220,9 @@ const config: Config = {
           "100%": { backgroundPosition: "-200% 0" },
         },
         blob: {
-          "0%, 100%": { transform: "translate(0px, 0px) scale(1)" },
-          "33%": { transform: "translate(30px, -40px) scale(1.08)" },
-          "66%": { transform: "translate(-25px, 25px) scale(0.95)" },
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(-20px) rotate(5deg)" },
         },
-      },
-      backgroundImage: {
-        // The ruled lines of a boiler log sheet. The only texture on the site,
-        // used behind the vendor file and nowhere loud.
-        ruled:
-          "repeating-linear-gradient(to bottom, transparent 0 39px, rgba(11,34,57,0.06) 39px 40px)",
       },
       backgroundSize: {
         "grid-sm": "32px 32px",
@@ -168,10 +230,9 @@ const config: Config = {
         "grid-lg": "64px 64px",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(11, 46, 79, 0.04), 0 4px 16px rgba(11, 46, 79, 0.06)",
-        "card-hover": "0 10px 40px rgba(11, 46, 79, 0.12), 0 2px 6px rgba(11, 46, 79, 0.05)",
-        header: "0 1px 0 rgba(11, 46, 79, 0.06), 0 8px 24px rgba(11, 46, 79, 0.08)",
-        "glow-accent": "0 12px 32px -8px rgba(255, 106, 26, 0.45)",
+        card: "0 10px 15px -3px rgb(226 232 240 / 0.5), 0 4px 6px -4px rgb(226 232 240 / 0.5)",
+        "card-hover": "0 20px 25px -5px rgb(178 218 231 / 0.5), 0 8px 10px -6px rgb(178 218 231 / 0.5)",
+        header: "0 10px 15px -3px rgb(219 238 244 / 0.5), 0 4px 6px -4px rgb(219 238 244 / 0.5)",
         "inset-border": "inset 0 0 0 1px rgba(255,255,255,0.08)",
       },
       transitionTimingFunction: {

@@ -118,7 +118,7 @@ export default function AboutPage() {
                   a stable, motivated workforce at every client site.
                 </p>
                 <p>
-                  Sri Lakshmi Balaji Boiler Contractor has grown to serve 10+ manufacturing facilities across
+                  Sri Lakshmi Balaji Boiler Contractor has grown to serve 15+ manufacturing facilities across
                   Hyderabad and Vishakhapatnam, deploying 85+ professionals. Our growth has been driven by client
                   trust — most of our expansions come through referrals from existing partners.
                 </p>
@@ -298,7 +298,7 @@ export default function AboutPage() {
       <CTASection
         title="Work with a contractor you can hold to account."
         subtitle="Let's discuss how SLBBC can take ownership of your boiler operations."
-        primaryCTA={{ label: "Request a site survey", href: "/contact" }}
+        primaryCTA={{ label: "Contact us", href: "/contact" }}
         secondaryCTA={{ label: "Our services", href: "/services" }}
       />
     </>
